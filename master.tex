@@ -1,0 +1,52 @@
+%%%%%%%%%%%%%%%%%% Frontpage and titlepage %%%%%%%%%%%%%%%%%%%%%%%%
+\def\today              {December 18, 2019}
+\def\projecttitle       {Audio Fingerprint Recognition}
+\def\projectsubtitle    {Applied linear algebra}
+\def\projectdegree      {Mathematical Engineering}
+\def\projectsemester    {2. semester 2020}
+\def\projectsupervisors {
+Søren Holdt Jensen \\
+Henrik Worm Routhe
+}
+\def\projectgroup       {MATTEK B376}
+\def\projectauthors     {
+    Anna Hansen\\ 
+    Dana Majgaard\\
+    Laurits Randers\\
+    Lukas Fasken\\
+    Niklas Frandsen\\
+    Sigmundur Jensen}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{setup/preamble.tex}
+\input{setup/hyphenations.tex}
+\input{setup/macros.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\setlength{\headheight}{13.6pt}
+%frontmatter
+\pagestyle{empty} %disable headers and footers
+\pagenumbering{roman} %use roman page numbering in the frontmatter
+\cleardoublepage
+\input{not_chapters/frontpage1.tex}
+\input{not_chapters/colophon.tex}
+\input{not_chapters/titlepages.tex}
+\input{not_chapters/preface.tex}
+\cleardoublepage
+\pdfbookmark[0]{Indholdsfortegnelse}{label:Indholdsfortegnelse}
+\pagestyle{fancy} %enable headers and footers again
+\tableofcontents
+\cleardoublepage
+%mainmatter
+\pagenumbering{arabic} %use arabic page numbering in the mainmatter
+
+%her tilføjes kapitler (sections)
+\input{sections/problemanalyse.tex}
+
+
+\printbibliography[heading=bibintoc]
+\label{bib:mybiblio}
+\appendix
+
+\end{document}

@@ -1,0 +1,19 @@
+\begin{figure} [H]
+    \centering
+    \begin{tikzpicture}[node distance = 4cm]
+        \tikzstyle{box} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, text width=3cm, draw=black]
+        \tikzstyle{line} = [draw, -latex']
+        \node (sampling) [box] {Audio recording};
+        \node (filtering) [box, right of=sampling] {Filtering};
+        \node (fingerprint) [box, right of=filtering] {Generate fingerprint};
+        \node (compare) [box, below of=filtering, node distance =3cm] {Compare fingerprint to a database};
+        \node (TrackInfo) [box, below of=sampling, node distance =3cm] {Present the track information};
+        
+        \path [line] (sampling) -- (filtering);
+         \path [line] (filtering) -- (fingerprint);
+        \path [line] (fingerprint) |- (compare);
+         \path [line] (compare) -- (TrackInfo);
+     \end{tikzpicture}
+    \caption{The process of which an audio fingerprinting system uses audio recordings, filters the recordings, generates audio fingerprints, matches fingerprints and presents the user with the information.}
+    \label{fig:Fingerprint_process}
+\end{figure}

@@ -1,0 +1,63 @@
+\chapter{Problem Analysis}
+Imagine sitting at a restaurant with your significant other and eating a delicious dinner and you notice a song they are playing, you quite enjoy the music, but both you and your partner do not know which song it is. To figure out which song it is, there are various options. One of the options is to ask the staff which song it is. This solution may be fast but a little bit tedious. Another option is to go through all the songs in a music app, this solution isn't the most effective way, though it spares you from an unwanted conversation. With modern technology you are able to download apps such as Shazam, which takes the good parts of both possibilities, you get spared from an unwanted conversation and it is quite fast.\\
+Shazam is an app with the purpose of recognising songs from a recording. The app is able to recognise a song even if ambient noise is present, such as in a restaurant or a car. When Shazam recognises a song, it gives the user the title of the track, the artist and the ability to stream the song on multiple different music platforms. Shazam generates an audio fingerprint from which it can compare and match with songs in the database. \cite{ShazamDescription} \\
+Another use case for audio fingerprinting is identification of copyrighted materials. This can be useful for social medias where the users can upload media freely, since the social media will be economically responsible if copyrighted material is shared on they're platform. 
+This use case comes with several challenges. For instance, the audio can be compressed. The end user may not hear the difference between the compressed audio and the original recording, but it is still covered by copyright. Furthermore, the users may try to avoid identification systems by adding inaudible noise. This means that the audio fingerprinting system must have the ability to recognise audio even though the waveform is modified. \cite{haitsma2003highly}
+
+\section{Audio Fingerprinting Process}
+An audio fingerprinting system can be generally be split into five parts.
+\begin{itemize}
+    \item \textbf{Audio recording:} Where the audio is digitised.
+    \item \textbf{Filtering:} Removes the unwanted information of the recorded signal.
+    \item \textbf{Generate fingerprint:} Generates the fingerprint needed to recognise the song.
+    \item \textbf{Compare fingerprint to a database:} The generated fingerprint is compared to the fingerprints in the database.
+    \item \textbf{Present the track information:} When the fingerprint is matched the relevant information is presented to the user.
+\end{itemize}
+This is illustrated in \autoref{fig:Fingerprint_process}.
+These parts will be further explained in the next few sections.
+   
+\input{figures/process_flowchart.tex}
+
+\subsection{Audio Fingerprinting}
+To generate an audio fingerprint one might look at the semantics of a song such as genre and composition. Genres are generally difficult to quantify since they change as cultures change and sometimes overlap. Furthermore, there are almost endless ways to compose a song, hence it is also hard to quantify. Therefore it is not feasible to generate a audio fingerprint using semantics.\\
+Another approach to generate an audio fingerprint is to look at the frequency content of the song. This is possible approach since an audio signal is a representation of sound. Sound is acoustic waves in the air. 
+
+\subsection{Filtering}
+When recognizing music, there is often a bit of noise involved. The noise involved can be in the form of background speech, the motor of a car, generated noise from speakers ect. To remove the noise, a filter is used. The filter needs to be optimized so it only filters out the noise part of the signal and keeps the “clean” version of the song intact.\\
+
+There are also different ways of encoding music, such as MP3 and GSM. The 2 different files compress the same music differently which results in the decoding of the song will be different. Nevertheless, the program will need to be able to recognize the song and generate the same fingerprint from both versions of the song.\\
+\subsubsection{Music Theory}
+
+
+To analyse, understand and make the digital audio fingerprints, basic knowledge about notes and frequency in music is required.  
+
+
+
+
+musik teori
+ - noder/toner
+ - lyd består af
+    - Melodi
+    - rytme
+    - pitch
+    - frekvenser
+    -tempo
+- Fourier transformation
+    - Fordelene ved at arbejde med frekvens 
+
+
+\section{Search Algorithm}
+When the fingerprint of a song has been generated the fingerprint has to be matched to the track information in the database. The database can potentially consist of millions of fingerprints. When the database is so large it is not effective to brute force a match, therefore an optimized search algorithm is needed. However this will not be explored further in this project. \cite{haitsma2003highly} 
+
+The program works by recording a sufficient amount of a song and then filtering noise from the recording. 
+Thereafter an audio fingerprint is generated with mathematical models and theories. This fingerprint is then used to identify a song, by comparing and matching the fingerprint with an already generated database of fingerprints. If a match is found, the user is presented with the relevant information regarding the song. This process is illustrated in \autoref{fig:Fingerprint_process}. \cite{ShazamDescription}\\
+
+Shazam is useful since it finds music simply and fast. It is not only the users which the app benefits, music artists also have benefits which consist of making their music more known, and therefore become more popular in the music industry. \cite{wang2003industrial} 
+
+
+
+
+
+
+
+\section{Problem Statement}
