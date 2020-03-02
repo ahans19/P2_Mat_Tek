@@ -9,8 +9,7 @@ In this project, the DFT is used to transform an audio signal into the different
         F[k]=\sum^{N-1}_{n=0}f[n]e^{-2jnk\pi/N}.
     \end{align*}
 \end{definition}
-The outcome of 
-The DFT can be linearly transformed by the following theorem. 
+The DFT can be represented as a matrix in by the following theorem
 \begin{theorem}{The Discrete Fourier Transform as a matrix}
     By making the definition 
     \begin{align*}
@@ -35,11 +34,12 @@ The DFT can be linearly transformed by the following theorem.
     \begin{align*}
         \textbf{y}=DFT_N\textbf{x}.
     \end{align*}
+    Where $x \in \mathds{R}^{N}$ and $y \in \mathds{C}^{N}$.
 \end{theorem}
 Since the DFT can be expressed as a matrix vektor product by THEORM ??? the DFT is a linear transformation.
 
 \section{The Fast Fourier Transform}
-The fast Fourier transform (FFT) is an method of reducing the number of computations needed to calculate the DFT. This is done by reducing the DFT matrix to a product of sparse matrices. 
+The fast Fourier transform (FFT) is a method of reducing the number of computations needed to calculate the DFT. This is done by reducing the DFT matrix to a product of sparse matrices. 
 To do so the following theorem is need
 \begin{theorem}{The DFT when $N$ is even}
     Let $\mathbf{y}=DFT_{N}\mathbf{x}$ be the $N$-point DFT of $\mathbf{x}$ where $N$ is even and let $D_{N/2}$ be an $(N/2)\times(N/2)$ diagonal matrix with entries $(D_{N/2})_{n,n}=W_N^n$ for $0\leq n< N/2$. Then
@@ -53,13 +53,13 @@ To do so the following theorem is need
 By the definition of the DFT,
     \begin{align*}
          F[k]&=\sum^{N-1}_{n=0}f[n]W_N^{nk}.\\
-        \intertext{The sum of the DFT can be split into two sums, the even and the odd values of $k$ respectively.}\\
+        \intertext{The sum of the DFT can be split into two sums, an even part and an odd part.}\\
         &=\sum^{N/2-1}_{r=0}f[2r]W_N^{2rk}+\sum^{N/2-1}_{r=0}f[2r+1]W_N^{(2r+1)k}\\
         &=\sum^{N/2-1}_{r=0}f[2r](W_N^2)^{rk}+W_N^k\sum^{N/2-1}_{r=0}f[2r+1](W_N^2)^{rk}\\
         W_N^2 &= \exp\left(\frac{-j2(2\pi)}{N}\right) = \exp\left(\frac{-j2\pi}{N/2}\right) = W_{N/2}\\
         F[k] &= \sum^{(N/2)-1}_{r=0}f[2r]W^{rk}_{N/2}+W^k_N\sum^{(N/2)-1}_{r=0}f[2r+1]W^{rk}_{N/2}\\
     \end{align*}
-     This can be written using the definition of $D_{N/2}$ where $0 \leq k < N/2$
+     This can be written using the definition of $D_{N/2}$ where $0 \leq k < N/2$ as
      \begin{align*}
         \mathbf{y_1}=DFT_{N/2}\mathbf{x}^{(e)}+D_{N/2}DFT_{N/2}\mathbf{x}^{(o)}.\\ 
      \end{align*}
@@ -71,19 +71,19 @@ By the definition of the DFT,
         W_N^{N/2}&=\exp\left(\frac{-j2\pi}{N}\frac{N}{2}\right)=\exp\left(-j\pi\right)=-1\\
         F[k+N/2] &=\sum^{N/2-1}_{r=0}f[2r]W_{N/2}^{r(k+N/2)}-W_N^{k}\sum^{N/2-1}_{r=0}f[2r+1]W_{N/2}^{r(k+N/2)}.\\
     \end{align*}
-    
+    This can be written using the definition of $D_{N/2}$ where $0 \leq k < N/2$ as
     \begin{align*}
-        \mathbf{y_2}=DFT_{N/2}\mathbf{x}^{(e)}-D_{N/2}DFT_{N/2}\mathbf{x}^{(o)}\\ 
+        \mathbf{y_2}=DFT_{N/2}\mathbf{x}^{(e)}-D_{N/2}DFT_{N/2}\mathbf{x}^{(o)}.\\ 
      \end{align*}
 \end{proof}
-
+From this the DFT of $\textbf{x}$ can be expressed as 
 \begin{align*}
     \mathbf{y}=
     \begin{bmatrix}
         \mathbf{y_1}\\
         \mathbf{y_2}
     \end{bmatrix}
-    =
+    &=
     \begin{bmatrix}
         DFT_{N/2} & D_{N/2}DFT_{N/2} \\
         DFT_{N/2} & -D_{N/2}DFT_{N/2}
@@ -91,8 +91,8 @@ By the definition of the DFT,
     \begin{bmatrix}
         \mathbf{x}^{(e)} \\
         \mathbf{x}^{(o)}
-    \end{bmatrix}
-    =
+    \end{bmatrix}\\
+    &=
     \begin{bmatrix}
         I_{N/2} & D_{N/2} \\
         I_{N/2} & -D_{N/2}
@@ -104,5 +104,47 @@ By the definition of the DFT,
     \begin{bmatrix}
         \mathbf{x}^{(e)} \\
         \mathbf{x}^{(o)}
-    \end{bmatrix}
+    \end{bmatrix}.
 \end{align*}
+If $N/2$ is even then this can be factored a second time in to
+\begin{align*}
+        \mathbf{y}=
+    \begin{bmatrix}
+        I_{N/2} & D_{N/2} \\
+        I_{N/2} & -D_{N/2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        I_{N/4} & D_{N/4} & \mathbf{0} & \mathbf{0} \\
+        I_{N/4} & -D_{N/4} & \mathbf{0} & \mathbf{0} \\
+        \mathbf{0} & \mathbf{0} & I_{N/4} & D_{N/4}  \\
+        \mathbf{0} & \mathbf{0} & I_{N/4} & -D_{N/4} \\
+    \end{bmatrix}\times\\
+    \begin{bmatrix}
+        DFT_{N/4} & \mathbf{0} & \mathbf{0} & \mathbf{0} \\
+        \mathbf{0} & DFT_{N/4} & \mathbf{0} & \mathbf{0} \\
+        \mathbf{0} & \mathbf{0} & DFT_{N/4} & \mathbf{0} \\
+        \mathbf{0} & \mathbf{0} & \mathbf{0} & DFT_{N/4} \\
+    \end{bmatrix}
+    \begin{bmatrix}
+        \mathbf{x}^{(ee)} \\
+        \mathbf{x}^{(eo)} \\
+        \mathbf{x}^{(oe)} \\
+        \mathbf{x}^{(oe)}
+    \end{bmatrix}.
+\end{align*}
+Where $\mathbf{x}^{(e)}$ and $\mathbf{x}^{(o)}$ are split in to an even and odd parts.  
+If $N$ is limited to be $N=2^L$ where $L$ is an positive integer then this can be factored $L=\log_2 N$ times. When factorising $\log_2 N$ times, the final matrix becomes a diagonal matrix with entries $DFT_1=[1]$ which is the identity matrix.
+\begin{align*}
+    DFT_N=\prod_{k=1}^{\log_2 N}\left(
+    \begin{bmatrix}
+    I_{N/2^k}  & D_{N/2^k}  & \mathbf{0} & \mathbf{0} & \hdots & \mathbf{0} & \mathbf{0}\\
+    I_{N/2^k}  & -D_{N/2^k} & \mathbf{0} & \mathbf{0} & \hdots & \mathbf{0} & \mathbf{0}\\
+    \mathbf{0} & \mathbf{0} & I_{N/2^k}  & D_{N/2^k}  & \hdots & \mathbf{0} & \mathbf{0}\\
+    \mathbf{0} & \mathbf{0} & I_{N/2^k}  & -D_{N/2^k} & \hdots & \mathbf{0} & \mathbf{0}\\
+    \vdots     & \vdots     & \vdots     & \vdots     & \ddots & \vdots     & \vdots    \\
+    \mathbf{0} & \mathbf{0} & \mathbf{0} & \mathbf{0} & \hdots & I_{N/2^k}  & D_{N/2^k} \\
+    \mathbf{0} & \mathbf{0} & \mathbf{0} & \mathbf{0} & \hdots & I_{N/2^k}  & -D_{N/2^k}
+    \end{bmatrix}
+    \right)P
+\end{align*}
+where $P$ is a permutation matrix. 

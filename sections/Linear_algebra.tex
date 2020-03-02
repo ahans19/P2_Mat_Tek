@@ -1,12 +1,39 @@
+\chapter {Linear Algebra} 
 Noget om transformationer og standard matricen.
 
 \begin{align*}
-    \textbf{x}=\begin{pmatrix}x_1 \\x_2 \\ x_3 \end{pmatrix} &= \begin{pmatrix}x_1 \\ 0 \\ 0  \end{pmatrix} + \begin{pmatrix}0 \\ x_2 \\ 0  \end{pmatrix} + \begin{pmatrix}0 \\ 0 \\ x_3  \end{pmatrix}\\ &=
-   x_1  \begin{pmatrix}1 \\ 0\\ 0  \end{pmatrix} + x_2 \begin{pmatrix}0 \\ 1 \\ 0  \end{pmatrix} + x_3 \begin{pmatrix}0 \\ 0 \\ 1  \end{pmatrix} \\ &= x_1 \textbf{e}_1 + x_2\textbf{e}_2+x_3 \textbf{e}_3
+    \textbf{x}=
+    \begin{pmatrix}x_1 
+        \\x_2 \\ x_3 
+    \end{pmatrix} &= 
+    \begin{pmatrix}
+        x_1 \\ 0 \\ 0  
+    \end{pmatrix} + 
+    \begin{pmatrix}
+        0 \\ x_2 \\ 0  
+    \end{pmatrix} + 
+    \begin{pmatrix}
+        0 \\ 0 \\ x_3  
+    \end{pmatrix}\\ &= x_1  
+   \begin{pmatrix}
+        1 \\ 0\\ 0  
+   \end{pmatrix}+ x_2 
+   \begin{pmatrix}
+        0 \\ 1 \\ 0  
+   \end{pmatrix} + x_3 
+   \begin{pmatrix}
+        0 \\ 0 \\ 1  
+   \end{pmatrix} \\ &= x_1 \textbf{e}_1 + x_2\textbf{e}_2+x_3 \textbf{e}_3
 \end{align*}
 
 \begin{align*}
-f(\textbf{x})&=f(x_1 \textbf{e}_1 + x_2\textbf{e}_2+x_3 \textbf{e}_3)\\ &= f(x_1 \textbf{e}_1) + f(x_2 \textbf{e}_2) + f(x_3 \textbf{e}_3) \\ &=x_1 f(\textbf{e}_1) + x_2 f(\textbf{e}_2) + x_3 f(\textbf{e}_3) \\ &= [f(\textbf{e}_1) f(\textbf{e}_2 ) f(\textbf{e}_3)] \begin{pmatrix}x_1 \\x_2 \\ x_3 \end{pmatrix} &= A \textbf{x}
+f(\textbf{x})&=f(x_1 \textbf{e}_1 + x_2\textbf{e}_2+x_3 \textbf{e}_3)\\ 
+&= f(x_1 \textbf{e}_1) + f(x_2 \textbf{e}_2) + f(x_3 \textbf{e}_3) \\
+&=x_1 f(\textbf{e}_1) + x_2 f(\textbf{e}_2) + x_3 f(\textbf{e}_3)
+\\ &= [f(\textbf{e}_1) f(\textbf{e}_2 ) f(\textbf{e}_3)] 
+\begin{pmatrix}
+    x_1 \\x_2 \\ x_3 
+\end{pmatrix} &= A \textbf{x}
 \end{align*}
 f er en matrix afbildning
 
@@ -51,11 +78,10 @@ For instance a $A_{ij}$ matrix, where the scalar in the $i$-th row and $j$-th co
     a_{i 1} & a_{i 2} & \cdots & a_{i j}\\
     \end{bmatrix}
 \end{align*}
-
 \end{definition}
-\begin{definition}{Elementary row operations}
-To find the solution set of a system of linear equations or determine that the system is inconsistent, there are some elementary row operations that can be done on a matrix $A$, which makes it possible to replace it with a equivalent system of linear equations, meaning a system of linear equations with the same solution, but more easily solved.
-
+To determine the solution set of a system of linear equations or whether the system is inconsistent, there are some elementary row operations that can be done on a matrix $A$, which makes it possible to replace it with a equivalent system of linear equations, meaning a system of linear equations with the same solution, but more easily solved.
+\begin{definition}{Elementary Row Operations}
+There are three elementary row operations, that can be used to determine an equivalent system of linear equations, for a given system of linear equations. 
 \begin{enumerate}
     \item Interchange Operation:
     It is allowed to let two rows switch place 
@@ -68,22 +94,105 @@ To find the solution set of a system of linear equations or determine that the s
     Notation: $A\xrightarrow{c\textbf{r}+\textbf{r}\rightarrow \textbf{r}} B$
 \end{enumerate}
 \end {definition}
-(Eksempel her måske, på rækkeoperationer??)
 
-\begin{example}{Elementary row operations}
+\begin{example}{Elementary Row Operations}
 This is an example with a given system of linear equations, where the  elementary row operations will be used to replace the given system with an equivalent system of linear equations, which will be more easily solved. Having the given system of linear equations
 \begin{align*}
     x_1-x_2-2x_4-8x_5&=-3\\
     -2x_1+x_3+2x_4+9x_5 &= 5\\
     3x-1-2x_3-3x_4-15x_5&=-9
 \end{align*}
-the augmented matrix
+the augmented matrix can be written as
 \begin{align*}
+[A \textbf{b}] =
+	&\begin{bmatrix}
+	1 & 0 & -1 &-2 & -8 & -3 \\
+	-2 & 0 & 1 & 2 & 9 & 5 \\
+	3 &0 & -2 & -3 & -15 & -9 
+   \end{bmatrix} \\
+  \xrightarrow{\substack{r_2+2r_1\rightarrow r_2\\  r_3-3r_1\rightarrow r_3}}
+  &\begin{bmatrix}
+ 	 1 & 0 & -1 &-2 & -8 & -3 \\
+ 	 0 & 0 & -1 & -2 & -7 & -1 \\
+	 0 &0 & 1 & 3 & 9 & 0
+  \end{bmatrix}\\
+  \xrightarrow{r_3+r_2\rightarrow r_3}
+    &\begin{bmatrix}
+  	 1 & 0 & -1 &-2 & -8 & -3 \\
+ 	 0 & 0 & -1 & -2 & -7 & -1 \\
+	 0 &0 & 0 & 1 & 2 & -1
+       \end{bmatrix}
+\end{align*}
+\label{exa:rowoperations}
+\end{example}
+When replacing a given system of linear equations with one, which are more easily solved, the most simple equivalent system of linear is called the reduced row echelon form. 
+To define how to determine the reduced row echelon form it is necessary to state concepts as zero row, nonzero row and a leading entry. Zero row is a row where all the entries are 0 and nonzero row otherwise. (Leading entry ved ikke lige hvordan det nemmest forklares)
+\begin{definition}{Reduced Row Echelon Form}
+A matrix in row echelon form is satisfying the following three conditions
+\begin{enumerate}
+    \item Each nonzero row lies above every zero row
+    \item The leading entry of a nonzero row is in a column to the right of the column containing the leading entry of any preceding row
+    \item All entries below a leading entry are $0$
+\end{enumerate}
+For a matrix to be in reduced echelon form it has to satisfy two conditions more. these are
+\begin{enumerate}
+    \item For a column with a leading entry, all other entries have to be 0
+    \item The leading entry has to be 1
+\end{enumerate}
+\end{definition}
 
+\begin{example}{Row Echelon Form}
+    In Example \autoref{exa:rowoperations} there were determined an equivalent system of linear equations, which is more easily solved. 
+\end{example}
+
+\begin{example}{Reduced Row Echelon Form}
+\begin{align*}
+  \xrightarrow{\substack{r_1+2r_3\rightarrow r_1\\r_2+2r_3\rightarrow r_2}}
+    &\begin{bmatrix}
+  	    1 & 0 & -1 &0 & -4 & -5 \\
+ 	    0 & 0 & -1 & 0 & -3 & -3 \\
+	    0 &0 & 0 & 1 & 2 & -1
+     \end{bmatrix}\\
+  \xrightarrow{\substack{r_1+r_2\rightarrow r_1\\-1r_2\rightarrow r_2}}
+  &\begin{bmatrix}
+        1 & 0 & 0 &0 & -1 & -2 \\
+ 	    0 & 0 & 1 & 0 & 3 & 3 \\
+	    0 &0 & 0 & 1 & 2 & -1
+     \end{bmatrix}
 \end{align*}
 \end{example}
 
-\begin{definition} {The Span of a set of vectors}
+\begin{example}{Parameterised Vectorform }
+	\begin{align*}
+		x-x_5 =-2   &\Rightarrow x_1=x_5 -2\\
+        x_3 + 3x_5 =3 &\Rightarrow x_3=-3x_5+3\\
+        x_4 +2x_5 = -1 &\Rightarrow	x_4=-2x_5-1
+	\end{align*}
+	En eller anden kommentar om, at $x_2$ og $x_5$ er frie variabler. 
+    \begin{align*}
+    	\textbf{x}=
+        \begin{bmatrix}
+       	    x_1\\ x_2 \\ x_3\\ x_4 \\x_5
+        \end{bmatrix} =
+        \begin{bmatrix}
+        	x_5- 2\\ x_2\\ -3x_5 +3\\-2x_5-1\\ x_5 
+        \end{bmatrix}=
+        \begin{bmatrix}
+      	    -2\\ 0 \\ 3 \\-1 \\0
+        \end{bmatrix} + x_2
+        \begin{bmatrix}
+            0 \\ 1 \\ 0 \\ 0 \\ 0 
+        \end{bmatrix} + x_5
+        \begin{bmatrix}
+            1 \\ 0 \\ -3 \\ -2 \\ 1
+        \end{bmatrix}
+    \end{align*}
+\end{example}
+
+\begin{definition} {The Span of a Set of Vectors}
 A linear combination is a vector of the form $c_1 \textbf{u}_1 + c_2\textbf{u}_2+ \cdots+ c_k\textbf{u}_k$, where $\textbf{u}_1,\textbf{u}_2 \cdots \textbf{u}_k$ are in $\mathbb{R}^n$ and $c_1, c_2 \cdots c_k$ are scalars. 
 \end{definition}
 
+\begin{definition}{Rank and Nullity of a Matrix}
+
+\end{definition}

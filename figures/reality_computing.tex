@@ -1,0 +1,22 @@
+\begin{figure} [H]
+    \centering
+    \begin{tikzpicture}[
+    node distance = 7mm and -3mm,
+every node/.style = {draw=black, rounded corners, fill=gray!30, 
+                     minimum width=2cm, minimum height=0.5cm,
+                     align=center},
+every path/.style = {draw, -latex}
+                        ]
+\node (Actuators) {Actuators};
+\node (Computation) [below  left=of Actuators]       {Computation}; 
+\node (Sensor) [below right=of Computation]     {Sensor};
+\node (Reality) [below right=of Actuators]     {Reality};
+
+\draw   (Computation) |- (Actuators);
+\draw   (Actuators) -| (Reality);
+\draw   (Reality) |- (Sensor);
+\draw   (Sensor) -| (Computation);
+    \end{tikzpicture}
+    \caption{Reality to computing} %better caption
+    \label{fig:reality_computing}
+\end{figure}

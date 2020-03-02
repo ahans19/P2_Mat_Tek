@@ -16,15 +16,24 @@ Microphones i used to convert sound into a electric signal. This is done by conv
 
 The figure above is a simpler version of a electret microphone. The microphone works by a signal going through the dust cover and then the electret diaphragm will begin to oscillate. When this happens there will be a change in distance between the backplate and the oscillating diaphragm. When this distance changes the capacitance changes and thus will the charge that were on the backplate. There will then be a change in voltage between the diaphragm and the backplate and this is detected by the field effect transistor (FET). The FET can also amplify the voltage. \\
 
-The diaphragm and the backplate creates a capacitor with a capacitance, this can be described by:
+\noindent The diaphragm and the backplate creates a capacitor with a capacitance, this can be described by:
 $$ C = \dfrac{\varepsilon A}{d}$$ 
-where $\varepsilon$ is the permittivity (a measure of the electric polarisation of the electrical insulator), $A$ is the area of the plates and $d$ is the distance between the diaphragm and the backplate. $A$ and $\varepsilon$ is considered constants. $d$ can be described by letting $z(t)$ be the distance between the diaphragm and the backplate to time $t$, by doing this $C$ then becomes a function of $z$. The voltage between the plates and their charge has the relation:
-$$
-\cite[p. 160]{LectureNotes}
+\indent where $\varepsilon$ is the permittivity (a measure of the electric polarisation of the electrical insulator), $A$ is the area of the plates and $d$ is the distance between the diaphragm and the backplate. $A$ and $\varepsilon$ is considered constants. $d$ can be described by letting $z(t)$ be the distance between the diaphragm and the backplate to time $t$, by doing this $C$ then becomes a function of $z$. The voltage between the plates and their charge has the relation:
+$$q=C v_C.$$
+This can also be described as:
+$$v_C(t)=v_C(z(t))= \dfrac{q(t)}{C(z(t))} = \dfrac{q(t)z(t)}{\varepsilon A},$$
+\indent where $v_C$ is the voltage between the plates. This means that when $z$ decreases, the distance between the plates becomes smaller, the charge on the diaphragm induces an increased charge on the backplate. 
+\cite[p. 160-161]{LectureNotes}
+
+%Skal der skrives mere til denne? er det nødvendigt at beskrive mechanical forces og electric forces? 
 
 \section{Sampling}
-When working with music signal, the music signal is a continuous-time signal.
-Going from a continuous-time signal, $x_c(t)$, to a discrete-time signal,$x[n]$, the new discrete-time signal can be manipulated by a computer. A discrete-time signal i essentially a sampled continuous-time signal. The discrete-time signal is formally written as:
+When working with signals an essential thing is to look at sampling. By sampling a signal it can then be stored analysed in a digital computer.\\ 
+
+\input{figures/reality_computing}
+
+\subsection{Discrete-time Signals}
+In this project music signals are used which are continuous-time signals. Going from a continuous-time signal, $x_c(t)$, to a discrete-time signal,$x[n]$, the new discrete-time signal can be manipulated by a computer. A discrete-time signal i essentially a sampled continuous-time signal. The discrete-time signal is formally written as:
 $$x={x(n)}, \quad    n \in Z$$
 A typical way to obtain a discrete-time signal from a continuous-time signal is by using periodic sampling. A periodic sampling is a sequence of samples, $x[n]$, also referred to as the nth sample, obtained from the continuous-time signal,$x_c(t)$, by using the following relation:
 $$x[n]=xc (nT), \quad    - \infty <n< \infty$$
