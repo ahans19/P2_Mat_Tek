@@ -1,4 +1,5 @@
 \chapter {Linear Algebra} 
+Den Første side er bare noter...
 Noget om transformationer og standard matricen.
 
 \begin{align*}
@@ -48,27 +49,24 @@ A = \begin{bmatrix}-5 & -4 \\8 & 7 \end{bmatrix}, \textbf{v} =\begin{bmatrix}1 \
 
 (Her skal være en intro; Koncept med lineær algebra, hvorfor vi går i gang med det, og hvorfor vi dækker det LiAl som vi gør)
 
-\begin{definition}{Linearity}
-$f(x)=Ax$
-
+\begin{definition}{Principles of Linearity}
 A transform $f: \mathbb{R}^n \rightarrow \mathbb{R}^m $ is linear if the following is true... 
 \begin{align*}
-f(u+v)=f(u)+f(v)\\
-f(c u)=c f u ,  \text{where c is a constant. }
+f(u+v)&=f(u)+f(v)\\
+f(c u)&=c f u ,  \text{where c is a constant. }
 \end{align*}
 
-Matrix-vector produkt...
+Matrix-vector product...
 \begin{align*}
-A(\textbf{u}+\textbf{v})=A\textbf{u}+A\textbf{v}\\
-A(c \textbf{u})=c f\textbf{u}
+A(\textbf{u}+\textbf{v})=& A\textbf{u}+A\textbf{v}\\
+A(c \textbf{u})=& c f\textbf{u}
 \end{align*}
 With means that all matrix transforms are linear..
 måske se side 171
 \end{definition}
 
-\begin{definition}{Matrix}
 A matrix is a rectangular array of scalars. The size of a matrix is determined by its number of rows $m$ and number of columns $n$. 
-For instance a $A_{ij}$ matrix, where the scalar in the $i$-th row and $j$-th column is called the (i, j)-entry of the $A_{ij}$ matrix:
+For instance an $A_{ij}$ matrix, where the scalar in the $i$-th row and $j$-th column is called the (i, j)-entry of the $A_{ij}$ matrix:
 \begin{align*}
     A_{ij} = 
     \begin{bmatrix}
@@ -78,31 +76,33 @@ For instance a $A_{ij}$ matrix, where the scalar in the $i$-th row and $j$-th co
     a_{i 1} & a_{i 2} & \cdots & a_{i j}\\
     \end{bmatrix}
 \end{align*}
-\end{definition}
+\cite[4]{LiAl}
 To determine the solution set of a system of linear equations or whether the system is inconsistent, there are some elementary row operations that can be done on a matrix $A$, which makes it possible to replace it with a equivalent system of linear equations, meaning a system of linear equations with the same solution, but more easily solved.
 \begin{definition}{Elementary Row Operations}
-There are three elementary row operations, that can be used to determine an equivalent system of linear equations, for a given system of linear equations. 
+There are three elementary row operations, that can be used to determine an equivalent system of linear equations, for a given system of linear equations.
 \begin{enumerate}
     \item Interchange Operation:
     It is allowed to let two rows switch place 
-    Notation: $A\xrightarrow{\textbf{r}\leftrightarrow \textbf{r}} B$ 
+    Notation: $A\xrightarrow{\textbf{r}_i\leftrightarrow \textbf{r}_t} B$ where $i$ and $t$ are rows
     \item Scaling Operation:
     Multiplying any row of a matrix with the same nonzero scalar.
-    Notation: $A\xrightarrow{c\textbf{r}\rightarrow \textbf{r}} B$
+    Notation: $A\xrightarrow{c\textbf{r}_i\rightarrow \textbf{r}_i} B$
     \item Row Addition Operation:
     Add a multiple of one row of the matrix to another row
-    Notation: $A\xrightarrow{c\textbf{r}+\textbf{r}\rightarrow \textbf{r}} B$
+    Notation: $A\xrightarrow{c\textbf{r}_i+\textbf{r}_t\rightarrow \textbf{r}_t} B$
 \end{enumerate}
+\cite[32]{LiAl}
 \end {definition}
-
+An example with a given system of linear equations, where the  elementary row operations will be used to replace the given system with an equivalent system of linear equations, which will be more easily solved.
 \begin{example}{Elementary Row Operations}
-This is an example with a given system of linear equations, where the  elementary row operations will be used to replace the given system with an equivalent system of linear equations, which will be more easily solved. Having the given system of linear equations
+ Having the given system of linear equations
 \begin{align*}
     x_1-x_2-2x_4-8x_5&=-3\\
     -2x_1+x_3+2x_4+9x_5 &= 5\\
-    3x-1-2x_3-3x_4-15x_5&=-9
+    3x-1-2x_3-3x_4-15x_5&=-9.
 \end{align*}
-the augmented matrix can be written as
+The augmented matrix can be written as
+
 \begin{align*}
 [A \textbf{b}] =
 	&\begin{bmatrix}
@@ -121,12 +121,11 @@ the augmented matrix can be written as
   	 1 & 0 & -1 &-2 & -8 & -3 \\
  	 0 & 0 & -1 & -2 & -7 & -1 \\
 	 0 &0 & 0 & 1 & 2 & -1
-       \end{bmatrix}
+       \end{bmatrix}.
 \end{align*}
 \label{exa:rowoperations}
 \end{example}
-When replacing a given system of linear equations with one, which are more easily solved, the most simple equivalent system of linear is called the reduced row echelon form. 
-To define how to determine the reduced row echelon form it is necessary to state concepts as zero row, nonzero row and a leading entry. Zero row is a row where all the entries are 0 and nonzero row otherwise. (Leading entry ved ikke lige hvordan det nemmest forklares)
+When replacing a given system of linear equations with one, which are more easily solved, the most simple equivalent system of linear equations is called the reduced row echelon form. 
 \begin{definition}{Reduced Row Echelon Form}
 A matrix in row echelon form is satisfying the following three conditions
 \begin{enumerate}
@@ -137,15 +136,22 @@ A matrix in row echelon form is satisfying the following three conditions
 For a matrix to be in reduced echelon form it has to satisfy two conditions more. these are
 \begin{enumerate}
     \item For a column with a leading entry, all other entries have to be 0
-    \item The leading entry has to be 1
+    \item The leading entry has to be equal to 1
 \end{enumerate}
+\cite[33]{LiAl}
 \end{definition}
-
-\begin{example}{Row Echelon Form}
-    In Example \autoref{exa:rowoperations} there were determined an equivalent system of linear equations, which is more easily solved. 
-\end{example}
-
+To determine whether a system of linear equations is consistent or inconsistent, the concepts pivot positions and pivot columns
+becomes useful. Using the conditions a row echelon form is satisfying, the number of pivot columns is equal to the number of leading entries in the given matrix, and a pivot position is the position of the leading entry.  
 \begin{example}{Reduced Row Echelon Form}
+It can be observed from the matrix in Example \ref{exa:rowoperations} that there is three pivot positions, and thereby three pivot columns.
+\begin{align*}
+     \begin{bmatrix}
+  	 \circled{1} & 0 & -1 &-2 & -8 & -3 \\
+ 	 0 & 0 & \circled{-1} & -2 & -7 & -1 \\
+	 0 &0 & 0 & \circled{1} & 2 & -1
+       \end{bmatrix}
+\end{align*}
+There are no pivot position in the last column of the augmented matrix, hence the system is consistent. All entries in column two is equal to zero, hence the system has infinite solutions. To determine the most simple equivalent system of the given linear equations, the reduced row echelon form is calculated:
 \begin{align*}
   \xrightarrow{\substack{r_1+2r_3\rightarrow r_1\\r_2+2r_3\rightarrow r_2}}
     &\begin{bmatrix}
@@ -159,16 +165,14 @@ For a matrix to be in reduced echelon form it has to satisfy two conditions more
  	    0 & 0 & 1 & 0 & 3 & 3 \\
 	    0 &0 & 0 & 1 & 2 & -1
      \end{bmatrix}
-\end{align*}
-\end{example}
+    \end{align*}
+(En eller anden tekst som overgang)
 
-\begin{example}{Parameterised Vectorform }
 	\begin{align*}
 		x-x_5 =-2   &\Rightarrow x_1=x_5 -2\\
         x_3 + 3x_5 =3 &\Rightarrow x_3=-3x_5+3\\
         x_4 +2x_5 = -1 &\Rightarrow	x_4=-2x_5-1
 	\end{align*}
-	En eller anden kommentar om, at $x_2$ og $x_5$ er frie variabler. 
     \begin{align*}
     	\textbf{x}=
         \begin{bmatrix}
@@ -189,10 +193,16 @@ For a matrix to be in reduced echelon form it has to satisfy two conditions more
     \end{align*}
 \end{example}
 
-\begin{definition} {The Span of a Set of Vectors}
-A linear combination is a vector of the form $c_1 \textbf{u}_1 + c_2\textbf{u}_2+ \cdots+ c_k\textbf{u}_k$, where $\textbf{u}_1,\textbf{u}_2 \cdots \textbf{u}_k$ are in $\mathbb{R}^n$ and $c_1, c_2 \cdots c_k$ are scalars. 
-\end{definition}
+
 
 \begin{definition}{Rank and Nullity of a Matrix}
+The rank of a $m x n$ matrix $A$, is defined as the number of pivot columns, or the number of nonzero rows of the reduced echelon form of $A$. The rank is denoted as rank$(A)$
+The nullity is defined as the opposite of rank, $n - $rank. Nullity is denoted as nullity$(A)$.
+\cite[47]{LiAl}
+\end{definition}
 
+\begin{definition} {The Span of a Set of Vectors}
+A linear combinations of a nonempty set of vectors $\mathcal{S} = \{ \textbf{u}_1,\textbf{u}_2 \cdots \textbf{u}_k\}$ is denoted as $c_1 \textbf{u}_1 + c_2\textbf{u}_2+ \cdots+ c_k\textbf{u}_k$, where $\textbf{u}_1,\textbf{u}_2 \cdots \textbf{u}_k$ are in $\mathbb{R}^n$ and $c_1, c_2 \cdots c_k$ are scalars
+The SPAN of the set of vectors is a set of all linear combinations in $\mathbb{R}^n$
+\cite[66]{LiAl}
 \end{definition}
