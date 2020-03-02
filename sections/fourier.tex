@@ -1,0 +1,108 @@
+\chapter{The Discrete Fourier Transform}
+In this chapter the discrete Fourier transform (DFT) is defined and from this the fast Fourier transform is derived.\\
+
+In this project, the DFT is used to transform an audio signal into the different frequencies in which it is composed of.
+
+\begin{definition}{The Discrete Fourier Transform}
+    The (DFT) transforms a discrete signal $f$ in the time domain with $N$ terms in to a discrete sequence $F$ in the frequency domain also with $N$ terms, defined as 
+    \begin{align*}
+        F[k]=\sum^{N-1}_{n=0}f[n]e^{-2jnk\pi/N}.
+    \end{align*}
+\end{definition}
+The outcome of 
+The DFT can be linearly transformed by the following theorem. 
+\begin{theorem}{The Discrete Fourier Transform as a matrix}
+    By making the definition 
+    \begin{align*}
+        W_N=e^{-2j\pi/N}
+    \end{align*}
+    then the discrete Fourier transform can be written as
+    \begin{align*}
+        F[k]=\sum^{N-1}_{n=0}f[n]W_N^{nk}.
+    \end{align*}
+    From this the $N\times N$ discrete Fourier transform matrix is defined as 
+    \begin{align*}
+        DFT_N=
+        \begin{bmatrix}
+             W_N^{0\cdot0} & W_N^{0\cdot1} & W_N^{0\cdot2} & \hdots & W_N^{0(N-1)} \\
+             W_N^{1\cdot0} & W_N^{1\cdot1} & W_N^{1\cdot2} & \hdots & W_N^{1(N-1)} \\
+             W_N^{2\cdot 0} & W_N^{2\cdot1} & W_N^{2\cdot2} & \hdots & W_N^{2(N-1)} \\
+             \vdots & \vdots & \vdots & \ddots & \vdots \\
+             W_N^{(N-1)0} & W_N^{(N-1)1} & W_N^{(N-1)2} & \hdots & W_N^{(N-1)(N-1)} \\
+         \end{bmatrix}.
+    \end{align*}
+    Then the DFT of $\textbf{x}$ is expressed as the transforms
+    \begin{align*}
+        \textbf{y}=DFT_N\textbf{x}.
+    \end{align*}
+\end{theorem}
+Since the DFT can be expressed as a matrix vektor product by THEORM ??? the DFT is a linear transformation.
+
+\section{The Fast Fourier Transform}
+The fast Fourier transform (FFT) is an method of reducing the number of computations needed to calculate the DFT. This is done by reducing the DFT matrix to a product of sparse matrices. 
+To do so the following theorem is need
+\begin{theorem}{The DFT when $N$ is even}
+    Let $\mathbf{y}=DFT_{N}\mathbf{x}$ be the $N$-point DFT of $\mathbf{x}$ where $N$ is even and let $D_{N/2}$ be an $(N/2)\times(N/2)$ diagonal matrix with entries $(D_{N/2})_{n,n}=W_N^n$ for $0\leq n< N/2$. Then
+    \begin{align*}
+         \mathbf{y_1}&=DFT_{N/2}\mathbf{x}^{(e)}+D_{N/2}DFT_{N/2}\mathbf{x}^{(o)}\\ 
+         \mathbf{y_2}&=DFT_{N/2}\mathbf{x}^{(e)}-D_{N/2}DFT_{N/2}\mathbf{x}^{(o)}.\\
+    \end{align*}
+    Where $\mathbf{y_1}$ is the first half $N/2$ entries of $\mathbf{y}$ and $\mathbf{y_2}$ is the second half set of entries. Hence $\mathbf{y_1},\mathbf{y_2}\in \mathds{C}^{N/2}$ and $\mathbf{x}^{(e)}$ and $\mathbf{x}^{(o)}$ are the even and odd entries of $\mathbf{x}$ respectively. Hence $\mathbf{x}^{(e)},\mathbf{x}^{(o)}\in \mathds{R}^{N/2}$.
+\end{theorem}
+\begin{proof}{The DFT when $N$ is even}
+By the definition of the DFT,
+    \begin{align*}
+         F[k]&=\sum^{N-1}_{n=0}f[n]W_N^{nk}.\\
+        \intertext{The sum of the DFT can be split into two sums, the even and the odd values of $k$ respectively.}\\
+        &=\sum^{N/2-1}_{r=0}f[2r]W_N^{2rk}+\sum^{N/2-1}_{r=0}f[2r+1]W_N^{(2r+1)k}\\
+        &=\sum^{N/2-1}_{r=0}f[2r](W_N^2)^{rk}+W_N^k\sum^{N/2-1}_{r=0}f[2r+1](W_N^2)^{rk}\\
+        W_N^2 &= \exp\left(\frac{-j2(2\pi)}{N}\right) = \exp\left(\frac{-j2\pi}{N/2}\right) = W_{N/2}\\
+        F[k] &= \sum^{(N/2)-1}_{r=0}f[2r]W^{rk}_{N/2}+W^k_N\sum^{(N/2)-1}_{r=0}f[2r+1]W^{rk}_{N/2}\\
+    \end{align*}
+     This can be written using the definition of $D_{N/2}$ where $0 \leq k < N/2$
+     \begin{align*}
+        \mathbf{y_1}=DFT_{N/2}\mathbf{x}^{(e)}+D_{N/2}DFT_{N/2}\mathbf{x}^{(o)}.\\ 
+     \end{align*}
+    If $k$ is limited to $0 \leq k < N/2$, then the second half of the DFT can be processed using the same methods as in the first half.
+    \begin{align*}
+        F[k+N/2] &= \sum^{N-1}_{n=0}f[n]W_N^{n(k+N/2)}\\
+        &=\sum^{N/2-1}_{r=0}f[2r]W_N^{2r(k+N/2)}+\sum^{N/2-1}_{r=0}f[2r+1]W_N^{(2r+1)(k+N/2)}\\
+        &=\sum^{N/2-1}_{r=0}f[2r](W_N^2)^{r(k+N/2)}+W_N^{k+N/2}\sum^{N/2-1}_{r=0}f[2r+1](W_N^2)^{r(k+N/2)}\\
+        W_N^{N/2}&=\exp\left(\frac{-j2\pi}{N}\frac{N}{2}\right)=\exp\left(-j\pi\right)=-1\\
+        F[k+N/2] &=\sum^{N/2-1}_{r=0}f[2r]W_{N/2}^{r(k+N/2)}-W_N^{k}\sum^{N/2-1}_{r=0}f[2r+1]W_{N/2}^{r(k+N/2)}.\\
+    \end{align*}
+    
+    \begin{align*}
+        \mathbf{y_2}=DFT_{N/2}\mathbf{x}^{(e)}-D_{N/2}DFT_{N/2}\mathbf{x}^{(o)}\\ 
+     \end{align*}
+\end{proof}
+
+\begin{align*}
+    \mathbf{y}=
+    \begin{bmatrix}
+        \mathbf{y_1}\\
+        \mathbf{y_2}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        DFT_{N/2} & D_{N/2}DFT_{N/2} \\
+        DFT_{N/2} & -D_{N/2}DFT_{N/2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        \mathbf{x}^{(e)} \\
+        \mathbf{x}^{(o)}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        I_{N/2} & D_{N/2} \\
+        I_{N/2} & -D_{N/2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        DFT_{N/2} & \mathbf{0} \\
+        \mathbf{0} & DFT_{N/2}
+    \end{bmatrix}
+    \begin{bmatrix}
+        \mathbf{x}^{(e)} \\
+        \mathbf{x}^{(o)}
+    \end{bmatrix}
+\end{align*}

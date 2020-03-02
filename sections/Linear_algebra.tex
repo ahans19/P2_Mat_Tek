@@ -1,0 +1,89 @@
+Noget om transformationer og standard matricen.
+
+\begin{align*}
+    \textbf{x}=\begin{pmatrix}x_1 \\x_2 \\ x_3 \end{pmatrix} &= \begin{pmatrix}x_1 \\ 0 \\ 0  \end{pmatrix} + \begin{pmatrix}0 \\ x_2 \\ 0  \end{pmatrix} + \begin{pmatrix}0 \\ 0 \\ x_3  \end{pmatrix}\\ &=
+   x_1  \begin{pmatrix}1 \\ 0\\ 0  \end{pmatrix} + x_2 \begin{pmatrix}0 \\ 1 \\ 0  \end{pmatrix} + x_3 \begin{pmatrix}0 \\ 0 \\ 1  \end{pmatrix} \\ &= x_1 \textbf{e}_1 + x_2\textbf{e}_2+x_3 \textbf{e}_3
+\end{align*}
+
+\begin{align*}
+f(\textbf{x})&=f(x_1 \textbf{e}_1 + x_2\textbf{e}_2+x_3 \textbf{e}_3)\\ &= f(x_1 \textbf{e}_1) + f(x_2 \textbf{e}_2) + f(x_3 \textbf{e}_3) \\ &=x_1 f(\textbf{e}_1) + x_2 f(\textbf{e}_2) + x_3 f(\textbf{e}_3) \\ &= [f(\textbf{e}_1) f(\textbf{e}_2 ) f(\textbf{e}_3)] \begin{pmatrix}x_1 \\x_2 \\ x_3 \end{pmatrix} &= A \textbf{x}
+\end{align*}
+f er en matrix afbildning
+
+Nogle eksempler jeg har skrevet ned i mit hæfte, da vi løste opgaver:
+
+Here is an example on how to show that a vector is an eigenvector of a matrix $A$ and how to determine what the corresponding eigenvalue is.... 
+
+\begin{align*}
+A = \begin{bmatrix}-5 & -4 \\8 & 7 \end{bmatrix}, \textbf{v} =\begin{bmatrix}1 \\-2\end{bmatrix}\\
+\begin{bmatrix}-5 & -4 \\8 & 7 \end{bmatrix} \begin{bmatrix}1 \\-2\end{bmatrix}\\ = \begin{bmatrix}-5 + 8 \\8  -14 \end{bmatrix} = \begin{bmatrix}3 \\-6 \end{bmatrix} = 3\begin{bmatrix}1\\-2 \end{bmatrix}
+\end{align*}
+
+(Her skal være en intro; Koncept med lineær algebra, hvorfor vi går i gang med det, og hvorfor vi dækker det LiAl som vi gør)
+
+\begin{definition}{Linearity}
+$f(x)=Ax$
+
+A transform $f: \mathbb{R}^n \rightarrow \mathbb{R}^m $ is linear if the following is true... 
+\begin{align*}
+f(u+v)=f(u)+f(v)\\
+f(c u)=c f u ,  \text{where c is a constant. }
+\end{align*}
+
+Matrix-vector produkt...
+\begin{align*}
+A(\textbf{u}+\textbf{v})=A\textbf{u}+A\textbf{v}\\
+A(c \textbf{u})=c f\textbf{u}
+\end{align*}
+With means that all matrix transforms are linear..
+måske se side 171
+\end{definition}
+
+\begin{definition}{Matrix}
+A matrix is a rectangular array of scalars. The size of a matrix is determined by its number of rows $m$ and number of columns $n$. 
+For instance a $A_{ij}$ matrix, where the scalar in the $i$-th row and $j$-th column is called the (i, j)-entry of the $A_{ij}$ matrix:
+\begin{align*}
+    A_{ij} = 
+    \begin{bmatrix}
+    a_{1 1} & a_{1 2} & \cdots & a_{1 j}\\
+    a_{2 1} & a_{2 2} & \cdots & a_{2 j}\\
+    \vdots  &   \vdots &  \ddots   & \vdots \\
+    a_{i 1} & a_{i 2} & \cdots & a_{i j}\\
+    \end{bmatrix}
+\end{align*}
+
+\end{definition}
+\begin{definition}{Elementary row operations}
+To find the solution set of a system of linear equations or determine that the system is inconsistent, there are some elementary row operations that can be done on a matrix $A$, which makes it possible to replace it with a equivalent system of linear equations, meaning a system of linear equations with the same solution, but more easily solved.
+
+\begin{enumerate}
+    \item Interchange Operation:
+    It is allowed to let two rows switch place 
+    Notation: $A\xrightarrow{\textbf{r}\leftrightarrow \textbf{r}} B$ 
+    \item Scaling Operation:
+    Multiplying any row of a matrix with the same nonzero scalar.
+    Notation: $A\xrightarrow{c\textbf{r}\rightarrow \textbf{r}} B$
+    \item Row Addition Operation:
+    Add a multiple of one row of the matrix to another row
+    Notation: $A\xrightarrow{c\textbf{r}+\textbf{r}\rightarrow \textbf{r}} B$
+\end{enumerate}
+\end {definition}
+(Eksempel her måske, på rækkeoperationer??)
+
+\begin{example}{Elementary row operations}
+This is an example with a given system of linear equations, where the  elementary row operations will be used to replace the given system with an equivalent system of linear equations, which will be more easily solved. Having the given system of linear equations
+\begin{align*}
+    x_1-x_2-2x_4-8x_5&=-3\\
+    -2x_1+x_3+2x_4+9x_5 &= 5\\
+    3x-1-2x_3-3x_4-15x_5&=-9
+\end{align*}
+the augmented matrix
+\begin{align*}
+
+\end{align*}
+\end{example}
+
+\begin{definition} {The Span of a set of vectors}
+A linear combination is a vector of the form $c_1 \textbf{u}_1 + c_2\textbf{u}_2+ \cdots+ c_k\textbf{u}_k$, where $\textbf{u}_1,\textbf{u}_2 \cdots \textbf{u}_k$ are in $\mathbb{R}^n$ and $c_1, c_2 \cdots c_k$ are scalars. 
+\end{definition}
+
