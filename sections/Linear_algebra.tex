@@ -136,7 +136,7 @@ A matrix in row echelon form is satisfying the following three conditions
 For a matrix to be in reduced echelon form it has to satisfy two conditions more. these are
 \begin{enumerate}
     \item For a column with a leading entry, all other entries have to be 0
-    \item The leading entry has to be equal to 1
+    \item The leading entries has to be equal to 1
 \end{enumerate}
 \cite[33]{LiAl}
 \end{definition}
@@ -144,13 +144,14 @@ To determine whether a system of linear equations is consistent or inconsistent,
 becomes useful. Using the conditions a row echelon form is satisfying, the number of pivot columns is equal to the number of leading entries in the given matrix, and a pivot position is the position of the leading entry.  
 \begin{example}{Reduced Row Echelon Form}
 It can be observed from the matrix in Example \ref{exa:rowoperations} that there is three pivot positions, and thereby three pivot columns.
-\begin{align*}
+\begin{align}
      \begin{bmatrix}
   	 \circled{1} & 0 & -1 &-2 & -8 & -3 \\
  	 0 & 0 & \circled{-1} & -2 & -7 & -1 \\
 	 0 &0 & 0 & \circled{1} & 2 & -1
        \end{bmatrix}
-\end{align*}
+\label{examplepivot}
+\end{align}
 There are no pivot position in the last column of the augmented matrix, hence the system is consistent. All entries in column two is equal to zero, hence the system has infinite solutions. To determine the most simple equivalent system of the given linear equations, the reduced row echelon form is calculated:
 \begin{align*}
   \xrightarrow{\substack{r_1+2r_3\rightarrow r_1\\r_2+2r_3\rightarrow r_2}}
@@ -193,8 +194,6 @@ There are no pivot position in the last column of the augmented matrix, hence th
     \end{align*}
 \end{example}
 
-
-
 \begin{definition}{Rank and Nullity of a Matrix}
 The rank of a $m x n$ matrix $A$, is defined as the number of pivot columns, or the number of nonzero rows of the reduced echelon form of $A$. The rank is denoted as rank$(A)$
 The nullity is defined as the opposite of rank, $n - $rank. Nullity is denoted as nullity$(A)$.
@@ -202,7 +201,100 @@ The nullity is defined as the opposite of rank, $n - $rank. Nullity is denoted a
 \end{definition}
 
 \begin{definition} {The Span of a Set of Vectors}
-A linear combinations of a nonempty set of vectors $\mathcal{S} = \{ \textbf{u}_1,\textbf{u}_2 \cdots \textbf{u}_k\}$ is denoted as $c_1 \textbf{u}_1 + c_2\textbf{u}_2+ \cdots+ c_k\textbf{u}_k$, where $\textbf{u}_1,\textbf{u}_2 \cdots \textbf{u}_k$ are in $\mathbb{R}^n$ and $c_1, c_2 \cdots c_k$ are scalars
-The SPAN of the set of vectors is a set of all linear combinations in $\mathbb{R}^n$
+A linear combinations of a nonempty set of vectors $\mathcal{S} = \{ \textbf{u}_1,\textbf{u}_2 \cdots \textbf{u}_k\}$ is denoted as $c_1 \textbf{u}_1 + c_2\textbf{u}_2+ \cdots+ c_k\textbf{u}_k$, where $\textbf{u}_1,\textbf{u}_2 \cdots \textbf{u}_k$ are in $\mathbb{R}^n$ and $c_1, c_2 \cdots c_k$ are scalars.
+The span of the set of vectors is a set of all linear combinations in $\mathbb{R}^n$
 \cite[66]{LiAl}
+\end{definition}
+
+vise et kort ekemspel på span og rank - udgangspunkt i det tidligere eksempel. 
+\eqref{examplepivot} - ref til matricen med pivot.
+
+\section{Subspace, Basis and Dimension}
+(En bette intro)
+
+\begin{definition}{Subspace}
+A subspace is a set of vectors $W$ in $\mathbb{R}^n$ which have the following three properties. 
+
+\begin{enumerate}
+    \item The zero vector belongs to $W$\\
+    \textbf{Closure properties:}
+    \item The sum of any pair of vectors that belongs to $W$, belongs to $W$ too. This means $W$ is closed under vector addition.
+    \item Every scalar multiple of a vector that belongs to $W$, belongs to $W$ too. This means $W$ is closed under scalar multiplication.
+\end{enumerate}
+\cite[227]{LiAl}
+\label{exa:SubspaceDef}
+\end{definition}
+\begin{example}{Determine whether $W$ is a subspace or not}
+\begin{align*}
+    W = \begin{Bmatrix}
+    \begin{bmatrix}
+    w_1\\w_2\\w_3\\w_4
+    \end{bmatrix}
+        \in \mathbb{R}^4: 2w_1 + 5w_2 - 7w_3 -2w_4 = 0 
+    \end{Bmatrix}
+\end{align*}
+\begin{enumerate}
+    \item To determine whenever the first property from\ref{exa:SubspaceDef} is satisfied, it is calculated that
+    $2(0) + 5(0) - 7(0) -2(0) = 0 $ Hence $\textbf{w}=\textbf{0}$
+    \item Having two vectors $\textbf{u}=\begin{bmatrix}
+    u_1\\u_2\\u_3\\u_4\end{bmatrix}$ and $\textbf{v}=\begin{bmatrix}
+    v_1\\v_2\\v_3\\v_4\end{bmatrix}$ in $W$ it must satisfy that $\textbf{u}+\textbf{v} = \begin{bmatrix}
+    u_1 + v_1 \\ u_2 + v_2 \\ u_3 + v_3
+    \end{bmatrix}$\\
+    Doing the calculations yields
+    \begin{align*}
+        &\,2(u_1+v_1)+5(u_2+v_2)-7(u_3+v_3)-2(u_4+v_4)\\
+        =& (2u_1+5u_2-7u_3+2u_4)+(2v_1+5v_2-7v_3+2v_4)\\ =& 0 + 0 \\=& 0
+    \end{align*}
+    \item Having a the vector \textbf{u} it most satisfy c
+\end{enumerate}
+\end{example}
+
+\begin{theorem}{More about span}
+The span of a definite nonempty subset of $\mathbb{R}^n$ is a subspace of $\mathbb{R}^n$.
+\cite[231]{LiAl}
+\end{theorem}
+Proooff????$\leftarrow$
+
+\begin{example}{Span as a subspace}
+\begin{align*}
+    W = \begin{Bmatrix}
+    \begin{bmatrix}
+    2s-5t\\3r+s-2t\\r-4s+3t\\-r+2s
+    \end{bmatrix}
+        \in \mathbb{R}^4:\text{r, s and t are scalars}
+    \end{Bmatrix}
+\end{align*}
+Written on parameterised vector form
+\begin{align*}
+    W =
+    r \begin{bmatrix}
+        0 \\ 3 \\1 \\ -1
+    \end{bmatrix}
+    +s\begin{bmatrix}
+        2 \\ 1 \\ -4 \\ 2
+    \end{bmatrix}
+    +t\begin{bmatrix}
+        -5 \\ -2 \\ 3 \\ 0
+    \end{bmatrix}
+\end{align*}
+\begin{align*}
+    \mathcal{S}=
+    \begin{Bmatrix}
+    \begin{bmatrix}
+        0 \\ 3 \\1 \\ -1
+    \end{bmatrix}, 
+    \begin{bmatrix}
+        2 \\ 1 \\ -4 \\ 2
+    \end{bmatrix},
+    \begin{bmatrix}
+        -5 \\ -2 \\ 3 \\ 0
+    \end{bmatrix}
+    \end{Bmatrix}
+\end{align*}
+Hence $\mathcal{S}$ is a subspace of $\mathbb{R}^4$
+\end{example}
+
+\begin{definition}{Basis}
+
 \end{definition}

@@ -8,6 +8,7 @@ In this project, the DFT is used to transform an audio signal into the different
     \begin{align*}
         F[k]=\sum^{N-1}_{n=0}f[n]e^{-2jnk\pi/N}.
     \end{align*}
+    \cite[5]{rao2011fast}
     \label{def:DFT_definiton}
 \end{definition}
 
@@ -37,18 +38,18 @@ In this project, the DFT is used to transform an audio signal into the different
     \begin{align*}
         \textbf{y}=DFT_N\textbf{x},
     \end{align*}
-    where $x \in \mathds{R}^{N}$ and $y \in \mathds{C}^{N}$.
+    where $x \in \mathds{R}^{N}$ and $y \in \mathds{C}^{N}$. \cite[10]{rao2011fast}
 \end{theorem}
 
 Since the DFT can be expressed as a matrix vector product by THEORM ??? the DFT is a linear transformation.
 
 \section{The Fast Fourier Transform}
 The fast Fourier transform (FFT) is a method of reducing the number of computations needed to calculate the DFT. This can be fulfilled by reducing the DFT matrix to a product of sparse matrices. 
-To do so the following theorem is needed:
+The following theorem is needed to do this:
 \begin{theorem}{The DFT when $N$ is even}
     Let $\mathbf{y}=DFT_{N}\mathbf{x}$ be the $N$-point DFT of $\mathbf{x}$ where $N$ is even and let $D_{N/2}$ be an $(N/2)\times(N/2)$ diagonal matrix with entries 
     \begin{align}
-        (D_{N/2})_{n,n}=W_N^n \; \text{for} \; 0 \leq n< N/2.
+        (D_{N/2})_{n,n}=W_N^n \quad \text{for} \quad 0 \leq n< N/2.
         \label{eq:DFTDiagonal}
     \end{align}
     It can then be written as:
@@ -56,18 +57,18 @@ To do so the following theorem is needed:
          \mathbf{y_1}&=DFT_{N/2}\mathbf{x}^{(e)}+D_{N/2}DFT_{N/2}\mathbf{x}^{(o)}\\ 
          \mathbf{y_2}&=DFT_{N/2}\mathbf{x}^{(e)}-D_{N/2}DFT_{N/2}\mathbf{x}^{(o)}.\\
     \end{align*}
-    Where $\mathbf{y_1}$ is the first half $N/2$ entries of $\mathbf{y}$ and $\mathbf{y_2}$ is the second half of entries and $\mathbf{x}^{(e)}$ and $\mathbf{x}^{(o)}$ are the even and odd entries of $\mathbf{x}$ respectively. Hence $\mathbf{x}^{(e)},\mathbf{x}^{(o)}\in \mathds{R}^{N/2}$ and $\mathbf{y_1},\mathbf{y_2}\in \mathds{C}^{N/2}$.
+    Where $\mathbf{y_1}$ is the first half $N/2$ entries of $\mathbf{y}$ and $\mathbf{y_2}$ is the second half of entries and $\mathbf{x}^{(e)}$ and $\mathbf{x}^{(o)}$ are the even and odd entries of $\mathbf{x}$ respectively. Hence $\mathbf{x}^{(e)},\mathbf{x}^{(o)}\in \mathds{R}^{N/2}$ and $\mathbf{y_1},\mathbf{y_2}\in \mathds{C}^{N/2}$. \cite[67]{ryan2019linear}
 \end{theorem}
 \begin{proof}{The DFT when $N$ is even}
 From \autoref{def:DFT_definiton}:
     \begin{align*}
          F[k]&=\sum^{N-1}_{n=0}f[n]W_N^{nk}.\\
-        \intertext{The sum of the DFT can be split into two sums, an even part and an odd part.}\\
+        \intertext{The sum of the DFT can be split into two sums, an even and an odd part.}\\
         &=\sum^{N/2-1}_{r=0}f[2r]W_N^{2rk}+\sum^{N/2-1}_{r=0}f[2r+1]W_N^{(2r+1)k}\\
-        \intertext{Reducing to be able to isolate $W_N^2$}
+        \intertext{Reducing to $W_N^2$ and moving the constant $W_N^k$ out of the sum.}
         &=\sum^{N/2-1}_{r=0}f[2r](W_N^2)^{rk}+W_N^k\sum^{N/2-1}_{r=0}f[2r+1](W_N^2)^{rk}\\
-        W_N^2 &= \exp\left(\frac{-j2(2\pi)}{N}\right) = \exp\left(\frac{-j2\pi}{N/2}\right) = W_{N/2}\\
-        F[k] &= \sum^{(N/2)-1}_{r=0}f[2r]W^{rk}_{N/2}+W^k_N\sum^{(N/2)-1}_{r=0}f[2r+1]W^{rk}_{N/2}\\
+        W_N^2 &= \exp\left(\frac{-j2(2\pi)}{N}\right) = \exp\left(\frac{-j2\pi}{N/2}\right) = W_{N/2}\\        %\intertext{replacing $W_N^2$ with $W_{N/2}$}
+        F[k] &= \sum^{(N/2)-1}_{r=0}f[2r]W^{rk}_{N/2}+W^k_N\sum^{(N/2)-1}_{r=0}f[2r+1]W^{rk}_{N/2}.\\
     \end{align*}
      This can be written using \eqref{eq:DFTDiagonal} where $0 \leq k < N/2$ as:
      \begin{align*}
@@ -85,6 +86,7 @@ From \autoref{def:DFT_definiton}:
     \begin{align*}
         \mathbf{y_2}=DFT_{N/2}\mathbf{x}^{(e)}-D_{N/2}DFT_{N/2}\mathbf{x}^{(o)}.\\ 
      \end{align*}
+     \cite[67]{ryan2019linear}
 \end{proof}
 From this the DFT of $\textbf{x}$ can be expressed as: 
 \begin{align*}
@@ -143,7 +145,7 @@ If $N/2$ is even then $DFT_{N/2}$ can be factored into:
     \end{bmatrix},
 \end{align*}
 where $\mathbf{x}^{(e)}$ and $\mathbf{x}^{(o)}$ are split into an even and odd parts.  
-If $N$ is limited to be $N=2^L$, where $L$ is an positive integer, It can then be factored $L=\log_2 N$ times. When factorising $\log_2 N$ times, the final matrix becomes a diagonal matrix with entries $DFT_1=[1]$, which is the identity matrix.
+If $N$ is limited to be $N=2^L$, where $L$ is an positive integer, It can then be factored $L=\log_2 N$ times. When factorising $\log_2 N$ times, the final matrix becomes a diagonal matrix with entries $DFT_1=[1]$, which is the identity matrix. \cite[68-69]{ryan2019linear}
 \begin{align*}
     DFT_N=\prod_{k=1}^{\log_2 N}\left(
     \begin{bmatrix}
@@ -195,6 +197,20 @@ to split the input vector into the even and odd parts of the transformation, a $
         \end{bmatrix}.
     \end{align*}
     It is observed that, if using the binary representation of the indexes of the first vector, then bit reversing it, the indexes of the last vector is obtained. For instance the binary representation of $3=011_2$ and when reversing the bits, $110_2=6$. Therefore, the sixth entry will be placed in third index of the final vector.
+    
+    To represent the example as a matrix, the values from the first vector need to be transformed into the third vector by multiplying with a matrix.
+    \begin{align*}
+        \begin{bmatrix}
+            1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+            0 & 0 & 0 & 0 & 1 & 0 & 0 & 0\\
+            0 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
+            0 & 0 & 0 & 0 & 0 & 0 & 1 & 0\\
+            0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+            0 & 0 & 0 & 0 & 0 & 1 & 0 & 0\\
+            0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+            0 & 0 & 0 & 0 & 0 & 0 & 0 & 1\\
+        \end{bmatrix}
+    \end{align*}
+    As seen in the matrix, the columns contain the values of the final vector as unit vectors respectively. The values represented require an addition of one $\left(\mathbf{e}_{i+1}\right)$ in their respected rows to be able to fit. For instance $X_1$ is on the second row in the fifth column.
 \end{example}
-P can be represented an $N \times N$ matrix where the i'th column will be the the vector $\textbf{e}_{j}$ where j is the bit reverse of $i-1$.
-
+$P$ is represented as a $N \times N$ matrix, where the columns contain the unit vector $\mathbf{e}_{i+1}$ from the bit reversed vector respectively.
