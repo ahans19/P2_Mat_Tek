@@ -38,14 +38,7 @@ f(\textbf{x})&=f(x_1 \textbf{e}_1 + x_2\textbf{e}_2+x_3 \textbf{e}_3)\\
 \end{align*}
 f er en matrix afbildning
 
-Nogle eksempler jeg har skrevet ned i mit hæfte, da vi løste opgaver:
 
-Here is an example on how to show that a vector is an eigenvector of a matrix $A$ and how to determine what the corresponding eigenvalue is.... 
-
-\begin{align*}
-A = \begin{bmatrix}-5 & -4 \\8 & 7 \end{bmatrix}, \textbf{v} =\begin{bmatrix}1 \\-2\end{bmatrix}\\
-\begin{bmatrix}-5 & -4 \\8 & 7 \end{bmatrix} \begin{bmatrix}1 \\-2\end{bmatrix}\\ = \begin{bmatrix}-5 + 8 \\8  -14 \end{bmatrix} = \begin{bmatrix}3 \\-6 \end{bmatrix} = 3\begin{bmatrix}1\\-2 \end{bmatrix}
-\end{align*}
 
 (Her skal være en intro; Koncept med lineær algebra, hvorfor vi går i gang med det, og hvorfor vi dækker det LiAl som vi gør)
 
@@ -246,7 +239,17 @@ A subspace is a set of vectors $W$ in $\mathbb{R}^n$ which have the following th
         &\,2(u_1+v_1)+5(u_2+v_2)-7(u_3+v_3)-2(u_4+v_4)\\
         =& (2u_1+5u_2-7u_3+2u_4)+(2v_1+5v_2-7v_3+2v_4)\\ =& 0 + 0 \\=& 0
     \end{align*}
-    \item Having a the vector \textbf{u} it most satisfy c
+    \item Having a the vector \textbf{u} it most satisfy $c\textbf{u}=c\begin{bmatrix}
+    u_1\\u_2\\u_3\\u_4\end{bmatrix}=
+    \begin{bmatrix}
+    cu_1\\cu_2\\cu_3\\cu_4\end{bmatrix}$ this yields
+    \begin{align*}
+       2(cu_1)+5(cu_2)-7(cu_3)-2(cu_4)=c(2u_1+5u_2-7u_3+2u_4)= c(0) = 0
+    \end{align*}
+    En konklussion på punkt 3 \\
+    En konklussion på eksemplet
+   
+    
 \end{enumerate}
 \end{example}
 
@@ -292,9 +295,134 @@ Written on parameterised vector form
     \end{bmatrix}
     \end{Bmatrix}
 \end{align*}
-Hence $\mathcal{S}$ is a subspace of $\mathbb{R}^4$
+Hence the span $\mathcal{S}$ is a subspace of $\mathbb{R}^4$
 \end{example}
 
-\begin{definition}{Basis}
+There are many generating sets for a nonzero subspace $V$, and thereby it can be convenient to determine a generating, which contains the fewest amount of vectors as possible. 
+(intro til baser, formål, hvorfor beskriver vi det, hvordan det kan sættes i forbindelse med span og subspaces)
 
+\begin{definition}{Basis}
+A basis for a nonzero subspace $V$, is a linearly independent generating set for $V$. This means that the basis contains as few vectors as possible.
 \end{definition}
+
+\begin{theorem}{Reduction Theorem}
+Let $\mathcal{S}$ be a finite generating set for a nonzero subspace $V$ for $\mathbb{R}^n$. Then by removing vectors from $\mathcal{S}$, the span can be reduced to a basis of $V$
+\label{reductiontheorem}
+\end{theorem}
+
+
+\begin{theorem}{Extension Theorem}
+Having a span $\mathcal{S}$ which is a subset of a subspace $V$, then $\mathcal{S}$ can be, by inclusion of additional vectors, extended to a basis for $V$
+\end{theorem}
+
+
+\begin{definition}{Dimension of a Subspace}
+The dimension of a nonzero subspace $V$ of $\mathbb{R}^n$ is the number of vectors in  basis. The dimension is denoted by dim$V$. The dimension of the zero subspace of $\mathbb{R}^n$ is 0  \cite[246]{LiAl}.
+\end{definition}
+\begin{theorem}{Theorem side 248, maybe?}
+A
+\end{theorem}
+\begin{definition}{Null space}
+The solution set $A\textbf{x}=\textbf{0}$ for a matrix $A$, is the null space of the matrix. It is denoted Null $A$
+\end{definition}
+
+Her er et eksempel på "how to find the generating set for the null space of a matrix.
+\begin{example}
+....
+\begin{align*}
+\begin{bmatrix}
+    1 & 1 & -1 & 4 \\
+    2 & 1 & -3 & 5\\
+    -2 & 0 & 4 & -2
+\end{bmatrix}\xrightarrow{\substack{r_1-2r_1\rightarrow r_2\\2r_1+r_3\rightarrow r_3}}
+\begin{bmatrix}
+    1 & 1 & -1 & 4 \\
+    0 & -1 & -1 & -3\\
+    0 & 2 & 2 & 6
+\end{bmatrix}\xrightarrow{2r_2+r_3\rightarrow r_3}
+\begin{bmatrix}
+   1 & 1 & -1 & 4 \\
+    0 & -1 & -1 & -3\\
+    0 & 0 & 0 & 0 
+\end{bmatrix}
+\end{align*}
+.... laves på reduceret form
+\begin{align*}
+\xrightarrow{r_1-r_2\rightarrow r_1}
+\begin{bmatrix}
+   1 & 0 & -2 & 1 \\
+    0 & -1 & -1 & -3\\
+    0 & 0 & 0 & 0
+\end{bmatrix}
+\end{align*}
+noget tekst
+\begin{align*}
+    x_1 - 2x_3 + x_4 = 0 &\Rightarrow x_1 = 2x_3 - x_4\\
+    x_2 + x_3 + 3x_4 = 0 &\Rightarrow x_2=-x_3 -3x_4
+\end{align*}
+Noget mere tekst
+\begin{align*}
+\begin{bmatrix}
+   x_1\\x_2\\x_3\\x_4 
+\end{bmatrix} =
+\begin{bmatrix}
+   2x_3 - x_4 \\ -x_3 -3x_4 \\ x_3 \\ x_4
+\end{bmatrix} = x_3
+\begin{bmatrix}
+   2\\ -1\\ 1 \\0
+\end{bmatrix} + x_4
+\begin{bmatrix}
+   -1\\ -3\\ 0\\ 1
+\end{bmatrix}
+\end{align*}
+En eller anden konklussion - Her er facit..
+\begin{align*}
+\mathcal{S?} = 
+\begin{Bmatrix}
+\begin{bmatrix}
+   2\\ -1\\ 1 \\0
+\end{bmatrix},
+\begin{bmatrix}
+   -1\\ -3\\ 0\\ 1
+\end{bmatrix}
+\end{Bmatrix}
+\end{align*}
+\end{example}
+
+Anvendelse af nulrum
+Fin overgang til eigenvektor og eigenværdier
+
+\section{Eigenvectors}
+Idéer til en intro.(taget med indspiration fra bogen s. 293)\\
+It is in many cases important to know and understand how vectors are transformed when they are multiplyed by a square matrix... 
+It is a importaint element in analysis of linear transforms.
+investigation of a matrix to find out if it can be replaced with a diagonal matrices - to find the diagonalizable matrices. (ved ikke om vi kommer til at bruge det, men det kan man ;) )
+
+\begin{definition}
+Tænker vi måske kunne skrive de to diffinationer der står på side 294 sammen til ét? 
+\end{definition}
+
+eksempel jeg har skrevet ned i mit hæfte, da vi løste opgaver:\\
+
+Here is an example on how to show that a vector is an eigenvector of a matrix $A$ and how to determine what the corresponding eigenvalue is.... 
+\begin{example}
+....
+\begin{align*}
+A = \begin{bmatrix}-5 & -4 \\8 & 7 \end{bmatrix}, \textbf{v} =\begin{bmatrix}1 \\-2\end{bmatrix}\\
+\begin{bmatrix}-5 & -4 \\8 & 7 \end{bmatrix} \begin{bmatrix}1 \\-2\end{bmatrix} = \begin{bmatrix}-5 + 8 \\8  -14 \end{bmatrix} = \begin{bmatrix}3 \\-6 \end{bmatrix} = 3\begin{bmatrix}1\\-2 \end{bmatrix}
+\end{align*}
+\end{example}
+
+$(A-\lambda I_n)\textbf{x}=\textbf{0}$
+
+\begin{example}
+How to determine if a scalar $\lambda$ is an eigenvalue of a matrix and how to determine a basis for its eigenspace.  
+\begin{align*}
+\begin{bmatrix}
+    -13 & -4 & 8\\
+    24 & 7 & -16\\
+    -12 & -4 & 7
+\end{bmatrix}, \lambda=-1
+\end{align*}
+
+\end{example}

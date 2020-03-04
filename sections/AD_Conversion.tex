@@ -1,6 +1,6 @@
 \chapter{A/D Conversion}
 
-\input{figures/sample_hold_AD}
+\input{figures/Tikz/sample_hold_AD}
 
 
 
@@ -20,3 +20,14 @@
     \item Aliasing (DFT)
     \item Quantization
 \end{itemize}
+
+\section{Sampling}
+In section ?? it was established that a continues signal y(t) can be represented as a discreet sequence y[t] of samples with a sample period $T$. 
+ It is often desirable to reconstruct signal from the discreet sequence. To do so the sequence must be uniquely determined. What or not a discreet sequence is uniquely determined is dependent on two parameters, the sample period and the bandwidth of the original signal. As described in section ?? a single can decomposed into the its frequency. The bandwidth the maximum frequency of a signal. This is possible to determine since the frequency is often but on not always bounded in practice.   
+
+\begin{theorem}{Nyquist-Shannon theorem}
+    If the denotes $\omega_N$ the maximum frequency  of a signal $y(t)$ then in order for the samples $y[k]$ to be uniquely determined the sample frequency $\omega_s$ must satisfy
+    \begin{align*}
+        \omega_s \geq 2\omega_N.
+    \end{align*}
+\end{theorem}
