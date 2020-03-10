@@ -1,0 +1,37 @@
+\begin{figure} [H]
+    \centering
+ \newcommand{\microphone}{%
+    \tikz{
+        \begin{scope}
+            \clip (-.3em,-.4ex) rectangle (1.3em,1.5ex);
+            \fill[black, rounded corners=1.5ex] (-.3em,-.4ex) rectangle (1.3em,5.5ex);
+        \end{scope}
+        \fill[white, rounded corners=1.3ex] (-.1em,0) rectangle (1.1em,5.1ex);
+        \fill[black, rounded corners=1.1ex] (0,.2ex) rectangle (1em,5ex);
+        \foreach \pos in {2.5ex, 2.9ex, 3.3ex, 3.7ex}
+            \fill[white, rounded corners=.1ex] (.35em,\pos) rectangle +(.8em,.25ex);
+        \fill[black] (.4em,-.4ex) rectangle (.6em,-1.5ex);
+        \fill[black] (0,-1.5ex) rectangle (1em,-2ex);
+    }%
+}
+    \tikzstyle{frame} = [
+        rectangle, draw, 
+        text width=5em, text centered,
+        minimum height=4em
+    ]
+    \tikzstyle{line} = [draw, -latex']
+\begin{tikzpicture}[node distance = 4cm]
+    \node [frame] (A/D) {Analog-to-digital converter};
+    \node [left=1cm of A/D] (mic) {\microphone};
+    \node [frame, right=1cm of A/D] (mcu)  {Micro Controller};
+    \node [frame, right=1cm of mcu] (pc)  {PC};
+
+
+    \path [line] (mic) -- (A/D);
+    \path [line] (A/D) -- (mcu);
+    \path [line] (mcu) -- (pc);
+  
+\end{tikzpicture}
+    \caption{Flowchart...} 
+    \label{fig:mic_AD_MCU_PC}
+\end{figure}

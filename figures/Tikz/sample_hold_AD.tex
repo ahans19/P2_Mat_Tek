@@ -5,15 +5,15 @@
     \centering
     \tikzstyle{frame} = [
         rectangle, draw, 
-        text width=4em, text centered,
+        text width=5em, text centered,
         minimum height=4em
     ]
     \tikzstyle{line} = [draw, -latex']
-\begin{tikzpicture}[node distance = 3cm]
+\begin{tikzpicture}[node distance = 4cm]
     \node [frame] (A/D) {A/D Conversion};
-    \node [left of=A/D] (yk) {$y[k]$};
+    \node [left=1cm of A/D] (yk) {$y[k]$};
     \node [frame, right of=A/D] (SH)  {Sample and Hold};
-    \node [right of=SH] (yt)  {$y(t)$};
+    \node [right=1cm of SH] (yt)  {$y(t)$};
     \node [below=1cm of SH] (ts)  {$T_s$};
     \node [below=1cm of A/D] (TS)  {$T_s$};
 

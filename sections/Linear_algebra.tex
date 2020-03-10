@@ -42,11 +42,14 @@ f er en matrix afbildning
 
 (Her skal være en intro; Koncept med lineær algebra, hvorfor vi går i gang med det, og hvorfor vi dækker det LiAl som vi gør)
 
+When working with recognition, linear algebra is useful since it contains the property of eigenvectors. Though to have enough knowledge to work with eigenvectors, various subjects in linear algebra is covered
+
 \begin{definition}{Principles of Linearity}
 A transform $f: \mathbb{R}^n \rightarrow \mathbb{R}^m $ is linear if the following is true... 
 \begin{align*}
 f(u+v)&=f(u)+f(v)\\
-f(c u)&=c f u ,  \text{where c is a constant. }
+f(c u)&=c \cdot f(u) , \; \text{where c is a constant. }
+\label{def: Principles_of_Linearity}
 \end{align*}
 
 Matrix-vector product...
@@ -54,11 +57,11 @@ Matrix-vector product...
 A(\textbf{u}+\textbf{v})=& A\textbf{u}+A\textbf{v}\\
 A(c \textbf{u})=& c f\textbf{u}
 \end{align*}
-With means that all matrix transforms are linear..
+Which means that all matrix transforms are linear..
 måske se side 171
 \end{definition}
 
-A matrix is a rectangular array of scalars. The size of a matrix is determined by its number of rows $m$ and number of columns $n$. 
+A matrix is a rectangular array of scalars. The size of a matrix is determined by its number of rows $m$ and number of columns $n$ which is represented as an $m \times n$ matrix. 
 For instance an $A_{ij}$ matrix, where the scalar in the $i$-th row and $j$-th column is called the (i, j)-entry of the $A_{ij}$ matrix:
 \begin{align*}
     A_{ij} = 
@@ -90,35 +93,35 @@ An example with a given system of linear equations, where the  elementary row op
 \begin{example}{Elementary Row Operations}
  Having the given system of linear equations
 \begin{align*}
-    x_1-x_2-2x_4-8x_5&=-3\\
+    x_1-x_3-2x_4-8x_5&=-3\\
     -2x_1+x_3+2x_4+9x_5 &= 5\\
-    3x-1-2x_3-3x_4-15x_5&=-9.
+    3x_1-2x_3-3x_4-15x_5&=-9.
 \end{align*}
 The augmented matrix can be written as
 
 \begin{align*}
 [A \textbf{b}] =
 	&\begin{bmatrix}
-	1 & 0 & -1 &-2 & -8 & -3 \\
-	-2 & 0 & 1 & 2 & 9 & 5 \\
-	3 &0 & -2 & -3 & -15 & -9 
+	1  & 0  & -1  &-2  & -8  & -3 \\
+	-2 & 0  & 1   & 2  & 9   & 5 \\
+	3  & 0  & -2  & -3 & -15 & -9 
    \end{bmatrix} \\
   \xrightarrow{\substack{r_2+2r_1\rightarrow r_2\\  r_3-3r_1\rightarrow r_3}}
   &\begin{bmatrix}
- 	 1 & 0 & -1 &-2 & -8 & -3 \\
+ 	 1 & 0 & -1 &-2  & -8 & -3 \\
  	 0 & 0 & -1 & -2 & -7 & -1 \\
-	 0 &0 & 1 & 3 & 9 & 0
+	 0 & 0 & 1  & 3  & 9  & 0
   \end{bmatrix}\\
   \xrightarrow{r_3+r_2\rightarrow r_3}
     &\begin{bmatrix}
-  	 1 & 0 & -1 &-2 & -8 & -3 \\
+  	 1 & 0 & -1 &-2  & -8 & -3 \\
  	 0 & 0 & -1 & -2 & -7 & -1 \\
-	 0 &0 & 0 & 1 & 2 & -1
+	 0 & 0 & 0  & 1  & 2  & -1
        \end{bmatrix}.
 \end{align*}
 \label{exa:rowoperations}
 \end{example}
-When replacing a given system of linear equations with one, which are more easily solved, the most simple equivalent system of linear equations is called the reduced row echelon form. 
+When replacing a given system of linear equations with one, which is easier solved, the most simple equivalent system of linear equations is called the reduced row echelon form. 
 \begin{definition}{Reduced Row Echelon Form}
 A matrix in row echelon form is satisfying the following three conditions
 \begin{enumerate}
@@ -160,10 +163,10 @@ There are no pivot position in the last column of the augmented matrix, hence th
 	    0 &0 & 0 & 1 & 2 & -1
      \end{bmatrix}
     \end{align*}
-(En eller anden tekst som overgang)
+With the reduced row echelon form, it is possible to reduce the equations to
 
 	\begin{align*}
-		x-x_5 =-2   &\Rightarrow x_1=x_5 -2\\
+		x_1-x_5 =-2   &\Rightarrow x_1=x_5 -2\\
         x_3 + 3x_5 =3 &\Rightarrow x_3=-3x_5+3\\
         x_4 +2x_5 = -1 &\Rightarrow	x_4=-2x_5-1
 	\end{align*}
@@ -184,11 +187,11 @@ There are no pivot position in the last column of the augmented matrix, hence th
         \begin{bmatrix}
             1 \\ 0 \\ -3 \\ -2 \\ 1
         \end{bmatrix}
-    \end{align*}
+    \end{align*}.
 \end{example}
 
 \begin{definition}{Rank and Nullity of a Matrix}
-The rank of a $m x n$ matrix $A$, is defined as the number of pivot columns, or the number of nonzero rows of the reduced echelon form of $A$. The rank is denoted as rank$(A)$
+The rank of a $m \times n$ matrix $A$, is defined as the number of pivot columns, or the number of nonzero rows of the reduced echelon form of $A$. The rank is denoted as rank$(A)$
 The nullity is defined as the opposite of rank, $n - $rank. Nullity is denoted as nullity$(A)$.
 \cite[47]{LiAl}
 \end{definition}
@@ -199,7 +202,6 @@ The span of the set of vectors is a set of all linear combinations in $\mathbb{R
 \cite[66]{LiAl}
 \end{definition}
 
-vise et kort ekemspel på span og rank - udgangspunkt i det tidligere eksempel. 
 \eqref{examplepivot} - ref til matricen med pivot.
 
 \section{Subspace, Basis and Dimension}
@@ -210,9 +212,8 @@ A subspace is a set of vectors $W$ in $\mathbb{R}^n$ which have the following th
 
 \begin{enumerate}
     \item The zero vector belongs to $W$\\
-    \textbf{Closure properties:}
-    \item The sum of any pair of vectors that belongs to $W$, belongs to $W$ too. This means $W$ is closed under vector addition.
-    \item Every scalar multiple of a vector that belongs to $W$, belongs to $W$ too. This means $W$ is closed under scalar multiplication.
+    \item the sum of any vectors in the same $W$, remain in the same subspace. This means $W$ is under closed under vector addition.
+    \item Every scalar multiple of a vector that belongs to $W$, remains in the same $W$. This means $W$ is closed under scalar multiplication.
 \end{enumerate}
 \cite[227]{LiAl}
 \label{exa:SubspaceDef}
@@ -227,7 +228,7 @@ A subspace is a set of vectors $W$ in $\mathbb{R}^n$ which have the following th
     \end{Bmatrix}
 \end{align*}
 \begin{enumerate}
-    \item To determine whenever the first property from\ref{exa:SubspaceDef} is satisfied, it is calculated that
+    \item To determine whenever the first property from definition\ref{exa:SubspaceDef} is satisfied, it is calculated that
     $2(0) + 5(0) - 7(0) -2(0) = 0 $ Hence $\textbf{w}=\textbf{0}$
     \item Having two vectors $\textbf{u}=\begin{bmatrix}
     u_1\\u_2\\u_3\\u_4\end{bmatrix}$ and $\textbf{v}=\begin{bmatrix}
@@ -237,17 +238,16 @@ A subspace is a set of vectors $W$ in $\mathbb{R}^n$ which have the following th
     Doing the calculations yields
     \begin{align*}
         &\,2(u_1+v_1)+5(u_2+v_2)-7(u_3+v_3)-2(u_4+v_4)\\
-        =& (2u_1+5u_2-7u_3+2u_4)+(2v_1+5v_2-7v_3+2v_4)\\ =& 0 + 0 \\=& 0
+        =& (2u_1+5u_2-7u_3-2u_4)+(2v_1+5v_2-7v_3-2v_4)\\ =& 0 + 0 = 0
     \end{align*}
-    \item Having a the vector \textbf{u} it most satisfy $c\textbf{u}=c\begin{bmatrix}
+    \item Having a the vector \textbf{u} it must satisfy $c\textbf{u}=c\begin{bmatrix}
     u_1\\u_2\\u_3\\u_4\end{bmatrix}=
     \begin{bmatrix}
     cu_1\\cu_2\\cu_3\\cu_4\end{bmatrix}$ this yields
     \begin{align*}
        2(cu_1)+5(cu_2)-7(cu_3)-2(cu_4)=c(2u_1+5u_2-7u_3+2u_4)= c(0) = 0
     \end{align*}
-    En konklussion på punkt 3 \\
-    En konklussion på eksemplet
+    As seen, when multiplying a vector in $W$, the subspace remains the same. \\
    
     
 \end{enumerate}
@@ -298,36 +298,64 @@ Written on parameterised vector form
 Hence the span $\mathcal{S}$ is a subspace of $\mathbb{R}^4$
 \end{example}
 
-There are many generating sets for a nonzero subspace $V$, and thereby it can be convenient to determine a generating, which contains the fewest amount of vectors as possible. 
-(intro til baser, formål, hvorfor beskriver vi det, hvordan det kan sættes i forbindelse med span og subspaces)
+There are many generating sets for a nonzero subspace $V$ of $\mathbb{R}^n$, and thereby it can be convenient to determine a generating set of $V$, which contains the fewest amount of vectors as possible. The span of this generating set is called a basis.
 
 \begin{definition}{Basis}
 A basis for a nonzero subspace $V$, is a linearly independent generating set for $V$. This means that the basis contains as few vectors as possible.
 \end{definition}
 
+The following three properties are true if $\mathcal{S}$ is a finite subset of $\mathbb{R}^n$
+\begin{itemize}
+    \item If $\mathcal{S}$ contains a least n vectors, then $\mathcal{S}$ is a generating set for $\mathbf{R}^n$. 
+    \item If $\mathcal{S}$ contains maximum n vectors then $\mathcal{S}$ is linear independent.
+    \item If $\mathcal{S}$ contains precisely n vectors then $\mathcal{S}$ is a basis for $\mathbf{R}^n$.
+\end{itemize}
+
+Because a basis is a linearly independent generating set of $\mathbb{R}^n$ containing exactly $n$ vectors , there are two theorems, which provides some operations that can be done to determine a basis of the given subspace. These theorems are called \textbf{Reduction Theorem} and \textbf{Extension Theorem}.
+
 \begin{theorem}{Reduction Theorem}
-Let $\mathcal{S}$ be a finite generating set for a nonzero subspace $V$ for $\mathbb{R}^n$. Then by removing vectors from $\mathcal{S}$, the span can be reduced to a basis of $V$
+Having $\mathcal{S}$ as a finite generating set of a nonzero subspace $V$ of $\mathbb{R}^n$. Then by removing vectors from $\mathcal{S}$, the span can be reduced to a basis of $V$.
+\cite[243]{LiAl}
 \label{reductiontheorem}
 \end{theorem}
+Proving the \ref{reductiontheorem} the term column space of a matrix is needed. The column space of a matrix is the span of its columns. A basis for this column space is the column space only consisting of the pivot columns of $A$, since a basis must be a linearly independent generating set.
+
+\begin{proof}{Reduction Theorem}
+Having a matrix $A=\begin{bmatrix}
+ \textbf{u}_1, \textbf{u}_2, \cdots, \textbf{u}_k
+\end{bmatrix}$ and a span
+$
+\mathcal{S}=\begin{Bmatrix}
+ \textbf{u}_1, \textbf{u}_2, \cdots, \textbf{u}_k
+\end{Bmatrix}  
+$, which is a generating set of a nonzero subspace $V$ of $\mathbb{R}^n$. Because $\mathcal{S}$ and $A$ consist of the exact same vectors, the column space of $A$ must be a generating set of $V$. Consider the pivot columns for matrix $A$, a basis for the column space of $A$ can be determined, and is contained in $\mathcal{S}$. \qedsymbol
+\end{proof}
+
 
 
 \begin{theorem}{Extension Theorem}
 Having a span $\mathcal{S}$ which is a subset of a subspace $V$, then $\mathcal{S}$ can be, by inclusion of additional vectors, extended to a basis for $V$
 \end{theorem}
 
+\begin{proof}{Extension Theorem}
+There are two cases for a linearly independent subset $\mathcal{S}$ to be extended to a basis of a nonzero subspace $V$.
+First case is where the span of $\mathcal{S}$ is $V$, hence $\mathcal{S}$ is a basis of $V$.\\
+Second case is where $V$ contains a vector $\textbf{v}_1$, and $\textbf{v}_1$ is not contained in a linearly independent subset $\mathcal{S}=
+\begin{Bmatrix} \textbf{u}_1,\textbf{u}_2,\cdots,\textbf{u}_k \end{Bmatrix} 
+ $. A possible basis for $V$ is $\mathcal{S}$ extended with $\textbf{v}_1$, if and only if $\mathcal{S'}=\begin{Bmatrix} \textbf{u}_1,\textbf{u}_2,\cdots,\textbf{u}_k, \textbf{v}_1 \end{Bmatrix}$ is linearly independent and span of $\mathcal{S'}$ is $V$. In the case that $\mathcal{S'}$ is not $V$, $\mathcal{S'}$ can be extended with another vector, denoted $\mathcal{S''}$. 
+\end{proof}
+
+The extension theorem and the reduction theorem have given two characteristics of a basis for a subspace. These characteristics yields that vectors can be deleted and used to extend a subset and form a basis for a subspace. These characteristics result in the possibility to determine infinitely many bases for a nonzero subspace . Even though a particular subspace has infinitely many bases, the bases will always consist of the same amount of vectors, which leads to following definition.
 
 \begin{definition}{Dimension of a Subspace}
-The dimension of a nonzero subspace $V$ of $\mathbb{R}^n$ is the number of vectors in  basis. The dimension is denoted by dim$V$. The dimension of the zero subspace of $\mathbb{R}^n$ is 0  \cite[246]{LiAl}.
+The dimension of a nonzero subspace $V$ of $\mathbb{R}^n$ is the number of vectors in  basis. The dimension is denoted by dim$V$. The dimension of the zero subspace of $\mathbb{R}^n$ is 0 \cite[246]{LiAl}.
 \end{definition}
-\begin{theorem}{Theorem side 248, maybe?}
-A
-\end{theorem}
+
 \begin{definition}{Null space}
 The solution set $A\textbf{x}=\textbf{0}$ for a matrix $A$, is the null space of the matrix. It is denoted Null $A$
 \end{definition}
 
-Her er et eksempel på "how to find the generating set for the null space of a matrix.
-\begin{example}
+\begin{example}{Determine a Generating Set for The Null Space of a Matrix }
 ....
 \begin{align*}
 \begin{bmatrix}
@@ -375,7 +403,7 @@ Noget mere tekst
    -1\\ -3\\ 0\\ 1
 \end{bmatrix}
 \end{align*}
-En eller anden konklussion - Her er facit..
+En eller anden konklusion - Her er facit..
 \begin{align*}
 \mathcal{S?} = 
 \begin{Bmatrix}
@@ -389,33 +417,61 @@ En eller anden konklussion - Her er facit..
 \end{align*}
 \end{example}
 
-Anvendelse af nulrum
+Anvendelse af nulrum\\
 Fin overgang til eigenvektor og eigenværdier
 
-\section{Eigenvectors}
+\section{Eigenvectors and Eigenvalues}
 Idéer til en intro.(taget med indspiration fra bogen s. 293)\\
-It is in many cases important to know and understand how vectors are transformed when they are multiplyed by a square matrix... 
-It is a importaint element in analysis of linear transforms.
-investigation of a matrix to find out if it can be replaced with a diagonal matrices - to find the diagonalizable matrices. (ved ikke om vi kommer til at bruge det, men det kan man ;) )
+It is in many cases important to know and understand how vectors are transformed when they are multiplied by a square matrix... 
+It is an important element in analysis of linear transforms(WHY?).
 
-\begin{definition}
-Tænker vi måske kunne skrive de to diffinationer der står på side 294 sammen til ét? 
+Investigation of a matrix to find out if it can be replaced with a diagonal matrices - to find the diagonalizable matrices. (ved ikke om vi kommer til at bruge det, men det kan man ;) )
+\\
+The following two definition is what an eigenvector and an eigenvalue for a linear transform and for a matrix.
+\begin{definition}{Eigenvalue and Eigenvector of a Linear Operator}
+A nonzero vector \textbf{v} in $\mathbb{R}^n$ is called an eigenvector of a linear operator $T$ on $\mathbb{R}^n$ if $T(\textbf{v})=\lambda\textbf{v}$, where $\lambda$ is a scalar. The scalar $\lambda$ is called the eigenvalue of $T$ that corresponds to \textbf{v}. 
 \end{definition}
 
-eksempel jeg har skrevet ned i mit hæfte, da vi løste opgaver:\\
+\begin{definition}{Eigenvalue and Eigenvector of a Matrix}
+A nonzero vector \textbf{v} in $\mathbb{R}^n$ is called an eigenvector of a $n \times n$ matrix $A$ if $A\textbf{v}=\lambda\textbf{v}$ where $\lambda$ is a scalar. The scalar $\lambda$ is called the eigenvalue of $A$ corresponding to $\textbf{v}$.
+\label{def:Eigenvalue_and_Eigenvector_of_a Matrix}
+\end{definition}
 
-Here is an example on how to show that a vector is an eigenvector of a matrix $A$ and how to determine what the corresponding eigenvalue is.... 
-\begin{example}
-....
+This two definitions yields that the eigenvectors and the corresponding eigenvalues are the same for a linear operator and a its standard matrix.
+
+Here it is shown by an example how to determine a eigenvector and eigenvalue of a matrix
+\begin{example}{Eigenvector of a Matrix}
+Show that \textbf{v} is an eigenvector of $A$ and determine the corresponding eigenvalue. 
 \begin{align*}
-A = \begin{bmatrix}-5 & -4 \\8 & 7 \end{bmatrix}, \textbf{v} =\begin{bmatrix}1 \\-2\end{bmatrix}\\
-\begin{bmatrix}-5 & -4 \\8 & 7 \end{bmatrix} \begin{bmatrix}1 \\-2\end{bmatrix} = \begin{bmatrix}-5 + 8 \\8  -14 \end{bmatrix} = \begin{bmatrix}3 \\-6 \end{bmatrix} = 3\begin{bmatrix}1\\-2 \end{bmatrix}
+A = \begin{bmatrix}-5 & -4 \\8 & 7 \end{bmatrix}, \textbf{v} =\begin{bmatrix}1 \\-2\end{bmatrix}
 \end{align*}
+When \textbf{v} is nonzero and is an eigenvector of $A$, then Defintion \ref{def:Eigenvalue_and_Eigenvector_of_a Matrix} yields that $A\textbf{v}$ must be equal to \textbf{v} multiplied with a scalar $\lambda$. Since  
+\begin{align*}
+\begin{bmatrix}-5 & -4 \\8 & 7 \end{bmatrix} \begin{bmatrix}1 \\-2\end{bmatrix} = \begin{bmatrix}-5 + 8 \\8  -14 \end{bmatrix} = \begin{bmatrix}3 \\-6 \end{bmatrix} = 3\begin{bmatrix}1\\-2 \end{bmatrix},
+\end{align*}
+\textbf{v} is an eigenvector of $A$, with a corresponding eigenvalue $\lambda=3$
+\label{exa:EigenValueVectorMatrix}
 \end{example}
 
-$(A-\lambda I_n)\textbf{x}=\textbf{0}$
+In Example \ref{exa:EigenValueVectorMatrix} it was shown that \textbf{v} was an eigenvector of $A$, with the corresponding eigenvalue 3. It is given that every nonzero scalar $c$ of \textbf{v} is an eigenvector of matrix $A$ corresponding to the exact same eigenvalue $\lambda$, if \textbf{v} is an eigenvector of matrix $A$. This can be seen in the following:
+\begin{align*}
+    A(c\textbf{v})=c(A\textbf{v})=c(\lambda\textbf{v})=\lambda(c\textbf{v}).
+\end{align*}
+Determining the eigenvectors of an $n\times n$ matrix that correspond to a given eigenvalue $\lambda$  ...... (Yada)..
 
-\begin{example}
+\begin{align}
+\nonumber A\textbf{v}&=\lambda\textbf{v}\\ 
+\nonumber A\textbf{v}-\lambda\textbf{v}&=\textbf{0}\\ 
+\nonumber A\textbf{v}-\lambda I_n \textbf{v}&=\textbf{0}\\
+(A-\lambda I_n)\textbf{x}&=\textbf{0}
+\label{MatrixLambdaIdentity}
+\end{align}
+
+Given a $n\times n$ matrix $A$ with a eigenvalue $\lambda$, the nonzero solutions to \eqref{MatrixLambdaIdentity} is used to determine the eigenvectors of $A$ corresponding to $\lambda$.
+The equation is the null space of $(A-\lambda I_n)\textbf{x}$, which will be mentioned as the eigenspace, thereby the span of the eigenspace consist of the eigenvectors corresponding to an eigenvalue $\lambda$
+
+
+\begin{example}{Eigenvalue and Basis for a Eigenspace for a Matrix}
 How to determine if a scalar $\lambda$ is an eigenvalue of a matrix and how to determine a basis for its eigenspace.  
 \begin{align*}
 \begin{bmatrix}
@@ -424,5 +480,65 @@ How to determine if a scalar $\lambda$ is an eigenvalue of a matrix and how to d
     -12 & -4 & 7
 \end{bmatrix}, \lambda=-1
 \end{align*}
+To determine if a scalar is an eigenvector Equation \eqref{MatrixLambdaIdentity} is used.
+\begin{align*}
+\begin{bmatrix}
+    -13 & -4 & 8\\
+    24 & 7 & -16\\
+    -12 & -4 & 7
+\end{bmatrix} - (-1) 
+\begin{bmatrix}
+    1 & 0 & 0\\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+\end{bmatrix}=
+\begin{bmatrix}
+    -12 & -4 & 8 \\
+    24 & 8 & -16 \\
+    -12 & -4 & 8
+\end{bmatrix}
+\end{align*}
+To calculate the basis for the eigenspace, the matrix is reduced to reduced row echelon form
+\begin{align*}
+   \xrightarrow{\substack{r_2+2r_1\rightarrow r_2\\r_3+r_2\rightarrow r_3}} 
+   \begin{bmatrix}
+        -12 & -4 & 8 \\
+        0 & 0 & 0 \\
+        0 & 0 & 0    
+   \end{bmatrix}\xrightarrow{\frac{r_1}{-12}\rightarrow r_2}
+   \begin{bmatrix}
+       1 & \frac{1}{3} & -\frac{2}{3}  \\
+        0 & 0 & 0 \\
+        0 & 0 & 0 
+   \end{bmatrix}\\
+   x_1+\frac{1}{3}x_2-\frac{2}{3}x_3=0\Rightarrow x_1=\frac{2}{3}x_3-\frac{1}{3}x_2
+\end{align*}
 
+\begin{align*}
+    \begin{bmatrix}
+        x_1\\x_2\\x_3
+    \end{bmatrix}
+    \begin{bmatrix}
+        -\frac{1}{3}x_2+\frac{2}{3}\\x_2\\x_3
+    \end{bmatrix}=x_2
+    \begin{bmatrix}
+        -\frac{1}{3}\\1\\0
+    \end{bmatrix}+x_3
+    \begin{bmatrix}
+        \frac{2}{3}\\0\\1
+    \end{bmatrix}
+\end{align*}
+\begin{align*}
+    \begin{Bmatrix}
+    \begin{bmatrix}
+        -1\\3\\0
+    \end{bmatrix},
+    \begin{bmatrix}
+        2\\0\\3
+    \end{bmatrix}
+    \end{Bmatrix}
+\end{align*}
 \end{example}
+
+Se side 313, der står der noget om diagonalization of matrices... VI kan finde ud af senere hvor meget vi skal bruge af det. 
+
