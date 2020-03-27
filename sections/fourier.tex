@@ -3,29 +3,41 @@ In this chapter the discrete Fourier transform (DFT) is defined and from this, t
 
 As mentioned in \autoref{sec:ParametersAudioRecognition}, when analysing music, it can be beneficial to look at a signal in the frequency domain. A continuous signal can be transformed into the frequency domain by using the Fourier transform. 
 \\
-The Fourier transform only works on continuous signals, however it is possible to define the discrete Fourier transform, which can be applied for sampled signals. 
+The Fourier transform only works on continuous signals, however it is possible to define the discrete Fourier transform, which can be applied for discrete signals. 
 
 \begin{definition}{The Discrete Fourier Transform}
     The DFT, transforms a discrete signal $f$ in the time domain with $N$ terms, into a discrete sequence $F$ in the frequency domain also with $N$ terms, which is defined as: 
     \begin{align*}
-        F[k]=\sum^{N-1}_{n=0}f[n]e^{-2jnk\pi/N}.
+        F[k]=\sum^{N-1}_{n=0}f[n]e^{-2jnk\pi/N}\quad \text{for } k=0, 1,... N-1 .
     \end{align*}
     \cite[5]{rao2011fast}
     \label{def:DFT_definiton}
 \end{definition}
+The discrete signal $f$ and $F$ can be expressed as the following single vectors 
+\begin{align*}
+    \textbf{x}=
+    \begin{bmatrix}
+    f[0]\\f[1]\\ \vdots \\ f[N-1]
+    \end{bmatrix},
+    \quad \textbf{y}=
+    \begin{bmatrix}
+    F[0]\\F[1]\\ \vdots \\ F[N-1]
+    \end{bmatrix}
+\end{align*}
+where $\textbf{x} \in \mathds{R}^{N}$ and $\textbf{y} \in \mathds{C}^{N}$. 
+\\
+In the following theorem it is shown, how the DFT can be represented as an matrix transformation.
 
-\noindent In the following theorem it is shown, how the DFT can be represented as a matrix vector product.
-
-\begin{theorem}{The Discrete Fourier Transform as a Matrix Vector Product}
+\begin{theorem}{The Discrete Fourier Transform as an Matrix Transformation}
     By defining
     \begin{align*}
         W_N=e^{-2j\pi/N},
     \end{align*}
-    the DFT can then be written as:
+    whits is called the twiddle factor. Then the DFT can be written as:
     \begin{align*}
-        F[k]=\sum^{N-1}_{n=0}f[n]W_N^{nk}.
+        F[k]=\sum^{N-1}_{n=0}f[n]W_N^{nk}\quad \text{for } k=0, 1,...  N-1.
     \end{align*}
-    From this the $N\times N$ DFT matrix is defined as:
+    From this the $N\times N$ $DFT_N$ matrix is defined as:
     \begin{align*}
         DFT_N=
         \begin{bmatrix}
@@ -36,14 +48,15 @@ The Fourier transform only works on continuous signals, however it is possible t
              W_N^{(N-1)0} & W_N^{(N-1)1} & W_N^{(N-1)2} & \hdots & W_N^{(N-1)(N-1)} \\
          \end{bmatrix}.
     \end{align*}
-    The DFT of a vector $\textbf{x}$ can then be expressed as the linear transformation
+    The DFT of a vector $\textbf{x}$ can then be expressed as the matrix transformation
     \begin{align*}
-        \textbf{y}=DFT_N\textbf{x},
+        \textbf{y}=DFT_N\textbf{x}.
     \end{align*}
-    where $\textbf{x} \in \mathds{R}^{N}$ and $\textbf{y} \in \mathds{C}^{N}$. \cite[10]{rao2011fast}
+    \cite[10]{rao2011fast}
 \end{theorem}
+Sine the DFT can be expressed as an matrix transformation by theorem \ref{the:linearityMatrixTransformation} the DFT is an linear transform.
 
-\noindent To compute the DFT, it is necessary to do $N^2$ computations. To reduce the amount of computations, the fast Fourier transform is used.
+To compute the DFT, it is necessary to do $N^2$ computations. To reduce the amount of computations, the fast Fourier transform is used.
 
 \section{The Fast Fourier Transform}
 The Fast Fourier Transform (FFT) is a method of reducing the number of computations needed to calculate the DFT. This can be accomplished by reducing the DFT matrix to a product of sparse matrices. 
@@ -80,7 +93,7 @@ From \autoref{def:DFT_definiton}:
      \begin{align*}
         \mathbf{y_1}=DFT_{N/2}\mathbf{x}^{(e)}+D_{N/2}DFT_{N/2}\mathbf{x}^{(o)}.\\ 
      \end{align*}
-    If $k$ is limited to $0 \leq k < N/2$, then the second half ($\mathbf{y_2}$) of the DFT can be processed using the same method as in the first half ($\mathbf{y}_1$):
+    If $k$ is limited to $0 \leq k < N/2$, then the second half $\mathbf{y_2}$ of the DFT can be processed using the same method as in the first half $\mathbf{y}_1$:
     \begin{align*}
         F[k+N/2] &= \sum^{N-1}_{n=0}f[n]W_N^{n(k+N/2)}\\
         &=\sum^{N/2-1}_{r=0}f[2r]W_N^{2r(k+N/2)}+\sum^{N/2-1}_{r=0}f[2r+1]W_N^{(2r+1)(k+N/2)}\\
@@ -166,7 +179,7 @@ This can be generalised as
     \end{bmatrix}
     \right)P.
 \end{align*}
-To split the input vector into the even and odd parts of the transformation, a $N\times N$ permutation matrix, $P$, is used. To illustrate how to determine $P$, the following example is used. 
+To split the input vector into the even and odd parts of the transformation, a $N\times N$ permutation matrix $P$, is used. To illustrate how to determine $P$, the following example is used. 
 
 \begin{example}{Bit Reversal}
     A $DFT_8$ can be factored $\log_2 8-1=2$ times. Which means that the input vector needs to be split into odd and even values twice. This is illustrated below:
@@ -226,12 +239,116 @@ To split the input vector into the even and odd parts of the transformation, a $
    As seen $P$ is represented as a $N \times N$ matrix, where the columns contains unit vectors $\mathbf{e}_{i+1}$ respectively, where $i$ is the bit reversed index number from $0$ to $N-1$.
     \label{exa:bitreverse}
 \end{example}
-From Example \ref{exa:bitreverse}, it can be generalised that $P$ is represented as a $N \times N$ matrix, where the columns contain the unit vector $\mathbf{e}_{i+1}$ from the bit reversed vector respectively.
-%\section{inverse FFT?}
+From Example \ref{exa:bitreverse}, it can be generalised that $P$ is represented as a $N \times N$ matrix, where the columns contain the unit vector $\mathbf{e}_{i+1}$ from the bit reversed vector respectively. \\
 
-% \section{Comparison between the DFT and the FFT}
-% To compare the computations required in FFT and DFT the amount of computations required are described in the following \cite[72]{ryan2019linear}
-% \begin{align*}
-%     FFT = 2Nlog_2N \qquad DFT = 8N^2.
-% \end{align*}
-% As seen the computations required for the DFT is significantly higher than the computations required for the FFT. Therefore, in practise it is more beneficial to use the FFT.
+When making the Fourier transform of a signal the signal is transformed from the time domain to the frequency domain. Then making this transformation the frequencies are known from the entire signal, but its not known when thees frequencies occurs. To analyse to witch time the frequencies occurs the discrete short-time Fourier transform can be used. 
+
+\section{The Discrete Short-Time Fourier Transform}
+Dealing with audio signals it can be desirable to use short-time Fourier transform (STFT), because it can be used to quantify the change of a nonstationary signal's frequency and phase content over time. The formal definition for the discrete short-time Fourier transform(DSTFT), is 
+\begin{align*}
+    F_w[n,\omega]=\sum^{\infty}_{m=-\infty}f[m]w[n-m]e^{-j\omega m},
+\end{align*}
+where $\omega=\frac{2\pi}{N} k$, $f[n]$ is the input signal at time $n$, $w[n]$ is a window function(e.g. Hanning) with length $M$, $F_w[n,\omega]$ is the Fourier transform of the output response for the convolution $(f*w)(n)$, within the length $M$ of the time window. The length/the number of frames of the window $M$ should be less than or equal to the length of the signal $N$ $w[n]$\cite[56]{layer2015signal}. 
+\\
+Time windows have different properties, in general it is a way to consider a smaller segment of the whole input signal. Each segment has the length $M$ and can be considered as a frame of the input signal, where $m$ is the number of a given frame.
+As mentioned, $F_w[n,\omega]$ is the Fourier transform of the output response for a discrete convolution $(f*w)(n)$, which is defined as
+\begin{align*}
+    y[n]=f[n]*w[n]=\sum_{-\infty}^{\infty}f[m]w[n-m]dm,
+\end{align*}
+where y(n) is the output response of the convolution.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/overlapfigure.pdf}
+    \caption{Illustrates "framing" of the original signal shown in the top, where frame $n$, $n+1$ and $n+2$ is shown. The original signal consist of two subsequent sinusiods of frequency 1 Hz and 5 Hz, and the applied time window is the rectangular window, with a window length of $M=4$ and 50\% overlap from a frame and the next. }
+    \label{fig:overlap}
+\end{figure}
+\includegraphics[scale=0.7]{figures/window.PNG}\\
+%\includegraphics[width=\textwidth]{overlap.JPG}
+
+Applying time windows, a given frame $m$ of the signal is nonzero in a specified time interval, and null otherwise, as shown in \autoref{fig:overlap}. There exist different types of window functions, which makes it possible to choose the most beneficial, in different cases. Often a window function is symmetrical and has the highest value around the middle of the interval. \\
+%In figure ?? a signal and the Fourier transform of the windowed version shown. In the figure a bell shaped time window is applied, and there is shown different segments of the signal. 
+One type of window function is the rectangular window which is defined as:
+\begin{align*}
+    w_R(n)=
+    \begin{cases}
+    1, & -\frac{M-1}{2}\leq n \leq \frac{M-1}{2} \\
+    0, & \text{otherwise}
+    \end{cases}
+\end{align*}
+where $M$ is the length of the window in samples.\\
+(Tekst)
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/RectangularTime.pdf}
+        \caption{Caption rectangular}
+        \label{fig:RectangularTime}
+    \end{subfigure}
+    \begin{subfigure}[b]{.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/RectangularFourier.pdf}
+        \caption{en anden caption rectangular}
+        \label{fig:RectangularFourier}
+    \end{subfigure}
+\caption{en fælles caption?}
+\label{fig: Rectangular}
+\end{figure}
+(tekst)
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/HanningTime.pdf}
+        \caption{Caption}
+        \label{fig:hanningtime}
+    \end{subfigure}
+    \begin{subfigure}[b]{.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/HanningFourier.pdf}
+        \caption{en anden caption}
+        \label{fig:hanningfourier}
+    \end{subfigure}
+\caption{en fælles caption?}
+\label{fig: Hanning}
+\end{figure}
+
+A commonly used type of time windows, is time windows in the Hamming family. A Hamming window consists of a rectangular window multiplied by one period of cosine. A genrealised Hamming window is defined as
+\begin{align*}
+    w_H(n)=w_R(n) \left(\alpha +2\beta \cos\left(\frac{2\pi n}{M}\right)\right),
+\end{align*}
+where $\alpha$ and $\beta$ is constants. The different windows in the Hamming family have different parameters for $\alpha$ and $\beta$. 
+One of this windows is called the Hanning window
+The Hanning window is defined by having the parameters $\alpha = \frac{1}{2} $ and $\beta = \frac{1}{4}$, hence
+\begin{align*}
+    w_H(n)&=w_R(n) \left(\frac{1}{2} + \frac{1}{2} \cos\left(\frac{2\pi n}{M}\right)\right) = w_R(n) \frac{1}{2}\left(1+\cos\left(\frac{2\pi n}{M}\right)\right)\\
+    \intertext{Using one of the fundamental trigonometric identities} \cos(x)^2=\frac{1+\cos(2x)}{2}\\
+    \intertext{the expression for $w_H(n)$ above can be written as}\\
+    &=w_R(n)\cos^2\left(\frac{\pi n}{M}\right)
+\end{align*}
+(afsluttende tekst)
+\\
+The difference, when comparing a Hanning window and the rectangular window, is that the Hanning window has lower side lobes, meaning that the side lobes are more attenuated, and the main lobe is twice as wide. When choosing a window function with lower side lobes, it minimises the risk of "crosstalk". Crosstalk is when a signal leakage from one channel or circuit to another, which can cause an unwanted effect. \\
+
+An ideal window requires a main lobe as narrow as possible and the side lobes should be as low as possible\cite[56]{layer2015signal}. In relation to Hanning and rectangular windows, Hanning has low side lobes, but a twice as wide main lobe, meaning that applying a Hanning window results in a (better/worse) frequency resolution.
+\\
+In relation to the length $M$ of the time window, a time window narrow, will result in a good time resolution, but a worse time resolution. Hence, a wide time window will result in a better frequency resolution, but a worse time resolution.
+Hence it is not possible to attain high time resolution and high frequency resolution at the same time. 
+\\
+With the knowledge of the relationship between length of time window, wide of lobes and resolution, a beneficial time window can be chosen to a given purpose. 
+(Hvorfor vi har valgt Hanning, kilden bruger det, most commonly used(Kilde herpå(Anna)), overlap. Behøves vi egentlig noget om overlap? Kontekst)
+
+Spectral analysis(spectrogram, STFT square magnitude):
+
+
+To visualise the STFT, a spectrogram is often used. A spectrogram
+is a two dimensional representation of time, frequency and magnitude, which is represented by the squared magnitude $ |F_w[n,\omega]|^2$.
+In the generated spectrogram (indsæt ref til billede), the horizontal axis represents time, the vertical axis represents the frequency and the intensity of color represents the value of the squared magnitude. 
+\\
+Afslutning: Spectrogram af C4 tone
+\\
+Zero-padding?:
+
+

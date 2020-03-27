@@ -1,106 +1,121 @@
 \chapter {Linear Algebra} 
-Den Første side er bare noter...
-Noget om transformationer og standard matricen.
-
-\begin{align*}
-    \textbf{x}=
-    \begin{pmatrix}x_1 
-        \\x_2 \\ x_3 
-    \end{pmatrix} &= 
-    \begin{pmatrix}
-        x_1 \\ 0 \\ 0  
-    \end{pmatrix} + 
-    \begin{pmatrix}
-        0 \\ x_2 \\ 0  
-    \end{pmatrix} + 
-    \begin{pmatrix}
-        0 \\ 0 \\ x_3  
-    \end{pmatrix}\\ &= x_1  
-   \begin{pmatrix}
-        1 \\ 0\\ 0  
-   \end{pmatrix}+ x_2 
-   \begin{pmatrix}
-        0 \\ 1 \\ 0  
-   \end{pmatrix} + x_3 
-   \begin{pmatrix}
-        0 \\ 0 \\ 1  
-   \end{pmatrix} \\ &= x_1 \textbf{e}_1 + x_2\textbf{e}_2+x_3 \textbf{e}_3
-\end{align*}
-
-\begin{align*}
-f(\textbf{x})&=f(x_1 \textbf{e}_1 + x_2\textbf{e}_2+x_3 \textbf{e}_3)\\ 
-&= f(x_1 \textbf{e}_1) + f(x_2 \textbf{e}_2) + f(x_3 \textbf{e}_3) \\
-&=x_1 f(\textbf{e}_1) + x_2 f(\textbf{e}_2) + x_3 f(\textbf{e}_3)
-\\ &= [f(\textbf{e}_1) f(\textbf{e}_2 ) f(\textbf{e}_3)] 
-\begin{pmatrix}
-    x_1 \\x_2 \\ x_3 
-\end{pmatrix} &= A \textbf{x}
-\end{align*}
-f er en matrix afbildning
-
-
-
-(Her skal være en intro; Koncept med lineær algebra, hvorfor vi går i gang med det, og hvorfor vi dækker det LiAl som vi gør)
-
-When working with recognition, linear algebra is useful since it contains the property of eigenvectors. Though to have enough knowledge to work with eigenvectors, various subjects in linear algebra is covered
-
-\begin{definition}{Principles of Linearity}
-A transform $f: \mathbb{R}^n \rightarrow \mathbb{R}^m $ is linear if the following is true... 
-\begin{align*}
-f(u+v)&=f(u)+f(v)\\
-f(c u)&=c \cdot f(u) , \; \text{where c is a constant. }
-\label{def: Principles_of_Linearity}
-\end{align*}
-
-Matrix-vector product...
-\begin{align*}
-A(\textbf{u}+\textbf{v})=& A\textbf{u}+A\textbf{v}\\
-A(c \textbf{u})=& c f\textbf{u}
-\end{align*}
-Which means that all matrix transforms are linear..
-måske se side 171
+en bette tekst om hvad det skal bruges til (i forhold til svd eller pca)\\
+Linear algebra is the study of linear equations and functions. This is done by introducing the concept of vectors and matrices. This project will introduce linear algebra through the concept of linear transformations. To define the linear transformations it is necessary to define functions.
+\begin{definition}{Functions from $\mathcal{S}_1$ to $\mathcal{S}_2$}
+    Let $\mathcal{S}_1$ be a subset of vectors in $\mathbb{R}^n$ and $\mathcal{S}_2$ be a subset of vectors in $\mathbb{R}^m$. Then a function $f$ from $\mathcal{S}_1$ to $\mathcal{S}_2$ written as $f$: $\mathcal{S}_1 \rightarrow \mathcal{S}_2$ assigns each vector $\textbf{v} \in \mathcal{S}_1$ to a unique vector $f(\textbf{v})\in \mathcal{S}_2$. Then $\mathcal{S}_1$ is called the domain of $f$ and $\mathcal{S}_2$ the codomain of $f$. \cite[167]{LiAl}
 \end{definition}
+\begin{figure} [H]
+    \centering
+    \input{figures/Tikz/function.tex}
+    \caption{Illustration of a function $f$: $\mathcal{S}_1 \rightarrow \mathcal{S}_2$.}
+    \label{fig:s_1_to_s_2}
+\end{figure}
+\autoref{fig:s_1_to_s_2} is a illustration of a function going from $\mathcal{S}_1 \rightarrow \mathcal{S}_2$. 
+\noindent Then a linear transformation can be defined as 
+\begin{definition}{Linear Transformations}
+    A function $T$: $\mathbb{R}^n \rightarrow \mathbb{R}^m$ is a linear transformation, if all $\textbf{u}, \textbf{v} \in \mathbb{R}^n$ and scalars $c \in \mathbb{R}$ hold that 
+    \begin{align*}
+        T(\textbf{u}+\textbf{v})&=T(\textbf{u})+T(\textbf{v})\\
+        T(c\textbf{u})&=cT(\textbf{u}).
+    \end{align*}
+    \cite[171]{LiAl}
+\end{definition}
+A matrix vector product with a $m \times n$ matrix can be seen as a function from $\mathbb{R}^m$ to $\mathbb{R}^n$. This is called a matrix transformation and is defined as
+\begin{definition}{Matrix Transformation}
+    Let $T_A(\textbf{v})=A\textbf{v}$ for an $m\times n$ matrix $A$ and $\textbf{v} \in \mathbb{R}^n$. Then the function $T_A$: $\mathbb{R}^n \rightarrow \mathbb{R}^m$ is called a matrix transformation induced by $A$. \cite[168]{LiAl}
+\end{definition}
+\noindent Since the matrix vector product is linear, the matrix transformation must be too. 
+\begin{theorem}{Linearity of the Matrix Transformation}
+    \label{the:linearityMatrixTransformation}
+    All matrix transformations are linear transformations.\cite[170]{LiAl}
+\end{theorem}
+\begin{proof}{Linearity of the Matrix Transformation}
+     Let $T_A(\textbf{v})=A\textbf{v}$ for an $m\times n$ matrix $A$ and $\textbf{v} \in \mathbb{R}^n$. Then
+     \begin{align*}
+         T_A(\textbf{v}+\textbf{u})&=A(\textbf{v}+\textbf{u})=A\textbf{v}+A\textbf{u}=T_A(\textbf{u})+T_A(\textbf{v})\\
+         T_A(c\textbf{v})&=A(c\textbf{v})=cA\textbf{v}=cT_A(\textbf{v}).
+     \end{align*}
+     From this it can be seen that all matrix transformations are linear transformations. \cite[170]{LiAl}
+\end{proof}
 
-A matrix is a rectangular array of scalars. The size of a matrix is determined by its number of rows $m$ and number of columns $n$ which is represented as an $m \times n$ matrix. 
-For instance an $A_{ij}$ matrix, where the scalar in the $i$-th row and $j$-th column is called the (i, j)-entry of the $A_{ij}$ matrix:
+\section{Elementary Row Operations}
+Linear algebra can be used to solve systems of linear equations. Below is a system with $m$ linear equations with invariables
+\begin{gather*}
+    a_{11}x_1+a_{12}x_2+\hdots + a_{1n}x_n = b_1\\
+    a_{21}x_1+a_{22}x_2+\hdots + a_{2n}x_n = b_2\\
+    \vdots \\
+    a_{m1}x_1+a_{m2}x_2+\hdots + a_{mn}x_n = b_m.
+\end{gather*}
+This can be represented as the following matrix vector product
 \begin{align*}
-    A_{ij} = 
     \begin{bmatrix}
-    a_{1 1} & a_{1 2} & \cdots & a_{1 j}\\
-    a_{2 1} & a_{2 2} & \cdots & a_{2 j}\\
-    \vdots  &   \vdots &  \ddots   & \vdots \\
-    a_{i 1} & a_{i 2} & \cdots & a_{i j}\\
+    a_{1 1} & a_{1 2} & \cdots & a_{1 n}\\
+    a_{2 1} & a_{2 2} & \cdots & a_{2 n}\\
+    \vdots  &  \vdots & \ddots & \vdots \\
+    a_{m 1} & a_{m 2} & \cdots & a_{m n}\\
+    \end{bmatrix}
+    \begin{bmatrix}
+    x_1 \\ x_2 \\ \vdots \\ x_n
+    \end{bmatrix}
+    = \begin{bmatrix}
+    b_1 \\ b_2 \\ \vdots \\ b_m
     \end{bmatrix}
 \end{align*}
-\cite[4]{LiAl}
-To determine the solution set of a system of linear equations or whether the system is inconsistent, there are some elementary row operations that can be done on a matrix $A$, which makes it possible to replace it with a equivalent system of linear equations, meaning a system of linear equations with the same solution, but more easily solved.
+This can be written as 
+\begin{align*}
+    A\textbf{x}=\textbf{b}
+\end{align*}
+where $A$ is an $m\times n$ matrix, $\textbf{x} \in \mathbb{R}^n$ and $\textbf{b} \in \mathbb{R}^m$. \cite[27-28]{LiAl}\\
+To determine the solution set of a system of linear equations or whether the system is has a solution at all, there are some elementary row operations that can be done on the matrix $[A\;\textbf{b}]$, which make it possible to replace it with a equivalent system of linear equations $[R\;\textbf{c}]$, meaning a system of linear equations with the same solution, but it is easier solved.
 \begin{definition}{Elementary Row Operations}
 There are three elementary row operations, that can be used to determine an equivalent system of linear equations, for a given system of linear equations.
 \begin{enumerate}
     \item Interchange Operation:
-    It is allowed to let two rows switch place 
+    It is allowed to let two rows switch place.
     Notation: $A\xrightarrow{\textbf{r}_i\leftrightarrow \textbf{r}_t} B$ where $i$ and $t$ are rows
     \item Scaling Operation:
-    Multiplying any row of a matrix with the same nonzero scalar.
+    Multiplying any row of a matrix with the same nonzero scalar $c$.
     Notation: $A\xrightarrow{c\textbf{r}_i\rightarrow \textbf{r}_i} B$
     \item Row Addition Operation:
-    Add a multiple of one row of the matrix to another row
+    Add a multiple of one row of the matrix to another row.
     Notation: $A\xrightarrow{c\textbf{r}_i+\textbf{r}_t\rightarrow \textbf{r}_t} B$
 \end{enumerate}
 \cite[32]{LiAl}
-\end {definition}
-An example with a given system of linear equations, where the  elementary row operations will be used to replace the given system with an equivalent system of linear equations, which will be more easily solved.
-\begin{example}{Elementary Row Operations}
- Having the given system of linear equations
+\end{definition}
+
+When replacing a given system of linear equations with one, which is easier solved, the most simple equivalent system of linear equations is called the reduced row echelon form. 
+\begin{definition}{Reduced Row Echelon Form}
+A matrix in row echelon form is satisfying the following three conditions.
+\begin{enumerate}
+    \item Each nonzero row lies above every zero row.
+    \item The leading entry of a nonzero row is in a column to the right of the column containing the leading entry of any preceding row.
+    \item All entries below a leading entry are $0$.
+\end{enumerate}
+Pivot positions are the first non zero entry of each row, the pivot columns are the columns containing the pivot positions. 
+For a matrix to be in reduced echelon form it has to satisfy two conditions more. these are
+\begin{enumerate}
+    \item For a column with a leading entry of some row, all other entries have to be 0.
+    \item The leading entries has to be equal to 1.
+\end{enumerate}
+\cite[33]{LiAl}
+\end{definition}
+A system of linear equations can have, no solutions, one solution or infinitely many solutions. If the system has either one or infinitely many solutions, the system is consistent, and if the system has no solutions, the system is considered inconsistent.
+
+The system is inconsistent if the last column of the row echelon of the augmented matrix is a pivot column. Since this is equivalent to $0\cdot x_1+0\cdot x_2+\hdots + 0\cdot x_n=c$ where $c\neq 0$. In all other cases the system is consistent.
+
+The following example shows the method of solving a system of linear equations using elementary row operations.
+\begin{example}{Reduced Row Echelon Form}
+Given system of linear equations
 \begin{align*}
     x_1-x_3-2x_4-8x_5&=-3\\
     -2x_1+x_3+2x_4+9x_5 &= 5\\
     3x_1-2x_3-3x_4-15x_5&=-9.
 \end{align*}
-The augmented matrix can be written as
-
+find the solution.
+\subsubsection{Solution}
+First the augmented matrix $[A\;\textbf{b}]$ can be written, and then reduced to row echelon form
 \begin{align*}
-[A \textbf{b}] =
+[A\;\textbf{b}] =
 	&\begin{bmatrix}
 	1  & 0  & -1  &-2  & -8  & -3 \\
 	-2 & 0  & 1   & 2  & 9   & 5 \\
@@ -114,62 +129,42 @@ The augmented matrix can be written as
   \end{bmatrix}\\
   \xrightarrow{r_3+r_2\rightarrow r_3}
     &\begin{bmatrix}
-  	 1 & 0 & -1 &-2  & -8 & -3 \\
- 	 0 & 0 & -1 & -2 & -7 & -1 \\
-	 0 & 0 & 0  & 1  & 2  & -1
-       \end{bmatrix}.
-\end{align*}
-\label{exa:rowoperations}
-\end{example}
-When replacing a given system of linear equations with one, which is easier solved, the most simple equivalent system of linear equations is called the reduced row echelon form. 
-\begin{definition}{Reduced Row Echelon Form}
-A matrix in row echelon form is satisfying the following three conditions
-\begin{enumerate}
-    \item Each nonzero row lies above every zero row
-    \item The leading entry of a nonzero row is in a column to the right of the column containing the leading entry of any preceding row
-    \item All entries below a leading entry are $0$
-\end{enumerate}
-For a matrix to be in reduced echelon form it has to satisfy two conditions more. these are
-\begin{enumerate}
-    \item For a column with a leading entry, all other entries have to be 0
-    \item The leading entries has to be equal to 1
-\end{enumerate}
-\cite[33]{LiAl}
-\end{definition}
-To determine whether a system of linear equations is consistent or inconsistent, the concepts pivot positions and pivot columns
-becomes useful. Using the conditions a row echelon form is satisfying, the number of pivot columns is equal to the number of leading entries in the given matrix, and a pivot position is the position of the leading entry.  
-\begin{example}{Reduced Row Echelon Form}
-It can be observed from the matrix in Example \ref{exa:rowoperations} that there is three pivot positions, and thereby three pivot columns.
-\begin{align}
-     \begin{bmatrix}
   	 \circled{1} & 0 & -1 &-2 & -8 & -3 \\
  	 0 & 0 & \circled{-1} & -2 & -7 & -1 \\
-	 0 &0 & 0 & \circled{1} & 2 & -1
-       \end{bmatrix}
+	 0 & 0 & 0 & \circled{1} & 2 & -1
+       \end{bmatrix}.
 \label{examplepivot}
-\end{align}
-There are no pivot position in the last column of the augmented matrix, hence the system is consistent. All entries in column two is equal to zero, hence the system has infinite solutions. To determine the most simple equivalent system of the given linear equations, the reduced row echelon form is calculated:
+\end{align*}
+As seen in the matrix above, there are three pivot positions (circled in red), and thereby three pivot columns.
+
+Since there are no pivot position in the last column of the augmented matrix, the system is considered consistent. All entries in column two is equal to zero, hence the system has infinite solutions. To determine the most simple equivalent system of the given linear equations, the reduced row echelon form is calculated:
 \begin{align*}
   \xrightarrow{\substack{r_1+2r_3\rightarrow r_1\\r_2+2r_3\rightarrow r_2}}
     &\begin{bmatrix}
   	    1 & 0 & -1 &0 & -4 & -5 \\
  	    0 & 0 & -1 & 0 & -3 & -3 \\
-	    0 &0 & 0 & 1 & 2 & -1
+	    0 & 0 & 0 & 1 & 2 & -1
      \end{bmatrix}\\
-  \xrightarrow{\substack{r_1+r_2\rightarrow r_1\\-1r_2\rightarrow r_2}}
+  \xrightarrow{\substack{-1r_2\rightarrow r_2}}
   &\begin{bmatrix}
-        1 & 0 & 0 &0 & -1 & -2 \\
+  	    1 & 0 & -1 &0 & -4 & -5 \\
  	    0 & 0 & 1 & 0 & 3 & 3 \\
-	    0 &0 & 0 & 1 & 2 & -1
+	    0 & 0 & 0 & 1 & 2 & -1
+     \end{bmatrix}\\
+     \xrightarrow{\substack{r_1+r_2\rightarrow r_1}}
+     &\begin{bmatrix}
+        1 & 0 & 0 & 0 &-1 &-2 \\
+ 	    0 & 0 & 1 & 0 & 3 & 3 \\
+	    0 & 0 & 0 & 1 & 2 &-1
      \end{bmatrix}
     \end{align*}
 With the reduced row echelon form, it is possible to reduce the equations to
-
 	\begin{align*}
 		x_1-x_5 =-2   &\Rightarrow x_1=x_5 -2\\
         x_3 + 3x_5 =3 &\Rightarrow x_3=-3x_5+3\\
         x_4 +2x_5 = -1 &\Rightarrow	x_4=-2x_5-1
 	\end{align*}
+Which can be written as:
     \begin{align*}
     	\textbf{x}=
         \begin{bmatrix}
@@ -186,33 +181,60 @@ With the reduced row echelon form, it is possible to reduce the equations to
         \end{bmatrix} + x_5
         \begin{bmatrix}
             1 \\ 0 \\ -3 \\ -2 \\ 1
-        \end{bmatrix}
-    \end{align*}.
+        \end{bmatrix}.
+    \end{align*}
+This is the general solution for the given linear equations.
 \end{example}
-
-\begin{definition}{Rank and Nullity of a Matrix}
+When a matrix is on reduced row echelon form, the number of pivot columns is called the rank, and the amount of non pivot columns is the nullity.
+\begin{definition}{Rank and Nullity of a Matrix}\label{def:rank_nullity}
 The rank of a $m \times n$ matrix $A$, is defined as the number of pivot columns, or the number of nonzero rows of the reduced echelon form of $A$. The rank is denoted as rank$(A)$
-The nullity is defined as the opposite of rank, $n - $rank. Nullity is denoted as nullity$(A)$.
+The nullity of $A$ is denoted as nullity$(A)$, is defined as nullity$(A)=n - $rank$(A)$.
 \cite[47]{LiAl}
 \end{definition}
+\section{Subspace, Basis and Dimension}
+en bette intro 
 
+\begin{definition}{Linear Combination}
+    A combination of vectors $\textbf{u}_1, \textbf{u}_2, \hdots, \textbf{u}_k$ is a linear combination if it is on the form
+    \begin{align*}
+        c_1\textbf{u}_1 + c_2\textbf{u}_2 + \hdots + c_k\textbf{u}_k
+    \end{align*}
+    where $c_1, c_2, \hdots, c_k$ are the scalars, which is called the coefficients of the linear combination. 
+\end{definition}
+ A set of vectors $\mathcal{S}=\{\textbf{v}_1, \textbf{v}_2, \hdots, \textbf{v}_k\}$ is set to be linear dependent if all vectors in the set can be represented as linear combinations of the other vectors. Otherwise the vector set is linear independent.
+ Let $\mathcal{S}$ be linear dependent and $\textbf{v}_i$ be an arbitrary vector in $\mathcal{S}$. Then for some scalars $c_1, c_2, \hdots, c_k$
+ \begin{align} \label{eq:LinearIndependent}
+    c_1\textbf{v}_1+c_2\textbf{v}_2+\cdots+c_k\textbf{v}_k=\textbf{v}_i
+ \end{align}
+ This is the same as
+  \begin{align*}
+    c_1\textbf{v}_1+c_2\textbf{v}_2+\cdots+c_k\textbf{v}_k-\textbf{v}_i=\textbf{0}.
+ \end{align*}
+ If $\mathcal{S}$ was linear independent there exists no scalars such that \eqref{eq:LinearIndependent} is true. This leads to the following definition.
+\begin{definition}{Linear Dependent and Linear Independent}
+    A set of vectors $\textbf{v}_1, \textbf{v}_2, \hdots, \textbf{v}_k$ is said to be linear dependent if for some scalars $c_1, c_2, \hdots, c_k$ which are not all $0$
+    \begin{align*}
+       c_1\textbf{v}_1+c_2\textbf{v}_2+\dots+c_k\textbf{v}_k=\textbf{0}.
+    \end{align*}
+    A set of vectors $\textbf{v}_1, \textbf{v}_2, \hdots, \textbf{v}_k$ is said to be linear independent if the only scalars $c_1, c_2, \hdots, c_k$ such that
+    \begin{align*}
+        c_1\textbf{v}_1+c_2\textbf{v}_2+\dots+c_k\textbf{v}_k=\textbf{0}
+    \end{align*}
+    is $c_1=c_2=\hdots=c_k=0$
+\end{definition}
+\noindent The vectors a that can be product by a linear combination of a set of vectors is called the span of the set and is defiant by
 \begin{definition} {The Span of a Set of Vectors}
 A linear combinations of a nonempty set of vectors $\mathcal{S} = \{ \textbf{u}_1,\textbf{u}_2 \cdots \textbf{u}_k\}$ is denoted as $c_1 \textbf{u}_1 + c_2\textbf{u}_2+ \cdots+ c_k\textbf{u}_k$, where $\textbf{u}_1,\textbf{u}_2 \cdots \textbf{u}_k$ are in $\mathbb{R}^n$ and $c_1, c_2 \cdots c_k$ are scalars.
 The span of the set of vectors is a set of all linear combinations in $\mathbb{R}^n$
 \cite[66]{LiAl}
 \end{definition}
 
-\eqref{examplepivot} - ref til matricen med pivot.
-
-\section{Subspace, Basis and Dimension}
-(En bette intro)
-
 \begin{definition}{Subspace}
 A subspace is a set of vectors $W$ in $\mathbb{R}^n$ which have the following three properties. 
 
 \begin{enumerate}
     \item The zero vector belongs to $W$\\
-    \item the sum of any vectors in the same $W$, remain in the same subspace. This means $W$ is under closed under vector addition.
+    \item the sum of any vectors in the same $W$, remain in the same subspace. This means $W$ is closed under vector addition.
     \item Every scalar multiple of a vector that belongs to $W$, remains in the same $W$. This means $W$ is closed under scalar multiplication.
 \end{enumerate}
 \cite[227]{LiAl}
@@ -253,51 +275,28 @@ A subspace is a set of vectors $W$ in $\mathbb{R}^n$ which have the following th
 \end{enumerate}
 \end{example}
 
-\begin{theorem}{More about span}
+\begin{theorem}{Span as a Subspace of $\mathbb{R}^n$}
 The span of a definite nonempty subset of $\mathbb{R}^n$ is a subspace of $\mathbb{R}^n$.
 \cite[231]{LiAl}
 \end{theorem}
-Proooff????$\leftarrow$
 
-\begin{example}{Span as a subspace}
-\begin{align*}
-    W = \begin{Bmatrix}
-    \begin{bmatrix}
-    2s-5t\\3r+s-2t\\r-4s+3t\\-r+2s
-    \end{bmatrix}
-        \in \mathbb{R}^4:\text{r, s and t are scalars}
-    \end{Bmatrix}
-\end{align*}
-Written on parameterised vector form
-\begin{align*}
-    W =
-    r \begin{bmatrix}
-        0 \\ 3 \\1 \\ -1
-    \end{bmatrix}
-    +s\begin{bmatrix}
-        2 \\ 1 \\ -4 \\ 2
-    \end{bmatrix}
-    +t\begin{bmatrix}
-        -5 \\ -2 \\ 3 \\ 0
-    \end{bmatrix}
-\end{align*}
-\begin{align*}
-    \mathcal{S}=
-    \begin{Bmatrix}
-    \begin{bmatrix}
-        0 \\ 3 \\1 \\ -1
-    \end{bmatrix}, 
-    \begin{bmatrix}
-        2 \\ 1 \\ -4 \\ 2
-    \end{bmatrix},
-    \begin{bmatrix}
-        -5 \\ -2 \\ 3 \\ 0
-    \end{bmatrix}
-    \end{Bmatrix}
-\end{align*}
-Hence the span $\mathcal{S}$ is a subspace of $\mathbb{R}^4$
-\end{example}
-
+\begin{proof}{Span as a Subspace of $\mathbb{R}^n$}
+    By letting $\mathcal{S} = \{\mathbf{w}_1, \mathbf{w}_2, \hdots, \mathbf{w}_k$, since:
+    $$0\mathbf{w}_1 + 0\mathbf{w}_2 + \hdots + 0\mathbf{w}_k = \mathbf{0}$$.
+    From this it can be seen that $\mathbf{0}$ belongs to $\mathcal{S}$, and if $\mathbf{u}$ and $\mathbf{v}$ belongs to $\mathcal{S}$, then:
+    $$\mathbf{u} = a_1\mathbf{w}_1 + a_2 \mathbf{w}_2 + \hdots + a_k\mathbf{w}_k \quad and \quad \mathbf{v} = b_1\mathbf{w}_1 + b_2 \mathbf{w}_2 + \hdots + b_k\mathbf{w}_k,$$
+    for some scalars $a_1, a_2, \hdots, a_k$ and $b_1, b_2, \hdots, b_k$. Since 
+    \begin{align*}
+     \mathbf{u}+\mathbf{v} &= (a_1\mathbf{w}_1 + a_2 \mathbf{w}_2 + \hdots + a_k\mathbf{w}_k) + (b_1\mathbf{w}_1 + b_2 \mathbf{w}_2 + \hdots + b_k\mathbf{w}_k)\\ 
+     &= (a_1+b_1)\mathbf{w}_1 + (a_2+b_2)\mathbf{w}_2 + \hdots + (a_k+b_k)\mathbf{w}_k.
+     \end{align*}
+     By this, it follows that $\mathbf{u}+\mathbf{v}$ belongs to $\mathcal{S}$, therefore $\mathcal{S}$ is closed under vector addition. For any scalar $c$:
+     \begin{align*}
+         c\mathbf{u} &= c(a_1\mathbf{w}_1 + a_2 \mathbf{w}_2 + \hdots + a_k\mathbf{w}_k)\\
+         &=(c_1a_1)\mathbf{w}_1 + (c_2a_2)\mathbf{w}_2 + \hdots + (c_ka_k)\mathbf{w}_k,
+     \end{align*}
+     where $c\mathbf{u}$ belongs to $\mathcal{S}$, then $\mathcal{S}$ is closed under scalar multiplication, and $\mathcal{S}$ is therefore a subspace of $\mathbb{R}^n$. \qedsymbol
+\end{proof}
 There are many generating sets for a nonzero subspace $V$ of $\mathbb{R}^n$, and thereby it can be convenient to determine a generating set of $V$, which contains the fewest amount of vectors as possible. The span of this generating set is called a basis.
 
 \begin{definition}{Basis}
@@ -306,9 +305,9 @@ A basis for a nonzero subspace $V$, is a linearly independent generating set for
 
 The following three properties are true if $\mathcal{S}$ is a finite subset of $\mathbb{R}^n$
 \begin{itemize}
-    \item If $\mathcal{S}$ contains a least n vectors, then $\mathcal{S}$ is a generating set for $\mathbf{R}^n$. 
+    \item If $\mathcal{S}$ contains a least n vectors, then $\mathcal{S}$ is a generating set for $\mathbb{R}^n$. 
     \item If $\mathcal{S}$ contains maximum n vectors then $\mathcal{S}$ is linear independent.
-    \item If $\mathcal{S}$ contains precisely n vectors then $\mathcal{S}$ is a basis for $\mathbf{R}^n$.
+    \item If $\mathcal{S}$ contains precisely n vectors then $\mathcal{S}$ is a basis for $\mathbb{R}^n$.
 \end{itemize}
 
 Because a basis is a linearly independent generating set of $\mathbb{R}^n$ containing exactly $n$ vectors , there are two theorems, which provides some operations that can be done to determine a basis of the given subspace. These theorems are called \textbf{Reduction Theorem} and \textbf{Extension Theorem}.
@@ -342,21 +341,29 @@ There are two cases for a linearly independent subset $\mathcal{S}$ to be extend
 First case is where the span of $\mathcal{S}$ is $V$, hence $\mathcal{S}$ is a basis of $V$.\\
 Second case is where $V$ contains a vector $\textbf{v}_1$, and $\textbf{v}_1$ is not contained in a linearly independent subset $\mathcal{S}=
 \begin{Bmatrix} \textbf{u}_1,\textbf{u}_2,\cdots,\textbf{u}_k \end{Bmatrix} 
- $. A possible basis for $V$ is $\mathcal{S}$ extended with $\textbf{v}_1$, if and only if $\mathcal{S'}=\begin{Bmatrix} \textbf{u}_1,\textbf{u}_2,\cdots,\textbf{u}_k, \textbf{v}_1 \end{Bmatrix}$ is linearly independent and span of $\mathcal{S'}$ is $V$. In the case that $\mathcal{S'}$ is not $V$, $\mathcal{S'}$ can be extended with another vector, denoted $\mathcal{S''}$. 
+ $. A possible basis for $V$ is $\mathcal{S}$ extended with $\textbf{v}_1$, if and only if $\mathcal{S'}=\begin{Bmatrix} \textbf{u}_1,\textbf{u}_2,\cdots,\textbf{u}_k, \textbf{v}_1 \end{Bmatrix}$ is linearly independent and span of $\mathcal{S'}$ is $V$. In the case that $\mathcal{S'}$ is not $V$, $\mathcal{S'}$ can be extended with another vector, denoted $\mathcal{S''}$. \qedsymbol 
 \end{proof}
 
-The extension theorem and the reduction theorem have given two characteristics of a basis for a subspace. These characteristics yields that vectors can be deleted and used to extend a subset and form a basis for a subspace. These characteristics result in the possibility to determine infinitely many bases for a nonzero subspace . Even though a particular subspace has infinitely many bases, the bases will always consist of the same amount of vectors, which leads to following definition.
+The extension theorem and the reduction theorem have given two characteristics of a basis for a subspace. These characteristics yields that vectors can be deleted and used to extend a subset and form a basis for a subspace. These characteristics result in the possibility to determine infinitely many bases for a nonzero subspace. Even though a particular subspace has infinitely many bases, the bases will always consist of the same amount of vectors, which leads to following definition.
 
 \begin{definition}{Dimension of a Subspace}
 The dimension of a nonzero subspace $V$ of $\mathbb{R}^n$ is the number of vectors in  basis. The dimension is denoted by dim$V$. The dimension of the zero subspace of $\mathbb{R}^n$ is 0 \cite[246]{LiAl}.
 \end{definition}
 
 \begin{definition}{Null space}
-The solution set $A\textbf{x}=\textbf{0}$ for a matrix $A$, is the null space of the matrix. It is denoted Null $A$
+The solution set $A\textbf{x}=\textbf{0}$ for a matrix $A$, is the null space of the matrix. It is denoted as Null $A$
 \end{definition}
 
 \begin{example}{Determine a Generating Set for The Null Space of a Matrix }
-....
+To generate a set for the null space of the matrix $A$
+\begin{align*}
+    \begin{bmatrix}
+    1 & 1 & -1 & 4 \\
+    2 & 1 & -3 & 5\\
+    -2 & 0 & 4 & -2
+    \end{bmatrix}
+\end{align*}
+With the help of row reductions, the matrix can be represented as a reduced row echelon form
 \begin{align*}
 \begin{bmatrix}
     1 & 1 & -1 & 4 \\
@@ -367,15 +374,12 @@ The solution set $A\textbf{x}=\textbf{0}$ for a matrix $A$, is the null space of
     1 & 1 & -1 & 4 \\
     0 & -1 & -1 & -3\\
     0 & 2 & 2 & 6
-\end{bmatrix}\xrightarrow{2r_2+r_3\rightarrow r_3}
+\end{bmatrix}\\\xrightarrow{2r_2+r_3\rightarrow r_3}
 \begin{bmatrix}
    1 & 1 & -1 & 4 \\
     0 & -1 & -1 & -3\\
     0 & 0 & 0 & 0 
 \end{bmatrix}
-\end{align*}
-.... laves på reduceret form
-\begin{align*}
 \xrightarrow{r_1-r_2\rightarrow r_1}
 \begin{bmatrix}
    1 & 0 & -2 & 1 \\
@@ -383,12 +387,12 @@ The solution set $A\textbf{x}=\textbf{0}$ for a matrix $A$, is the null space of
     0 & 0 & 0 & 0
 \end{bmatrix}
 \end{align*}
-noget tekst
+This can be written in the general solution for $A\textbf{x}=\textbf{0}$.
 \begin{align*}
     x_1 - 2x_3 + x_4 = 0 &\Rightarrow x_1 = 2x_3 - x_4\\
     x_2 + x_3 + 3x_4 = 0 &\Rightarrow x_2=-x_3 -3x_4
 \end{align*}
-Noget mere tekst
+and written in vector form
 \begin{align*}
 \begin{bmatrix}
    x_1\\x_2\\x_3\\x_4 
@@ -403,9 +407,9 @@ Noget mere tekst
    -1\\ -3\\ 0\\ 1
 \end{bmatrix}
 \end{align*}
-En eller anden konklusion - Her er facit..
+The null space is then
 \begin{align*}
-\mathcal{S?} = 
+\text{Null}\; A = \mathcal{S} = 
 \begin{Bmatrix}
 \begin{bmatrix}
    2\\ -1\\ 1 \\0
@@ -419,126 +423,398 @@ En eller anden konklusion - Her er facit..
 
 Anvendelse af nulrum\\
 Fin overgang til eigenvektor og eigenværdier
+%skal vi have lineær operatorer med?
+
+\section{Invertible Matrix}
+When transforming matrices it can be relevant to reverse the transformation and thereby being able to recreate the original matrix. 
+
+\begin{definition}{Invertible Matrix}
+    An  $n \times n$ matrix $A$ is invertible, if there exists another $n \times n$ matrix $B$ which when multiplied with $A$ results in an identity matrix such as
+    \begin{align*}
+        AB=BA=I_n.
+    \end{align*}
+    In this case, $B$ can be defined as an inverse of $A$. \\
+    The inverse matrix of $A$ is denoted $A^{-1}$
+\end{definition}
+
+As seen in \autoref{bil:ElementaryMatrix}, $P$ is defined as an invertible elementary matrix. Which leads to the following theorem:
+
+\begin{theorem}{Invertible Matrix P} \label{the:PMatrix}
+    If an $m \times n$ matrix $A$ has a reduced row echelon form $R$, there will exist an invertible $m \times m$ elementary matrix $P$ which when multiplied with $A$ will equal $R$, such as
+    \begin{align*}
+        PA=R.
+    \end{align*}
+    \cite[127]{LiAl}
+    \label{theo:invertible}
+\end{theorem}
+A proof of Theorem \ref{theo:invertible} leads to a justification of why it is possible to reduce a matrix $A$ to a matrix $R$.
+\begin{proof}{Invertible Matrix P}
+    $P$ is an invertible matrix so $P[A\mathbf{b}]=[R\mathbf{c}]$, where $[R\mathbf{c}]$ is the reduced row echelon form of $[A\mathbf{b}]$. 
+    Hence the following can be stated
+    \begin{align*}
+        [PA\;P\mathbf{b}]=P[A\;\mathbf{b}]=[R\;\mathbf{c}].
+    \end{align*}
+    As seen, the connection between $PA$, $P\mathbf{b}$ and $R\mathbf{c}$ is
+    \begin{align*}
+        PA=R \quad\text{and}\quad P\mathbf{b}=\mathbf{c},
+    \end{align*}
+    hence
+    \begin{align*}
+        A = P^{-1}R \quad \text{and} \quad \mathbf{b} = P^{-1}\mathbf{c}.
+    \end{align*}
+    If $\mathbf{v}$ is a solution for $A\mathbf{x}=\mathbf{b}$, then $A\mathbf{v}=\mathbf{b}$. Thereby it can be expressed that 
+    \begin{align*}
+        R\mathbf{v}=(PA)\mathbf{v}=P(A\mathbf{v})=P\mathbf{b}=\mathbf{c}.
+    \end{align*}
+    This shows that $\mathbf{v}$ is a solution of $R\mathbf{x}=\mathbf{c}$
+    and as said, $P$ is invertible, and therefore the following must be true
+    \begin{align*}
+        A\mathbf{v}=(P^{-1}R)\mathbf{v}=P^{-1}(R\mathbf{v})=P^{-1}\mathbf{c}=\mathbf{b}
+    \end{align*}
+    and as seen above, $\mathbf{v}$ is a solution of $A\mathbf{x}=\mathbf{b}$. As proved, $A\mathbf{x}=\mathbf{b}$ and $R\mathbf{x}=\mathbf{c}$ have the same solutions for \textbf{x}. \qedsymbol
+\end{proof}
+
+For a matrix to be invertible the following theorem has to be satisfied.
+
+\begin{theorem}{Invertible Matrix}
+    \label{the:invertibleMatrix}
+    If an $n \times n$ matrix $A$ is invertible, then the following statements are true
+    \begin{enumerate}
+        \item The reduced row echelon form of $A$ is $I_n$
+        \item $\text{rank } A = n$
+        \item The equation $A\mathbf{x}=\mathbf{b}$ is consistent for every $\mathbf{b}$ in $\mathbb{R}^n$
+        \item The only solution for $A\mathbf{x}=\mathbf{0}$ is $\mathbf{0}$
+    \end{enumerate}
+    \cite[138]{LiAl}
+\end{theorem}
+
+\begin{proof}{Invertible matrix}
+\begin{enumerate}
+    \item  If the reduced row echelon form of $A$ is $I_n$, there must exists an invertible $n \times n$ elementary matrix $P$ which when multiplied by $A$ is $I_n$. So
+    \begin{align*}
+        A=I_nA=(P^{-1}P)A=P^{-1}(PA)=P^{-1}I_n=P^{-1}.
+    \end{align*}
+    As seen $A=P^{-1}$, hence $A$ is invertible if the reduced row echelon form of $A$ is $I_n$.
+    \item As stated in definition \ref{def:rank_nullity} the rank of a matrix is defined as the amount of pivot columns in the reduced echelon form, and since the reduced echelon form is $I_n$ the rank will be $n$.
+    \item $A\mathbf{x}=\mathbf{b}$ is consistent when $\mathbf{b}$ equals a linear combination of the columns of $A$, hence $\mathbf{b}$ is consistent for every $\mathbf{b}$ in $\mathbb{R}^n$
+    \item Let $R$ be the reduced row echelon form of $A$. 
+    Hence $R$ has the form $I_n$, and the only solution to $I_n\mathbf{x}= \mathbf{0}$ is $\mathbf{0}$. Since $A\mathbf{x}=\mathbf{0}$ has the same solutions as $R\mathbf{x}=\mathbf{0}$, then the only solution is $\mathbf{0}$.
+\end{enumerate}
+\end{proof}
+
+A way to determine whether a matrix is invertible or not, is to consider the determinant of the matrix.
+\section{Determinants}
+Determinants of squared matrices is a scalar, that provides information about the matrix. The focus in this section is how to calculate the determinant for a matrix and determine whether a matrix is invertible or not. 
+\begin{definition}{Determinant of a $2\times 2$ matrix}
+    The determinant of the $2\times 2$ matrix 
+    \begin{align*}
+        A=\begin{bmatrix}
+           a & b\\ c & d
+        \end{bmatrix}
+    \end{align*}
+   is denoted $\det A$ and is defined as 
+    \begin{align*}
+        \det A = ad-bc.
+    \end{align*}
+    \label{def:determinant}
+\end{definition}
+Definition \ref{def:determinant} states a way to determine the determinant for a $2\times 2$ matrix. A more general definition of the determinant for a $n\times n$ matrix is considered in the following.
+\begin{definition}{Determinants of an $n\times n$ Matrix} 
+    The determinant of an $n\times n$ matrix $A$ for $n>2$ is defined as
+    \begin{align*}
+    \det A &= \sum_{j=1}^n (-1)^{j+i}a_{ij}\det A_{ij}, \quad \text{for } 1 \leq i \leq n.\\
+    &= a_{i1}\det A_{i1}-a_{i2}\det A_{i2}+\cdots+(-1)^{n+i}a_{in}\det A_{in},
+    \end{align*}
+    where $a_{ij}$ denotes the ($i$,$j$)-entry of $A$ and $A_{ij}$ denotes the matrix $(n-1)\times (n-1)$ obtained by removing row $i$ and column $j$ from $A$.
+    \label{def: generaldeterminant}
+\end{definition}
+To illustrate the method presented in Definition \ref{def: generaldeterminant} there is a calculated example in the following.
+\begin{example}{Determinant of an $n\times n$ Matrix}
+Determine the determinant for
+    \begin{align*}
+        A=\begin{bmatrix}
+           1 & -2 & 1\\
+           4 & 2 & 5\\
+           0 & 1 & 3
+        \end{bmatrix}.
+    \end{align*}
+    \subsubsection{Solution}
+    The determinant of matrix $A$ is calculated using Definition \ref{def: generaldeterminant} with $i=3$ yields
+    \begin{align*}
+        \det A &= 0(-1)^{1+3} \det
+        \begin{bmatrix}
+           -2 & 1\\
+           2 & 5
+        \end{bmatrix}
+        +1(-1)^{2+3}\det 
+        \begin{bmatrix}
+           1 & 1\\
+           4 & 5
+        \end{bmatrix}
+        +3(-1)^{3+3}\det 
+        \begin{bmatrix}
+           1 & -2\\
+           4 & 2
+        \end{bmatrix}\\
+        &=
+        - \det 
+        \begin{bmatrix}
+           1 & 1\\
+           4 & 5
+        \end{bmatrix}
+        +3 \det 
+        \begin{bmatrix}
+           1 & -2\\
+           4 & 2
+        \end{bmatrix}\\
+        &=-(1\cdot5-4\cdot1)+3(1\cdot2-4\cdot(-2))=29.
+    \end{align*}
+    The determinant of matrix A is 29. 
+\end{example}
+One of the uses of determinants is to Determent if a matrix is inevitable or not.
+\begin{theorem}{Determinants of an Invertible Matrix}
+    If a $n\times n$ matrix $A$ is invertible then $\det A \neq 0$. If $A$ is non-invertible then $\det A = 0$.
+    \cite[214]{LiAl}
+    \label{theo: det_intvertible_matrix}
+\end{theorem}
+\begin{proof}{Determinants of an Invertible Matrix}
+    If $A$ has the reduced row echelon $R$ then by Theorem \ref{the:PMatrix} there exist a matrix $P$ such that
+    \begin{align*}
+        PA=R \\
+        A=RP^{-1} \\
+        \det A = \det RP^{-1}
+    \end{align*}
+    If $A$ is invertible then by Theorem \ref{the:invertibleMatrix}  the reduced row echelon form of $A$ is $I_n$. 
+    \begin{align*}
+        A=I_nP^{-1}=P^{-1} \\
+        \det A = \det P^{-1}
+    \end{align*}
+    It can be proven that $\det P^{-1}$ is nonzero. Hence $\det A \neq 0$ if $A$ is invertible.
+    
+    If $A$ is non-invertible then by Theorem \ref{the:invertibleMatrix} $\text{rank } A < n$, hence the reduced row echelon $R$ has at least one zero row. By this the matrix $RP^{-1}$ also has at least one zero row. Using Theorem \ref{def: generaldeterminant} on the zero row it can be seen that $\det RP^{-1}=\det A=0$. Therefore if $A$ is non-invertible $\det A = 0$.
+\end{proof}
 
 \section{Eigenvectors and Eigenvalues}
-Idéer til en intro.(taget med indspiration fra bogen s. 293)\\
-It is in many cases important to know and understand how vectors are transformed when they are multiplied by a square matrix... 
-It is an important element in analysis of linear transforms(WHY?).
+When working with matrix transforms it can be interesting to look at which vectors (if any) only changes in magnitude and not direction under the transform. These vectors are called eigenvectors and the scalar that changes the magnitude is called the eigenvalues.
+\\ 
+In the following, eigenvectors and eigenvalues for a linear transform and for a matrix is defined.
 
-Investigation of a matrix to find out if it can be replaced with a diagonal matrices - to find the diagonalizable matrices. (ved ikke om vi kommer til at bruge det, men det kan man ;) )
-\\
-The following two definition is what an eigenvector and an eigenvalue for a linear transform and for a matrix.
 \begin{definition}{Eigenvalue and Eigenvector of a Linear Operator}
 A nonzero vector \textbf{v} in $\mathbb{R}^n$ is called an eigenvector of a linear operator $T$ on $\mathbb{R}^n$ if $T(\textbf{v})=\lambda\textbf{v}$, where $\lambda$ is a scalar. The scalar $\lambda$ is called the eigenvalue of $T$ that corresponds to \textbf{v}. 
 \end{definition}
 
 \begin{definition}{Eigenvalue and Eigenvector of a Matrix}
-A nonzero vector \textbf{v} in $\mathbb{R}^n$ is called an eigenvector of a $n \times n$ matrix $A$ if $A\textbf{v}=\lambda\textbf{v}$ where $\lambda$ is a scalar. The scalar $\lambda$ is called the eigenvalue of $A$ corresponding to $\textbf{v}$.
+A nonzero vector \textbf{v} in $\mathbb{R}^n$ is called an eigenvector of an $n \times n$ matrix $A$ if $A\textbf{v}=\lambda\textbf{v}$ where $\lambda \in \mathbb{R}$ is a scalar. The scalar $\lambda$ is called the eigenvalue of $A$ corresponding to $\textbf{v}$.
 \label{def:Eigenvalue_and_Eigenvector_of_a Matrix}
 \end{definition}
 
-This two definitions yields that the eigenvectors and the corresponding eigenvalues are the same for a linear operator and a its standard matrix.
-
-Here it is shown by an example how to determine a eigenvector and eigenvalue of a matrix
-\begin{example}{Eigenvector of a Matrix}
-Show that \textbf{v} is an eigenvector of $A$ and determine the corresponding eigenvalue. 
-\begin{align*}
-A = \begin{bmatrix}-5 & -4 \\8 & 7 \end{bmatrix}, \textbf{v} =\begin{bmatrix}1 \\-2\end{bmatrix}
-\end{align*}
-When \textbf{v} is nonzero and is an eigenvector of $A$, then Defintion \ref{def:Eigenvalue_and_Eigenvector_of_a Matrix} yields that $A\textbf{v}$ must be equal to \textbf{v} multiplied with a scalar $\lambda$. Since  
-\begin{align*}
-\begin{bmatrix}-5 & -4 \\8 & 7 \end{bmatrix} \begin{bmatrix}1 \\-2\end{bmatrix} = \begin{bmatrix}-5 + 8 \\8  -14 \end{bmatrix} = \begin{bmatrix}3 \\-6 \end{bmatrix} = 3\begin{bmatrix}1\\-2 \end{bmatrix},
-\end{align*}
-\textbf{v} is an eigenvector of $A$, with a corresponding eigenvalue $\lambda=3$
-\label{exa:EigenValueVectorMatrix}
-\end{example}
-
-In Example \ref{exa:EigenValueVectorMatrix} it was shown that \textbf{v} was an eigenvector of $A$, with the corresponding eigenvalue 3. It is given that every nonzero scalar $c$ of \textbf{v} is an eigenvector of matrix $A$ corresponding to the exact same eigenvalue $\lambda$, if \textbf{v} is an eigenvector of matrix $A$. This can be seen in the following:
+This two definitions yields that the eigenvectors and the corresponding eigenvalues are the same for a linear operator and its standard matrix.
+It is given that every nonzero scalar $c$ of \textbf{v} is an eigenvector of matrix $A$ corresponding to the exact same eigenvalue $\lambda$, if \textbf{v} is an eigenvector of matrix $A$. This can be seen in the following:
 \begin{align*}
     A(c\textbf{v})=c(A\textbf{v})=c(\lambda\textbf{v})=\lambda(c\textbf{v}).
 \end{align*}
-Determining the eigenvectors of an $n\times n$ matrix that correspond to a given eigenvalue $\lambda$  ...... (Yada)..
+Definition \ref{def:Eigenvalue_and_Eigenvector_of_a Matrix} can be rewritten as:
 
 \begin{align}
 \nonumber A\textbf{v}&=\lambda\textbf{v}\\ 
 \nonumber A\textbf{v}-\lambda\textbf{v}&=\textbf{0}\\ 
 \nonumber A\textbf{v}-\lambda I_n \textbf{v}&=\textbf{0}\\
-(A-\lambda I_n)\textbf{x}&=\textbf{0}
+(A-\lambda I_n)\textbf{v}&=\textbf{0}
 \label{MatrixLambdaIdentity}
 \end{align}
 
-Given a $n\times n$ matrix $A$ with a eigenvalue $\lambda$, the nonzero solutions to \eqref{MatrixLambdaIdentity} is used to determine the eigenvectors of $A$ corresponding to $\lambda$.
-The equation is the null space of $(A-\lambda I_n)\textbf{x}$, which will be mentioned as the eigenspace, thereby the span of the eigenspace consist of the eigenvectors corresponding to an eigenvalue $\lambda$
+From this it can be seen that, given an $n\times n$ matrix $A$ with an eigenvalue $\lambda$, the nonzero solutions to \eqref{MatrixLambdaIdentity} is used to determine the eigenvectors of $A$ corresponding to $\lambda$.
+The solution to the equation is the null space of $(A-\lambda I_n)$, which will be mentioned as the eigenspace, thereby the span of the eigenspace consist of the eigenvectors corresponding to an eigenvalue $\lambda$. Since \textbf{v} has to be a nonzero vector the null space of $A$ has to be nonzero. By Theorem \ref{the:invertibleMatrix} the matrix $A-\lambda I_n$ has to be non-invertible. By Theorem \ref{theo: det_intvertible_matrix} means that the determinant must be equal to zero:
+\begin{align*}
+    \det(A-\lambda I_n)=0.
+\end{align*}
+This is called the characteristic equation of $A$ and the eigenvalues are the solutions to this equation.  
 
-
-\begin{example}{Eigenvalue and Basis for a Eigenspace for a Matrix}
-How to determine if a scalar $\lambda$ is an eigenvalue of a matrix and how to determine a basis for its eigenspace.  
-\begin{align*}
-\begin{bmatrix}
-    -13 & -4 & 8\\
-    24 & 7 & -16\\
-    -12 & -4 & 7
-\end{bmatrix}, \lambda=-1
-\end{align*}
-To determine if a scalar is an eigenvector Equation \eqref{MatrixLambdaIdentity} is used.
-\begin{align*}
-\begin{bmatrix}
-    -13 & -4 & 8\\
-    24 & 7 & -16\\
-    -12 & -4 & 7
-\end{bmatrix} - (-1) 
-\begin{bmatrix}
-    1 & 0 & 0\\
-    0 & 1 & 0 \\
-    0 & 0 & 1
-\end{bmatrix}=
-\begin{bmatrix}
-    -12 & -4 & 8 \\
-    24 & 8 & -16 \\
-    -12 & -4 & 8
-\end{bmatrix}
-\end{align*}
-To calculate the basis for the eigenspace, the matrix is reduced to reduced row echelon form
-\begin{align*}
-   \xrightarrow{\substack{r_2+2r_1\rightarrow r_2\\r_3+r_2\rightarrow r_3}} 
-   \begin{bmatrix}
-        -12 & -4 & 8 \\
-        0 & 0 & 0 \\
-        0 & 0 & 0    
-   \end{bmatrix}\xrightarrow{\frac{r_1}{-12}\rightarrow r_2}
-   \begin{bmatrix}
-       1 & \frac{1}{3} & -\frac{2}{3}  \\
-        0 & 0 & 0 \\
-        0 & 0 & 0 
-   \end{bmatrix}\\
-   x_1+\frac{1}{3}x_2-\frac{2}{3}x_3=0\Rightarrow x_1=\frac{2}{3}x_3-\frac{1}{3}x_2
-\end{align*}
-
-\begin{align*}
-    \begin{bmatrix}
-        x_1\\x_2\\x_3
-    \end{bmatrix}
-    \begin{bmatrix}
-        -\frac{1}{3}x_2+\frac{2}{3}\\x_2\\x_3
-    \end{bmatrix}=x_2
-    \begin{bmatrix}
-        -\frac{1}{3}\\1\\0
-    \end{bmatrix}+x_3
-    \begin{bmatrix}
-        \frac{2}{3}\\0\\1
-    \end{bmatrix}
-\end{align*}
-\begin{align*}
+\begin{example}{Eigenvalue and Basis for an Eigenspace for a Matrix}
+    Find the eigenvalue and the basis for the eigenspace for the matrix
+    \begin{align*}
+        A=
+        \begin{bmatrix}
+            1 & 3\\
+            0 & -4
+        \end{bmatrix}
+    \end{align*}
+    \subsubsection{Solution}
+Calculating matrix $A-\lambda I_2$ yields
+    \begin{align*}
+        A-\lambda I_2=
+         \begin{bmatrix}
+            1 & 3\\
+            0 & -4
+        \end{bmatrix} -\lambda
+        \begin{bmatrix}
+            1 & 0\\
+            0 & 1
+        \end{bmatrix}=
+        \begin{bmatrix}
+            1-\lambda & 3\\
+            0 & -4-\lambda
+        \end{bmatrix}.
+    \end{align*}
+    The determinant of this matrix is
+    \begin{align*}
+        \det \left(\begin{bmatrix}
+            1-\lambda & 3\\
+            0 & -4-\lambda
+        \end{bmatrix} \right)=(1-\lambda)(-4-\lambda)-3\cdot0=(1-\lambda)(-4-\lambda)=0.
+    \end{align*}
+   It can be seen that the two eigenvalues are $1$ and $-4$. 
+   The eigenspace corresponding to $1$ can be determined as $\text{nullity}(A-I_2)$. The reduced row echelon form of $A-I_2$ is
+    \begin{align*}
+            \begin{bmatrix}
+                0 & 1\\
+                0 & 0
+            \end{bmatrix}.
+    \end{align*}
+    Then the solution is 
+    \begin{align*}
+        \begin{bmatrix}
+            x_1\\x_2
+        \end{bmatrix}=x_1
+         \begin{bmatrix}
+            1\\0
+        \end{bmatrix}
+    \end{align*}
+    and then the eigenspace corresponding to eigenvalue 1 is
+    \begin{align*}
     \begin{Bmatrix}
-    \begin{bmatrix}
-        -1\\3\\0
-    \end{bmatrix},
-    \begin{bmatrix}
-        2\\0\\3
-    \end{bmatrix}
-    \end{Bmatrix}
-\end{align*}
+        \begin{bmatrix}
+            1\\0
+        \end{bmatrix}
+    \end{Bmatrix}.
+    \end{align*}
+    The eigenspace corresponding to $-4$ can be found with same process.
+    The reduced row echelon form of $A+4I_n$ is
+        \begin{align*}
+            \begin{bmatrix}
+                1 & \frac{5}{3}\\
+                0 & 0
+            \end{bmatrix}.
+    \end{align*}
+    Then the solution is 
+    \begin{align*}
+        \begin{bmatrix}
+            x_1\\x_2
+        \end{bmatrix}=x_1
+         \begin{bmatrix}
+            -\frac{5}{3}\\1
+        \end{bmatrix}
+    \end{align*}
+    and then the eigenspace corresponding to -4 is
+    \begin{align*}
+    \begin{Bmatrix}
+        \begin{bmatrix}
+            -\frac{5}{3}\\1
+        \end{bmatrix}
+    \end{Bmatrix}.
+    \end{align*}
 \end{example}
 
+
+
+%der mangler vel en konklusion på eksemplet?
 Se side 313, der står der noget om diagonalization of matrices... VI kan finde ud af senere hvor meget vi skal bruge af det. 
 
+\section{Orthogonal Matrices}
+Orthogonal transforms are transforms that preserve the lengths of vectors and angle between vectors. In $\mathbb{R}^2$ and $\mathbb{R}^3$ Euclidean space orthogonal transforms are always a rotation or a reflection. \\
+To vectors $\textbf{u}$ and $\textbf{v}$ in $\mathbb{R}^n$ is orthogonal if $\textbf{u}\cdot \textbf{v}=0$. A set of vectors is orthogonal if all the vectors is orthogonal to on another. 
+\begin{theorem}{Linearly Independent Orthogonal Set of Vectors}
+If a set of vectors consists of nonzero vectors and are orthogonal it is linearly independent.\cite[375]{LiAl}
+\end{theorem}
+
+\begin{proof}{Linearly Independent Orthogonal Set of Vectors}
+If $\{\mathbf{v}_1, \mathbf{v}_2, \hdots, \mathbf{v}_k\}$ is an orthogonal subset of $\mathbb{R}^n$ and consist of $k$ nonzero vectors and if $c_1, c_2, \hdots, c_k$ are the scalars, such that
+$$c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \hdots + c_k\mathbf{v}_k = \textbf{0}$$
+for any $\mathbf{v}_i$:
+\begin{align*}
+  0 &= \mathbf{0 \vprik v}_i  \\
+  &= (c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \hdots + c_i \mathbf{v}_i + \hdots + c_k \mathbf{v}_k ) \mathbf{\vprik v}_i \\
+  &= c_1\mathbf{v}_1 \mathbf{\vprik v}_i + c_2\mathbf{v}_2 \mathbf{\vprik v}_i + \hdots + c_i \mathbf{v}_i \mathbf{\vprik v}_i + \hdots + c_k\mathbf{v}_k \mathbf{\vprik v}_i \\
+  &=c_i(\mathbf{v}_i \mathbf{\vprik v}_i)\\
+  &=c_i||\mathbf{v}_i||^2
+\end{align*}
+Where $||\mathbf{v}_i||^2 \neq 0$ since $\mathbf{v}_i \neq \mathbf{0}$, from this it follows that $c_i=0$. This shows that $\mathbf{v}_1, \mathbf{v}_2, \hdots, \mathbf{v}_k$ are linearly independent. \qedsymbol   
+\end{proof}
+If the basis for a subspace of $\mathbb{R}^n$ is also a orthogonal set, it is then called a orthogonal basis. In practice orthogonal basis is often normalised to obtain normalised basis of the same subspace. This is called a orthonormal basis.  A matrix which rows forms a orthonormal set is called a orthogonal matrix.
+
+\begin{example}{Orthonormal set of vectors}
+    Consider the set of vectors:
+    \begin{align*}
+    \begin{Bmatrix}
+    \begin{bmatrix}
+        -1\\1
+    \end{bmatrix},
+    \begin{bmatrix}
+        2\\2
+    \end{bmatrix}
+    \end{Bmatrix}.
+    \end{align*}
+    Show that it is an orthogonal set and find the corresponding orthonormal set.
+    \subsubsection{Solution}
+    To determine whether the two vectors are orthogonal the dot products between them is computers 
+    \begin{align*}
+    \begin{bmatrix}
+        -1\\1
+    \end{bmatrix}\vprik
+    \begin{bmatrix}
+        2\\2
+    \end{bmatrix}=(-1)\cdot2+1\cdot2=0.
+    \end{align*}
+    Since the dot product between the vectors is zero, the vectors forms a orthogonal set. The orthonormal set can be found by dividing the vectors by the norm of the vector. 
+    \begin{align*}
+    \begin{Bmatrix}
+    \frac{1}{\sqrt{2}}
+    \begin{bmatrix}
+        -1\\1
+    \end{bmatrix},
+    \frac{1}{2\sqrt{2}}
+    \begin{bmatrix}
+        2\\2
+    \end{bmatrix}
+    \end{Bmatrix}.
+    \end{align*}
+\end{example}
+
+\subsubsection{Inverse of an Orthogonal Matrix}
+A useful property of an orthogonal matrix is that its transpose equals its inverse.
+\begin{theorem}{Inverse of an Orthogonal Matrix}
+    If $Q$ is an $n\times n$ orthogonal matrix then
+    \begin{align*}
+        Q^T Q = I_n,
+    \end{align*}
+    $Q$ is invertible and
+    \begin{align*}
+        Q^T = Q^{-1}.
+    \end{align*}
+    \cite[413]{LiAl}
+\end{theorem}
+\begin{proof}{Inverse of an orthogonal matrix} 
+    Observe that the $i$'th row of $Q^T$ equals $\textbf{q}_i$. Then the ($i$,$j$)-entry of $Q^TQ$ is equal to $\textbf{q}_i\cdot\textbf{q}_j$. Since the columns of $Q$ forms an orthonormal set, this equals to
+    \begin{align*}
+        \textbf{q}_i\cdot\textbf{q}_j= \left\{
+    \begin{array}{ll}
+          0 & \text{for } j\neq i\\
+          1 & \text{for } j= i
+    \end{array}
+    \right. .
+    \end{align*}
+    From this it can be seen that $Q^TQ=I_n$. Using the def... it can be seen that $Q$ is invertible and $Q^T=Q^{-1}$.
+    \qedsymbol 
+\end{proof}
+
+
+\begin{enumerate}
+    \item theorem 6.5
+    \item eksempel hvordan man finder ud af om de er ortogonale og videre til orthonormale
+    \item theorem 6.9 - invertibel done
+    \item theorem 6.14 - forbindelse til eigenværdier
+    \item i LIAL done wrong - corollary 3.2 muligvis theorem 3.1
+    \item def i starten 3.3
+\end{enumerate}
+
+\section{Singular Value Decomposition}

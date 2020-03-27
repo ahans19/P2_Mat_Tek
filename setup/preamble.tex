@@ -168,3 +168,7 @@
 	}
 	
 \usepackage{siunitx}
+\makeatletter
+\newcommand*\vprik{\mathpalette\vprik@{.5}}
+\newcommand*\vprik@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother

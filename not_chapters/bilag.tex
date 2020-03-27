@@ -1,0 +1,52 @@
+\chapter{Elementary Matrix}\label{bil:ElementaryMatrix}
+An elementary matrix is a matrix, which represents elementary row operations. When multiplying the second row in a $2 \times 2$ matrix with a scalar, the elementary matrix will be represented as 
+\begin{align*}
+    \begin{bmatrix}
+    1 & 0\\
+    0 & k
+    \end{bmatrix}.
+\end{align*}
+When using the Interchange operation, the following matrix is used for a $2\times 2$ matrix:
+\begin{align*}
+    \begin{bmatrix}
+    0 & 1\\
+    1 & 0
+    \end{bmatrix}.
+\end{align*}
+When using the row addition operation, the following matrix is used for a $2\times 2$ matrix, where the first row, is added on to the second row:
+\begin{align*}
+    \begin{bmatrix}
+        1 & 0\\
+        1 & 1
+    \end{bmatrix}.
+\end{align*}
+The row operations above are represented as elementary matrices, and are capable of being reversed, hence the elementary matrices are invertible. It must be noted that elementary matrices are not only restricted in $\mathbb{R}^{2\times 2}$, but can be represented in $\mathbb{R}^{n\times n}$.\\
+
+The following example is a row operation on $3 \times 3$ matrix represented as an elementary matrix.
+\begin{example}{Elementary matrix}
+   In this example the row addition operation is used on a $3 \times 3$ matrix $A$ and the equivalent elementary matrix is shown.
+   \begin{align*}
+       A=
+       \begin{bmatrix}
+       1 & 2 & 3\\
+       2 & 5 & 6\\
+       3 & 4 & 8
+       \end{bmatrix}
+       \xrightarrow{\mathbf{r}_3-3\mathbf{r}_1\rightarrow\mathbf{r}_3}
+       \begin{bmatrix}
+       1 & 2 & 3\\
+       2 & 5 & 6\\
+       0 & -2 & -1
+       \end{bmatrix}.
+   \end{align*}
+   Using the same row operation on an $I_3$ matrix leads to
+   \begin{align*}
+   B=
+        \begin{bmatrix}
+        1 & 0 & 0\\
+        0 & 1 & 0\\
+       -3 & 0 & 1
+        \end{bmatrix}.
+   \end{align*}
+   The $B$ matrix is the elementary matrix of the row operation, on matrix $A$. 
+\end{example}

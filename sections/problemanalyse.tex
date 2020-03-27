@@ -22,8 +22,8 @@ When recording audio with a microphone, the audio signal becomes an electrical s
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/toneC4time.JPG}
-    \caption{The tone C\textsubscript{4} played on a piano, in the time domain (vi replikerer selv denne figur.)}
+    \includegraphics[width=0.8\textwidth]{figures/C4audio.pdf}
+    \caption{The tone C\textsubscript{4} played on a piano, in the time domain.}
     \label{fig:toneC4time}
 \end{figure}
 
@@ -32,14 +32,14 @@ Instead of considering the electrical signal in the time domain, it might be pre
 This is beneficial because each tone consist of defined frequencies. For instance the tone C\textsubscript{4} played on a piano corresponds to the fundamental frequency of $261.6 \si{Hz}$ seen as the first peak in \autoref{fig:toneC4freq} \cite[29]{Meinard2015Fundamentals}. A tone consist of not only the fundamental frequency, but other frequencies called overtones. A general term for all the frequency peaks for a tone is called partial tones. The fundamental frequency is the first partial tone and the number of overtones in a tone can be described as $N-1$, where $N$ is the number of partial tones in a specific tone. For C\textsubscript{4} there are three partial tones, hence two overtones at approximately $523 \si{Hz}$ and $ 785 \si{Hz}$. \cite[41]{Meinard2015Fundamentals}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/toneC4freq.JPG}
-    \caption{Fourier transform of the audio recording of the tone C\textsubscript{4} played on a piano (vi replikerer selv denne figur.)}
+    \includegraphics[width=0.8\textwidth]{figures/C4freq.pdf}
+    \caption{Fourier transform of the audio recording of the tone C\textsubscript{4} played on a piano.}
     \label{fig:toneC4freq}
 \end{figure}
 Using the fact that tones have a fundamental frequency and overtones, it is possible to consider partial tones at a given time, in an audio recording, as unique characteristics in a song. When recording audio it is relevant to look into noise handling. Noise is often one of the factors which can cause the audio fingerprint to differ from the fingerprint in the database and therefore it might not be possible to recognise the song.\\
 
-\section{Noisy and Distorted}
-As described it is often desirable to recognise songs even if the input is noisy or distorted. The noise involved can be people speaking in the background, road noise in a car. The distortion could come from the speaker and amplifier the music is playing out of or from the sound bouncing around the room. To remove these unwanted aspects, it is necessary to filter the input.\cite{haitsma2003highly}\\
+\section{Noise and Distorted}
+As described it is often desirable to recognise songs even if the input is noisy or distorted. The noise involved can be people speaking in the background, road noise in a car. The distortion could come from the speaker and amplifier the music is playing out of or from the sound bouncing around the room. To remove these unwanted aspects, it is necessary to manipulate the audio recorded with a microphone.\cite{haitsma2003highly}\\
 
 
 % When a recorded song is filtered and the fingerprint is generated, it then needs to be matched with a song in the database. The database can potentially consist of millions of fingerprints. When the database is that large it is not effective to brute force a match, therefore an optimized search algorithm can be necessary. \cite{haitsma2003highly}
