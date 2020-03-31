@@ -1,8 +1,8 @@
 \chapter {Linear Algebra} 
-en bette tekst om hvad det skal bruges til (i forhold til svd eller pca)\\
+%En bette tekst om hvad det skal bruges til (i forhold til svd eller pca)\\
 Linear algebra is the study of linear equations and functions. This is done by introducing the concept of vectors and matrices. This project will introduce linear algebra through the concept of linear transformations. To define the linear transformations it is necessary to define functions.
 \begin{definition}{Functions from $\mathcal{S}_1$ to $\mathcal{S}_2$}
-    Let $\mathcal{S}_1$ be a subset of vectors in $\mathbb{R}^n$ and $\mathcal{S}_2$ be a subset of vectors in $\mathbb{R}^m$. Then a function $f$ from $\mathcal{S}_1$ to $\mathcal{S}_2$ written as $f$: $\mathcal{S}_1 \rightarrow \mathcal{S}_2$ assigns each vector $\textbf{v} \in \mathcal{S}_1$ to a unique vector $f(\textbf{v})\in \mathcal{S}_2$. Then $\mathcal{S}_1$ is called the domain of $f$ and $\mathcal{S}_2$ the codomain of $f$. \cite[167]{LiAl}
+    Let $\mathcal{S}_1$ be a subset of vectors in $\mathbb{R}^n$ and $\mathcal{S}_2$ be a subset of vectors in $\mathbb{R}^m$. Then a function $f$ from $\mathcal{S}_1$ to $\mathcal{S}_2$ written as $f$: $\mathcal{S}_1 \rightarrow \mathcal{S}_2$ assigns each vector $\textbf{v} \in \mathcal{S}_1$ to an unique vector $f(\textbf{v})\in \mathcal{S}_2$. Then $\mathcal{S}_1$ is called the domain of $f$ and $\mathcal{S}_2$ the codomain of $f$. \cite[167]{LiAl}
 \end{definition}
 \begin{figure} [H]
     \centering
@@ -10,21 +10,20 @@ Linear algebra is the study of linear equations and functions. This is done by i
     \caption{Illustration of a function $f$: $\mathcal{S}_1 \rightarrow \mathcal{S}_2$.}
     \label{fig:s_1_to_s_2}
 \end{figure}
-\autoref{fig:s_1_to_s_2} is a illustration of a function going from $\mathcal{S}_1 \rightarrow \mathcal{S}_2$. 
-\noindent Then a linear transformation can be defined as 
+\autoref{fig:s_1_to_s_2} illustrates a function going from $\mathcal{S}_1 \rightarrow \mathcal{S}_2$. Then a linear transformation can be defined as:
 \begin{definition}{Linear Transformations}
-    A function $T$: $\mathbb{R}^n \rightarrow \mathbb{R}^m$ is a linear transformation, if all $\textbf{u}, \textbf{v} \in \mathbb{R}^n$ and scalars $c \in \mathbb{R}$ hold that 
+    A function $T$: $\mathbb{R}^n \rightarrow \mathbb{R}^m$ is a linear transformation, if all $\textbf{u}, \textbf{v} \in \mathbb{R}^n$ and scalars $c \in \mathbb{R}$ satisfies that 
     \begin{align*}
         T(\textbf{u}+\textbf{v})&=T(\textbf{u})+T(\textbf{v})\\
         T(c\textbf{u})&=cT(\textbf{u}).
     \end{align*}
     \cite[171]{LiAl}
 \end{definition}
-A matrix vector product with a $m \times n$ matrix can be seen as a function from $\mathbb{R}^m$ to $\mathbb{R}^n$. This is called a matrix transformation and is defined as
+A matrix vector product with a $m \times n$ matrix can be considered as a function from $\mathbb{R}^n$ to $\mathbb{R}^m$. This is called a matrix transformation and is defined as:
 \begin{definition}{Matrix Transformation}
     Let $T_A(\textbf{v})=A\textbf{v}$ for an $m\times n$ matrix $A$ and $\textbf{v} \in \mathbb{R}^n$. Then the function $T_A$: $\mathbb{R}^n \rightarrow \mathbb{R}^m$ is called a matrix transformation induced by $A$. \cite[168]{LiAl}
 \end{definition}
-\noindent Since the matrix vector product is linear, the matrix transformation must be too. 
+ \noindent Since a matrix vector product is linear, the matrix transformation must be too. 
 \begin{theorem}{Linearity of the Matrix Transformation}
     \label{the:linearityMatrixTransformation}
     All matrix transformations are linear transformations.\cite[170]{LiAl}
@@ -35,7 +34,7 @@ A matrix vector product with a $m \times n$ matrix can be seen as a function fro
          T_A(\textbf{v}+\textbf{u})&=A(\textbf{v}+\textbf{u})=A\textbf{v}+A\textbf{u}=T_A(\textbf{u})+T_A(\textbf{v})\\
          T_A(c\textbf{v})&=A(c\textbf{v})=cA\textbf{v}=cT_A(\textbf{v}).
      \end{align*}
-     From this it can be seen that all matrix transformations are linear transformations. \cite[170]{LiAl}
+     From this it can be seen that all matrix transformations are linear transformations. \cite[170]{LiAl}\qedsymbol
 \end{proof}
 
 \section{Elementary Row Operations}
@@ -59,14 +58,14 @@ This can be represented as the following matrix vector product
     \end{bmatrix}
     = \begin{bmatrix}
     b_1 \\ b_2 \\ \vdots \\ b_m
-    \end{bmatrix}
+    \end{bmatrix},
 \end{align*}
-This can be written as 
+and can be written as 
 \begin{align*}
     A\textbf{x}=\textbf{b}
 \end{align*}
 where $A$ is an $m\times n$ matrix, $\textbf{x} \in \mathbb{R}^n$ and $\textbf{b} \in \mathbb{R}^m$. \cite[27-28]{LiAl}\\
-To determine the solution set of a system of linear equations or whether the system is has a solution at all, there are some elementary row operations that can be done on the matrix $[A\;\textbf{b}]$, which make it possible to replace it with a equivalent system of linear equations $[R\;\textbf{c}]$, meaning a system of linear equations with the same solution, but it is easier solved.
+To determine whether a system of linear equations has a general solution or not, there are some elementary row operations that can be done on the augmented matrix $[A\;\textbf{b}]$. The use of row operations makes it possible to reduce the augmented matrix to $[R\;\textbf{c}]$, which is an equivalent matrix. Reducing $[A\;\textbf{b}]$ to $[R\;\textbf{c}]$ makes the system of linear equations easier solved.
 \begin{definition}{Elementary Row Operations}
 There are three elementary row operations, that can be used to determine an equivalent system of linear equations, for a given system of linear equations.
 \begin{enumerate}
@@ -92,28 +91,26 @@ A matrix in row echelon form is satisfying the following three conditions.
     \item All entries below a leading entry are $0$.
 \end{enumerate}
 Pivot positions are the first non zero entry of each row, the pivot columns are the columns containing the pivot positions. 
-For a matrix to be in reduced echelon form it has to satisfy two conditions more. these are
+For a matrix to be in reduced echelon form it has to satisfy two conditions more. 
 \begin{enumerate}
     \item For a column with a leading entry of some row, all other entries have to be 0.
     \item The leading entries has to be equal to 1.
 \end{enumerate}
 \cite[33]{LiAl}
 \end{definition}
-A system of linear equations can have, no solutions, one solution or infinitely many solutions. If the system has either one or infinitely many solutions, the system is consistent, and if the system has no solutions, the system is considered inconsistent.
+A system of linear equations can be whether consistent or inconsistent. For a inconsistent system there is no solutions.
+Otherwise for a consistent system there is either one solution or infinitely many solutions.
 
-The system is inconsistent if the last column of the row echelon of the augmented matrix is a pivot column. Since this is equivalent to $0\cdot x_1+0\cdot x_2+\hdots + 0\cdot x_n=c$ where $c\neq 0$. In all other cases the system is consistent.
-
+A system is inconsistent if the last column of the row echelon form of the augmented matrix is a pivot column. Since this is equivalent to $0\cdot x_1+0\cdot x_2+\hdots + 0\cdot x_n=c$ where $c\neq 0$. \\
 The following example shows the method of solving a system of linear equations using elementary row operations.
 \begin{example}{Reduced Row Echelon Form}
-Given system of linear equations
+Given a system of linear equations
 \begin{align*}
     x_1-x_3-2x_4-8x_5&=-3\\
     -2x_1+x_3+2x_4+9x_5 &= 5\\
     3x_1-2x_3-3x_4-15x_5&=-9.
 \end{align*}
-find the solution.
-\subsubsection{Solution}
-First the augmented matrix $[A\;\textbf{b}]$ can be written, and then reduced to row echelon form
+To determine the general solution for the system, the first step is to calculate the row echelon form of the augmented matrix $[A\;\textbf{b}]$. This makes it possible to determine whether the system is consistent or inconsistent. Calculating the row echelon form yields
 \begin{align*}
 [A\;\textbf{b}] =
 	&\begin{bmatrix}
@@ -135,9 +132,10 @@ First the augmented matrix $[A\;\textbf{b}]$ can be written, and then reduced to
        \end{bmatrix}.
 \label{examplepivot}
 \end{align*}
-As seen in the matrix above, there are three pivot positions (circled in red), and thereby three pivot columns.
+As seen in the matrix above, there are three pivot positions (circled in red), hence three pivot columns.
 
-Since there are no pivot position in the last column of the augmented matrix, the system is considered consistent. All entries in column two is equal to zero, hence the system has infinite solutions. To determine the most simple equivalent system of the given linear equations, the reduced row echelon form is calculated:
+Since the last column of the augmented matrix not is a pivot column, the system is considered consistent. All entries in the second column is equal to zero, hence the system has infinite solutions. 
+To determine the most simple equivalent system of the given linear equations, the reduced row echelon form is calculated:
 \begin{align*}
   \xrightarrow{\substack{r_1+2r_3\rightarrow r_1\\r_2+2r_3\rightarrow r_2}}
     &\begin{bmatrix}
@@ -162,9 +160,9 @@ With the reduced row echelon form, it is possible to reduce the equations to
 	\begin{align*}
 		x_1-x_5 =-2   &\Rightarrow x_1=x_5 -2\\
         x_3 + 3x_5 =3 &\Rightarrow x_3=-3x_5+3\\
-        x_4 +2x_5 = -1 &\Rightarrow	x_4=-2x_5-1
+        x_4 +2x_5 = -1 &\Rightarrow	x_4=-2x_5-1,
 	\end{align*}
-Which can be written as:
+which can be written as
     \begin{align*}
     	\textbf{x}=
         \begin{bmatrix}
@@ -191,134 +189,144 @@ The rank of a $m \times n$ matrix $A$, is defined as the number of pivot columns
 The nullity of $A$ is denoted as nullity$(A)$, is defined as nullity$(A)=n - $rank$(A)$.
 \cite[47]{LiAl}
 \end{definition}
+The concepts of rank and nullity will be used in the next section where the concepts subspace and basis for $\mathbb{R}^n$, and their dimension will be introduced.
 \section{Subspace, Basis and Dimension}
-en bette intro 
+(intro af hvad subspace og basis bruges til, svar på spørgsmålet om hvorfor vi beskriver dette)
 
 \begin{definition}{Linear Combination}
     A combination of vectors $\textbf{u}_1, \textbf{u}_2, \hdots, \textbf{u}_k$ is a linear combination if it is on the form
     \begin{align*}
         c_1\textbf{u}_1 + c_2\textbf{u}_2 + \hdots + c_k\textbf{u}_k
     \end{align*}
-    where $c_1, c_2, \hdots, c_k$ are the scalars, which is called the coefficients of the linear combination. 
+    where $c_1, c_2, \hdots, c_k$ are the scalars, which is called the coefficients of the linear combination. \cite[14]{LiAl} 
 \end{definition}
- A set of vectors $\mathcal{S}=\{\textbf{v}_1, \textbf{v}_2, \hdots, \textbf{v}_k\}$ is set to be linear dependent if all vectors in the set can be represented as linear combinations of the other vectors. Otherwise the vector set is linear independent.
- Let $\mathcal{S}$ be linear dependent and $\textbf{v}_i$ be an arbitrary vector in $\mathcal{S}$. Then for some scalars $c_1, c_2, \hdots, c_k$
- \begin{align} \label{eq:LinearIndependent}
-    c_1\textbf{v}_1+c_2\textbf{v}_2+\cdots+c_k\textbf{v}_k=\textbf{v}_i
- \end{align}
- This is the same as
+A set of vectors $\mathcal{S}=\{\textbf{v}_1, \textbf{v}_2, \hdots, \textbf{v}_k\}$ is said to be linear dependent if all vectors in the set can be represented as linear combinations of the other vectors. Otherwise the vector set is linear independent.
+Let $\mathcal{S}$ be linear dependent and $\textbf{v}_i$ be an arbitrary vector in $\mathcal{S}$. Then for some scalars $c_1, c_2, \hdots, c_k$
+\begin{align} \label{eq:LinearIndependent}
+    c_1\textbf{v}_1+c_2\textbf{v}_2+\cdots+c_k\textbf{v}_k=\textbf{v}_i,
+\end{align}
+which is the same as
   \begin{align*}
-    c_1\textbf{v}_1+c_2\textbf{v}_2+\cdots+c_k\textbf{v}_k-\textbf{v}_i=\textbf{0}.
+    c_1\textbf{v}_1+c_2\textbf{v}_2+\cdots+c_k\textbf{v}_k-\textbf{v}_i=\textbf{0}. 
  \end{align*}
  If $\mathcal{S}$ was linear independent there exists no scalars such that \eqref{eq:LinearIndependent} is true. This leads to the following definition.
-\begin{definition}{Linear Dependent and Linear Independent}
-    A set of vectors $\textbf{v}_1, \textbf{v}_2, \hdots, \textbf{v}_k$ is said to be linear dependent if for some scalars $c_1, c_2, \hdots, c_k$ which are not all $0$
+\begin{definition}{Linear Dependent and Linear Independent} \label{def:LinearDependent}
+    A set of vectors $\textbf{v}_1, \textbf{v}_2, \hdots, \textbf{v}_k$ is linear dependent for some scalars $c_1, c_2, \hdots, c_k$ which are not all $0$
     \begin{align*}
        c_1\textbf{v}_1+c_2\textbf{v}_2+\dots+c_k\textbf{v}_k=\textbf{0}.
     \end{align*}
-    A set of vectors $\textbf{v}_1, \textbf{v}_2, \hdots, \textbf{v}_k$ is said to be linear independent if the only scalars $c_1, c_2, \hdots, c_k$ such that
+    A set of vectors $\textbf{v}_1, \textbf{v}_2, \hdots, \textbf{v}_k$ is linear independent if the scalars $c_1, c_2, \hdots, c_k$, where all equals 0, such that
     \begin{align*}
         c_1\textbf{v}_1+c_2\textbf{v}_2+\dots+c_k\textbf{v}_k=\textbf{0}
     \end{align*}
-    is $c_1=c_2=\hdots=c_k=0$
+    Note that, by the definitions, a set of vectors obviously is linear independent, if it is not linear dependent. \cite[75-76]{LiAl} 
 \end{definition}
-\noindent The vectors a that can be product by a linear combination of a set of vectors is called the span of the set and is defiant by
+\noindent The vectors which is a product by a linear combination of a set of vectors is called the span of the set of vectors and is defined by:
 \begin{definition} {The Span of a Set of Vectors}
 A linear combinations of a nonempty set of vectors $\mathcal{S} = \{ \textbf{u}_1,\textbf{u}_2 \cdots \textbf{u}_k\}$ is denoted as $c_1 \textbf{u}_1 + c_2\textbf{u}_2+ \cdots+ c_k\textbf{u}_k$, where $\textbf{u}_1,\textbf{u}_2 \cdots \textbf{u}_k$ are in $\mathbb{R}^n$ and $c_1, c_2 \cdots c_k$ are scalars.
 The span of the set of vectors is a set of all linear combinations in $\mathbb{R}^n$
 \cite[66]{LiAl}
 \end{definition}
-
+An important concept in linear algebra is subspaces, which have the following properties.
 \begin{definition}{Subspace}
 A subspace is a set of vectors $W$ in $\mathbb{R}^n$ which have the following three properties. 
-
 \begin{enumerate}
-    \item The zero vector belongs to $W$\\
-    \item the sum of any vectors in the same $W$, remain in the same subspace. This means $W$ is closed under vector addition.
+    \item The zero vector belongs to $W$.
+    \item The sum of any vectors in the same $W$, remains in the same subspace. This means $W$ is closed under vector addition.
     \item Every scalar multiple of a vector that belongs to $W$, remains in the same $W$. This means $W$ is closed under scalar multiplication.
 \end{enumerate}
 \cite[227]{LiAl}
 \label{exa:SubspaceDef}
 \end{definition}
-\begin{example}{Determine whether $W$ is a subspace or not}
+\noindent The following example shows how to determine whether a set of vectors is a subspace or not.
+\begin{example}{Determine Whether $W$ is a Subspace or Not}
+The following set of vectors is given
 \begin{align*}
     W = \begin{Bmatrix}
     \begin{bmatrix}
     w_1\\w_2\\w_3\\w_4
     \end{bmatrix}
         \in \mathbb{R}^4: 2w_1 + 5w_2 - 7w_3 -2w_4 = 0 
-    \end{Bmatrix}
+    \end{Bmatrix}.
 \end{align*}
-\begin{enumerate}
-    \item To determine whenever the first property from definition\ref{exa:SubspaceDef} is satisfied, it is calculated that
-    $2(0) + 5(0) - 7(0) -2(0) = 0 $ Hence $\textbf{w}=\textbf{0}$
-    \item Having two vectors $\textbf{u}=\begin{bmatrix}
+To determine whether $W$ is a subspace or not, the three properties of Definition \ref{exa:SubspaceDef} is used. \\
+
+\noindent 1. To determine whenever the first property from Definition \ref{exa:SubspaceDef} is satisfied, it is shown that $\textbf{0}$ is in the set.
+\begin{align*}
+    2(0) + 5(0) - 7(0) -2(0) = 0,
+\end{align*}
+hence $\textbf{0}\in W$\\
+2. Having two vectors $\textbf{u}=\begin{bmatrix}
     u_1\\u_2\\u_3\\u_4\end{bmatrix}$ and $\textbf{v}=\begin{bmatrix}
-    v_1\\v_2\\v_3\\v_4\end{bmatrix}$ in $W$ it must satisfy that $\textbf{u}+\textbf{v} = \begin{bmatrix}
-    u_1 + v_1 \\ u_2 + v_2 \\ u_3 + v_3
-    \end{bmatrix}$\\
-    Doing the calculations yields
+    v_1\\v_2\\v_3\\v_4\end{bmatrix}$ in $W$ it must satisfy that 
+    \begin{align*}
+        \textbf{u}+\textbf{v} =
+        \begin{bmatrix}
+         u_1 + v_1 \\ u_2 + v_2 \\ u_3 + v_3 \\ u_4 + v_4
+        \end{bmatrix}.  
+    \end{align*}\\
+    Further calculations yields
     \begin{align*}
         &\,2(u_1+v_1)+5(u_2+v_2)-7(u_3+v_3)-2(u_4+v_4)\\
-        =& (2u_1+5u_2-7u_3-2u_4)+(2v_1+5v_2-7v_3-2v_4)\\ =& 0 + 0 = 0
+        =& (2u_1+5u_2-7u_3-2u_4)+(2v_1+5v_2-7v_3-2v_4)\\ =& 0 + 0 = 0,
     \end{align*}
-    \item Having a the vector \textbf{u} it must satisfy $c\textbf{u}=c\begin{bmatrix}
-    u_1\\u_2\\u_3\\u_4\end{bmatrix}=
-    \begin{bmatrix}
-    cu_1\\cu_2\\cu_3\\cu_4\end{bmatrix}$ this yields
+    hence $\textbf{u}+\textbf{v}\in W$.\\ 
+3. Having a vector \textbf{u} it must satisfy 
     \begin{align*}
-       2(cu_1)+5(cu_2)-7(cu_3)-2(cu_4)=c(2u_1+5u_2-7u_3+2u_4)= c(0) = 0
+        c\textbf{u}=c\begin{bmatrix}
+        u_1\\u_2\\u_3\\u_4\end{bmatrix}=
+        \begin{bmatrix}
+        cu_1\\cu_2\\cu_3\\cu_4\end{bmatrix},
     \end{align*}
-    As seen, when multiplying a vector in $W$, the subspace remains the same. \\
-   
-    
-\end{enumerate}
+    which yields
+    \begin{align*}
+       2(cu_1)+5(cu_2)-7(cu_3)-2(cu_4)=c(2u_1+5u_2-7u_3+2u_4)= c(0) = 0.
+    \end{align*}
+    As seen, when multiplying a vector in $W$, the subspace remains the same. Since all the properties of Definition \ref{exa:SubspaceDef} is satisfied $W$ is a subspace.
 \end{example}
-
+\noindent It can be shown that the span of a set of vectors in $\mathbb{R}^n$ is also a subspace of $\mathbb{R}^n$.
 \begin{theorem}{Span as a Subspace of $\mathbb{R}^n$}
 The span of a definite nonempty subset of $\mathbb{R}^n$ is a subspace of $\mathbb{R}^n$.
 \cite[231]{LiAl}
 \end{theorem}
-
 \begin{proof}{Span as a Subspace of $\mathbb{R}^n$}
-    By letting $\mathcal{S} = \{\mathbf{w}_1, \mathbf{w}_2, \hdots, \mathbf{w}_k$, since:
-    $$0\mathbf{w}_1 + 0\mathbf{w}_2 + \hdots + 0\mathbf{w}_k = \mathbf{0}$$.
-    From this it can be seen that $\mathbf{0}$ belongs to $\mathcal{S}$, and if $\mathbf{u}$ and $\mathbf{v}$ belongs to $\mathcal{S}$, then:
-    $$\mathbf{u} = a_1\mathbf{w}_1 + a_2 \mathbf{w}_2 + \hdots + a_k\mathbf{w}_k \quad and \quad \mathbf{v} = b_1\mathbf{w}_1 + b_2 \mathbf{w}_2 + \hdots + b_k\mathbf{w}_k,$$
-    for some scalars $a_1, a_2, \hdots, a_k$ and $b_1, b_2, \hdots, b_k$. Since 
+   Having a span of $\mathcal{S} = \{\mathbf{w}_1, \mathbf{w}_2, \hdots, \mathbf{w}_k$\}. It can be seen that $\mathbf{0}$ belongs to $\mathcal{S}$, by following expression:
+    \begin{align*}
+        0\mathbf{w}_1 + 0\mathbf{w}_2 + \hdots + 0\mathbf{w}_k = \mathbf{0}.
+    \end{align*}
+    If $\mathbf{u}$ and $\mathbf{v}$ belongs to $\mathcal{S}$ then
+    \begin{align*}
+      \mathbf{u} = a_1\mathbf{w}_1 + a_2 \mathbf{w}_2 + \hdots + a_k\mathbf{w}_k \quad \text{and} \quad \mathbf{v} = b_1\mathbf{w}_1 + b_2 \mathbf{w}_2 + \hdots + b_k\mathbf{w}_k,  
+    \end{align*}
+    for some scalars $a_1, a_2, \hdots, a_k$ and $b_1, b_2, \hdots, b_k$.\\ It follows that $\mathbf{u}+\mathbf{v}$ belongs to $\mathcal{S}$ since 
     \begin{align*}
      \mathbf{u}+\mathbf{v} &= (a_1\mathbf{w}_1 + a_2 \mathbf{w}_2 + \hdots + a_k\mathbf{w}_k) + (b_1\mathbf{w}_1 + b_2 \mathbf{w}_2 + \hdots + b_k\mathbf{w}_k)\\ 
      &= (a_1+b_1)\mathbf{w}_1 + (a_2+b_2)\mathbf{w}_2 + \hdots + (a_k+b_k)\mathbf{w}_k.
      \end{align*}
-     By this, it follows that $\mathbf{u}+\mathbf{v}$ belongs to $\mathcal{S}$, therefore $\mathcal{S}$ is closed under vector addition. For any scalar $c$:
+     Therefore $\mathcal{S}$ is closed under vector addition.\\ For any scalar $c$ it can be expressed that 
      \begin{align*}
          c\mathbf{u} &= c(a_1\mathbf{w}_1 + a_2 \mathbf{w}_2 + \hdots + a_k\mathbf{w}_k)\\
          &=(c_1a_1)\mathbf{w}_1 + (c_2a_2)\mathbf{w}_2 + \hdots + (c_ka_k)\mathbf{w}_k,
      \end{align*}
-     where $c\mathbf{u}$ belongs to $\mathcal{S}$, then $\mathcal{S}$ is closed under scalar multiplication, and $\mathcal{S}$ is therefore a subspace of $\mathbb{R}^n$. \qedsymbol
+     where $c\mathbf{u}$ belongs to $\mathcal{S}$, then $\mathcal{S}$ is closed under scalar multiplication, and $\mathcal{S}$ is therefore a subspace of $\mathbb{R}^n$.\cite[231]{LiAl} \qedsymbol
 \end{proof}
-There are many generating sets for a nonzero subspace $V$ of $\mathbb{R}^n$, and thereby it can be convenient to determine a generating set of $V$, which contains the fewest amount of vectors as possible. The span of this generating set is called a basis.
-
+\noindent There are many generating sets for a nonzero subspace $V$ of $\mathbb{R}^n$, and thereby it can be convenient to determine a generating set of $V$, which contains the fewest amount of vectors as possible. The span of this generating set is called a basis.
 \begin{definition}{Basis}
-A basis for a nonzero subspace $V$, is a linearly independent generating set for $V$. This means that the basis contains as few vectors as possible.
+A basis for a nonzero subspace $V$, is a linearly independent generating set for $V$. This means that the basis contains as few vectors as possible.\cite[241]{LiAl}
 \end{definition}
-
-The following three properties are true if $\mathcal{S}$ is a finite subset of $\mathbb{R}^n$
+\noindent The following three properties are true if $\mathcal{S}$ is a finite subset of $\mathbb{R}^n$
 \begin{itemize}
-    \item If $\mathcal{S}$ contains a least n vectors, then $\mathcal{S}$ is a generating set for $\mathbb{R}^n$. 
+    \item If $\mathcal{S}$ contains at least n vectors, then $\mathcal{S}$ is a generating set for $\mathbb{R}^n$. 
     \item If $\mathcal{S}$ contains maximum n vectors then $\mathcal{S}$ is linear independent.
     \item If $\mathcal{S}$ contains precisely n vectors then $\mathcal{S}$ is a basis for $\mathbb{R}^n$.
 \end{itemize}
-
-Because a basis is a linearly independent generating set of $\mathbb{R}^n$ containing exactly $n$ vectors , there are two theorems, which provides some operations that can be done to determine a basis of the given subspace. These theorems are called \textbf{Reduction Theorem} and \textbf{Extension Theorem}.
-
+Because a basis is a linearly independent generating set of $\mathbb{R}^n$ containing exactly $n$ vectors , there are two theorems, which provides some operations that can be done to determine a basis of the given subspace. These theorems are called Reduction theorem and Extension theorem.
 \begin{theorem}{Reduction Theorem}
 Having $\mathcal{S}$ as a finite generating set of a nonzero subspace $V$ of $\mathbb{R}^n$. Then by removing vectors from $\mathcal{S}$, the span can be reduced to a basis of $V$.
 \cite[243]{LiAl}
 \label{reductiontheorem}
 \end{theorem}
 Proving the \ref{reductiontheorem} the term column space of a matrix is needed. The column space of a matrix is the span of its columns. A basis for this column space is the column space only consisting of the pivot columns of $A$, since a basis must be a linearly independent generating set.
-
 \begin{proof}{Reduction Theorem}
 Having a matrix $A=\begin{bmatrix}
  \textbf{u}_1, \textbf{u}_2, \cdots, \textbf{u}_k
@@ -327,13 +335,13 @@ $
 \mathcal{S}=\begin{Bmatrix}
  \textbf{u}_1, \textbf{u}_2, \cdots, \textbf{u}_k
 \end{Bmatrix}  
-$, which is a generating set of a nonzero subspace $V$ of $\mathbb{R}^n$. Because $\mathcal{S}$ and $A$ consist of the exact same vectors, the column space of $A$ must be a generating set of $V$. Consider the pivot columns for matrix $A$, a basis for the column space of $A$ can be determined, and is contained in $\mathcal{S}$. \qedsymbol
+,$ which is a generating set of a nonzero subspace $V$ of $\mathbb{R}^n$. Because $\mathcal{S}$ and $A$ consist of the exact same vectors, the column space of $A$ must be a generating set of $V$. Consider the pivot columns for matrix $A$, a basis for the column space of $A$ can be determined, and is contained in $\mathcal{S}$. \qedsymbol
 \end{proof}
 
 
 
 \begin{theorem}{Extension Theorem}
-Having a span $\mathcal{S}$ which is a subset of a subspace $V$, then $\mathcal{S}$ can be, by inclusion of additional vectors, extended to a basis for $V$
+Having a span $\mathcal{S}$ which is a subset of a subspace $V$, then $\mathcal{S}$ can be, by inclusion of additional vectors, extended to a basis for $V$. \cite[245]{LiAl}
 \end{theorem}
 
 \begin{proof}{Extension Theorem}
@@ -344,32 +352,34 @@ Second case is where $V$ contains a vector $\textbf{v}_1$, and $\textbf{v}_1$ is
  $. A possible basis for $V$ is $\mathcal{S}$ extended with $\textbf{v}_1$, if and only if $\mathcal{S'}=\begin{Bmatrix} \textbf{u}_1,\textbf{u}_2,\cdots,\textbf{u}_k, \textbf{v}_1 \end{Bmatrix}$ is linearly independent and span of $\mathcal{S'}$ is $V$. In the case that $\mathcal{S'}$ is not $V$, $\mathcal{S'}$ can be extended with another vector, denoted $\mathcal{S''}$. \qedsymbol 
 \end{proof}
 
-The extension theorem and the reduction theorem have given two characteristics of a basis for a subspace. These characteristics yields that vectors can be deleted and used to extend a subset and form a basis for a subspace. These characteristics result in the possibility to determine infinitely many bases for a nonzero subspace. Even though a particular subspace has infinitely many bases, the bases will always consist of the same amount of vectors, which leads to following definition.
+The Extension theorem and the Reduction theorem have given two characteristics of a basis for a subspace. These characteristics yields that vectors can be deleted and used to extend a subset and form a basis for a subspace. These characteristics result in the possibility to determine infinitely many bases for a nonzero subspace. Even though a particular subspace has infinitely many bases, the bases will always consist of the same amount of vectors, which leads to following definition.
 
 \begin{definition}{Dimension of a Subspace}
-The dimension of a nonzero subspace $V$ of $\mathbb{R}^n$ is the number of vectors in  basis. The dimension is denoted by dim$V$. The dimension of the zero subspace of $\mathbb{R}^n$ is 0 \cite[246]{LiAl}.
+The dimension of a nonzero subspace $V$ of $\mathbb{R}^n$ is the number of vectors in the basis. The dimension is denoted by dim $V$. The dimension of the zero subspace of $\mathbb{R}^n$ is 0 \cite[246]{LiAl}.
 \end{definition}
 
 \begin{definition}{Null space}
-The solution set $A\textbf{x}=\textbf{0}$ for a matrix $A$, is the null space of the matrix. It is denoted as Null $A$
+The solution set $A\textbf{x}=\textbf{0}$ for a matrix $A$, is the null space of the matrix. It is denoted as Null $A$. \cite[232]{LiAl}
 \end{definition}
 
-\begin{example}{Determine a Generating Set for The Null Space of a Matrix }
-To generate a set for the null space of the matrix $A$
+\begin{example}{Determine a Generating Set for The Null Space and the Dimension of a Matrix }
+Let
 \begin{align*}
+    A=
     \begin{bmatrix}
     1 & 1 & -1 & 4 \\
     2 & 1 & -3 & 5\\
     -2 & 0 & 4 & -2
-    \end{bmatrix}
+    \end{bmatrix}.
 \end{align*}
-With the help of row reductions, the matrix can be represented as a reduced row echelon form
+To generate a set for Null $A$, the matrix is reduced to reduced row echelon form:
+
 \begin{align*}
 \begin{bmatrix}
     1 & 1 & -1 & 4 \\
     2 & 1 & -3 & 5\\
     -2 & 0 & 4 & -2
-\end{bmatrix}\xrightarrow{\substack{r_1-2r_1\rightarrow r_2\\2r_1+r_3\rightarrow r_3}}
+\end{bmatrix}\xrightarrow{\substack{r_2-2r_1\rightarrow r_2\\2r_1+r_3\rightarrow r_3}}
 \begin{bmatrix}
     1 & 1 & -1 & 4 \\
     0 & -1 & -1 & -3\\
@@ -380,19 +390,19 @@ With the help of row reductions, the matrix can be represented as a reduced row 
     0 & -1 & -1 & -3\\
     0 & 0 & 0 & 0 
 \end{bmatrix}
-\xrightarrow{r_1-r_2\rightarrow r_1}
+\xrightarrow{\substack{r_1-r_2\rightarrow r_1\\(-1)r_2\rightarrow r_2}}
 \begin{bmatrix}
    1 & 0 & -2 & 1 \\
-    0 & -1 & -1 & -3\\
+    0 & 1 & 1 & 3\\
     0 & 0 & 0 & 0
-\end{bmatrix}
+\end{bmatrix},
 \end{align*}
-This can be written in the general solution for $A\textbf{x}=\textbf{0}$.
+hence the general solution for $A\textbf{x}=\textbf{0}$ is
 \begin{align*}
     x_1 - 2x_3 + x_4 = 0 &\Rightarrow x_1 = 2x_3 - x_4\\
-    x_2 + x_3 + 3x_4 = 0 &\Rightarrow x_2=-x_3 -3x_4
+    x_2 + x_3 + 3x_4 = 0 &\Rightarrow x_2=-x_3 -3x_4.
 \end{align*}
-and written in vector form
+Written in vector form
 \begin{align*}
 \begin{bmatrix}
    x_1\\x_2\\x_3\\x_4 
@@ -405,11 +415,11 @@ and written in vector form
 \end{bmatrix} + x_4
 \begin{bmatrix}
    -1\\ -3\\ 0\\ 1
-\end{bmatrix}
+\end{bmatrix}.
 \end{align*}
 The null space is then
 \begin{align*}
-\text{Null}\; A = \mathcal{S} = 
+\text{Null}\; A = 
 \begin{Bmatrix}
 \begin{bmatrix}
    2\\ -1\\ 1 \\0
@@ -417,68 +427,35 @@ The null space is then
 \begin{bmatrix}
    -1\\ -3\\ 0\\ 1
 \end{bmatrix}
-\end{Bmatrix}
+\end{Bmatrix}.
 \end{align*}
+From this it can be seen that $\text{Null}\; A$ have dimension 2.
 \end{example}
 
-Anvendelse af nulrum\\
-Fin overgang til eigenvektor og eigenværdier
-%skal vi have lineær operatorer med?
-
 \section{Invertible Matrix}
-When transforming matrices it can be relevant to reverse the transformation and thereby being able to recreate the original matrix. 
-
-\begin{definition}{Invertible Matrix}
+This section introduces the concept of invertible matrices. Working with transformation of a matrix, it is often relevant to be able recreate the original matrix. This can be done using an invertible matrix, as seen on \autoref{fig:inverseFunction}, where it is possible to go from the domain to the codomain by transformation and the other way by its inverse. 
+\begin{figure}[H]
+    \centering
+    \input{figures/Tikz/inverseFunction.tex}
+    \caption{Illustration of the function $f$: $\mathcal{S}_1 \rightarrow \mathcal{S}_2$ and $f^{-1}$: $\mathcal{S}_2 \rightarrow \mathcal{S}_1$}
+    \label{fig:inverseFunction}
+\end{figure}
+To explain how to invert a matrix, it is defined in the following.
+\begin{definition}{Invertible Matrix} \label{def:Invertible}
     An  $n \times n$ matrix $A$ is invertible, if there exists another $n \times n$ matrix $B$ which when multiplied with $A$ results in an identity matrix such as
     \begin{align*}
         AB=BA=I_n.
     \end{align*}
-    In this case, $B$ can be defined as an inverse of $A$. \\
-    The inverse matrix of $A$ is denoted $A^{-1}$
+    In this case, $B$ can be defined as an inverse of $A$. The inverse matrix of $A$ is denoted $A^{-1}$. \cite[122]{LiAl}
 \end{definition}
-
-As seen in \autoref{bil:ElementaryMatrix}, $P$ is defined as an invertible elementary matrix. Which leads to the following theorem:
-
-\begin{theorem}{Invertible Matrix P} \label{the:PMatrix}
-    If an $m \times n$ matrix $A$ has a reduced row echelon form $R$, there will exist an invertible $m \times m$ elementary matrix $P$ which when multiplied with $A$ will equal $R$, such as
-    \begin{align*}
-        PA=R.
-    \end{align*}
-    \cite[127]{LiAl}
-    \label{theo:invertible}
-\end{theorem}
-A proof of Theorem \ref{theo:invertible} leads to a justification of why it is possible to reduce a matrix $A$ to a matrix $R$.
-\begin{proof}{Invertible Matrix P}
-    $P$ is an invertible matrix so $P[A\mathbf{b}]=[R\mathbf{c}]$, where $[R\mathbf{c}]$ is the reduced row echelon form of $[A\mathbf{b}]$. 
-    Hence the following can be stated
-    \begin{align*}
-        [PA\;P\mathbf{b}]=P[A\;\mathbf{b}]=[R\;\mathbf{c}].
-    \end{align*}
-    As seen, the connection between $PA$, $P\mathbf{b}$ and $R\mathbf{c}$ is
-    \begin{align*}
-        PA=R \quad\text{and}\quad P\mathbf{b}=\mathbf{c},
-    \end{align*}
-    hence
-    \begin{align*}
-        A = P^{-1}R \quad \text{and} \quad \mathbf{b} = P^{-1}\mathbf{c}.
-    \end{align*}
-    If $\mathbf{v}$ is a solution for $A\mathbf{x}=\mathbf{b}$, then $A\mathbf{v}=\mathbf{b}$. Thereby it can be expressed that 
-    \begin{align*}
-        R\mathbf{v}=(PA)\mathbf{v}=P(A\mathbf{v})=P\mathbf{b}=\mathbf{c}.
-    \end{align*}
-    This shows that $\mathbf{v}$ is a solution of $R\mathbf{x}=\mathbf{c}$
-    and as said, $P$ is invertible, and therefore the following must be true
-    \begin{align*}
-        A\mathbf{v}=(P^{-1}R)\mathbf{v}=P^{-1}(R\mathbf{v})=P^{-1}\mathbf{c}=\mathbf{b}
-    \end{align*}
-    and as seen above, $\mathbf{v}$ is a solution of $A\mathbf{x}=\mathbf{b}$. As proved, $A\mathbf{x}=\mathbf{b}$ and $R\mathbf{x}=\mathbf{c}$ have the same solutions for \textbf{x}. \qedsymbol
-\end{proof}
-
+Not all matrices is invertible. To describe the conditions for which a matrix is invertible the concepts of an elementary matrix are introduced. This is done in \autoref{bil:ElementaryMatrix} where $P$ was defined as $P=E_K\cdots E_2E_1$, where $E$ is an elementary matrix such that:
+\begin{align*}
+    PA=R.
+\end{align*}
 For a matrix to be invertible the following theorem has to be satisfied.
-
 \begin{theorem}{Invertible Matrix}
     \label{the:invertibleMatrix}
-    If an $n \times n$ matrix $A$ is invertible, then the following statements are true
+    If an $n \times n$ matrix $A$ is invertible, then the following statements are true:
     \begin{enumerate}
         \item The reduced row echelon form of $A$ is $I_n$
         \item $\text{rank } A = n$
@@ -487,22 +464,22 @@ For a matrix to be invertible the following theorem has to be satisfied.
     \end{enumerate}
     \cite[138]{LiAl}
 \end{theorem}
-
 \begin{proof}{Invertible matrix}
 \begin{enumerate}
     \item  If the reduced row echelon form of $A$ is $I_n$, there must exists an invertible $n \times n$ elementary matrix $P$ which when multiplied by $A$ is $I_n$. So
     \begin{align*}
         A=I_nA=(P^{-1}P)A=P^{-1}(PA)=P^{-1}I_n=P^{-1}.
     \end{align*}
-    As seen $A=P^{-1}$, hence $A$ is invertible if the reduced row echelon form of $A$ is $I_n$.
+    As seen $A=P^{-1}$, hence $A$ is invertible if the reduced row echelon form of $A$ is $I_n$. 
     \item As stated in definition \ref{def:rank_nullity} the rank of a matrix is defined as the amount of pivot columns in the reduced echelon form, and since the reduced echelon form is $I_n$ the rank will be $n$.
-    \item $A\mathbf{x}=\mathbf{b}$ is consistent when $\mathbf{b}$ equals a linear combination of the columns of $A$, hence $\mathbf{b}$ is consistent for every $\mathbf{b}$ in $\mathbb{R}^n$
+    \item Since the reduced row echelon form of $A$ is $I_n$ the reduced row echelon form of $[A\;\textbf{b}]$ is $[I_n\;\textbf{c}]$. Since there is no pivot positions in the last column the system is consistent for all $\textbf{b}$.
     \item Let $R$ be the reduced row echelon form of $A$. 
     Hence $R$ has the form $I_n$, and the only solution to $I_n\mathbf{x}= \mathbf{0}$ is $\mathbf{0}$. Since $A\mathbf{x}=\mathbf{0}$ has the same solutions as $R\mathbf{x}=\mathbf{0}$, then the only solution is $\mathbf{0}$.
 \end{enumerate}
+\qedsymbol
 \end{proof}
-
 A way to determine whether a matrix is invertible or not, is to consider the determinant of the matrix.
+
 \section{Determinants}
 Determinants of squared matrices is a scalar, that provides information about the matrix. The focus in this section is how to calculate the determinant for a matrix and determine whether a matrix is invertible or not. 
 \begin{definition}{Determinant of a $2\times 2$ matrix}
@@ -530,7 +507,7 @@ Definition \ref{def:determinant} states a way to determine the determinant for a
 \end{definition}
 To illustrate the method presented in Definition \ref{def: generaldeterminant} there is a calculated example in the following.
 \begin{example}{Determinant of an $n\times n$ Matrix}
-Determine the determinant for
+Let
     \begin{align*}
         A=\begin{bmatrix}
            1 & -2 & 1\\
@@ -538,7 +515,6 @@ Determine the determinant for
            0 & 1 & 3
         \end{bmatrix}.
     \end{align*}
-    \subsubsection{Solution}
     The determinant of matrix $A$ is calculated using Definition \ref{def: generaldeterminant} with $i=3$ yields
     \begin{align*}
         \det A &= 0(-1)^{1+3} \det
@@ -571,14 +547,14 @@ Determine the determinant for
     \end{align*}
     The determinant of matrix A is 29. 
 \end{example}
-One of the uses of determinants is to Determent if a matrix is inevitable or not.
-\begin{theorem}{Determinants of an Invertible Matrix}
+One of the uses of determinants is to be able to tell whether a matrix is invertible or not.
+\begin{theorem}{Determinant of an Invertible Matrix}
     If a $n\times n$ matrix $A$ is invertible then $\det A \neq 0$. If $A$ is non-invertible then $\det A = 0$.
     \cite[214]{LiAl}
     \label{theo: det_intvertible_matrix}
 \end{theorem}
-\begin{proof}{Determinants of an Invertible Matrix}
-    If $A$ has the reduced row echelon $R$ then by Theorem \ref{the:PMatrix} there exist a matrix $P$ such that
+\begin{proof}{Determinant of an Invertible Matrix}
+    If $A$ has the reduced row echelon $R$ then there exist a matrix $P$ such that
     \begin{align*}
         PA=R \\
         A=RP^{-1} \\
@@ -591,7 +567,7 @@ One of the uses of determinants is to Determent if a matrix is inevitable or not
     \end{align*}
     It can be proven that $\det P^{-1}$ is nonzero. Hence $\det A \neq 0$ if $A$ is invertible.
     
-    If $A$ is non-invertible then by Theorem \ref{the:invertibleMatrix} $\text{rank } A < n$, hence the reduced row echelon $R$ has at least one zero row. By this the matrix $RP^{-1}$ also has at least one zero row. Using Theorem \ref{def: generaldeterminant} on the zero row it can be seen that $\det RP^{-1}=\det A=0$. Therefore if $A$ is non-invertible $\det A = 0$.
+    If $A$ is non-invertible then by Theorem \ref{the:invertibleMatrix} $\text{rank } A < n$, hence the reduced row echelon $R$ has at least one zero row. By this the matrix $RP^{-1}$ also has at least one zero row. Using Theorem \ref{def: generaldeterminant} on the zero row it can be seen that $\det RP^{-1}=\det A=0$. Therefore if $A$ is non-invertible $\det A = 0$. \qedsymbol
 \end{proof}
 
 \section{Eigenvectors and Eigenvalues}
@@ -631,7 +607,7 @@ The solution to the equation is the null space of $(A-\lambda I_n)$, which will 
 This is called the characteristic equation of $A$ and the eigenvalues are the solutions to this equation.  
 
 \begin{example}{Eigenvalue and Basis for an Eigenspace for a Matrix}
-    Find the eigenvalue and the basis for the eigenspace for the matrix
+    Let
     \begin{align*}
         A=
         \begin{bmatrix}
@@ -639,8 +615,7 @@ This is called the characteristic equation of $A$ and the eigenvalues are the so
             0 & -4
         \end{bmatrix}
     \end{align*}
-    \subsubsection{Solution}
-Calculating matrix $A-\lambda I_2$ yields
+    To determine eigenvalue(s) and the basis for the eigenspace(s) corresponding to the eigenvalue(s) for $A$, the first step is to calculate the matrix $A-\lambda I_2$. This yields
     \begin{align*}
         A-\lambda I_2=
          \begin{bmatrix}
@@ -671,16 +646,16 @@ Calculating matrix $A-\lambda I_2$ yields
                 0 & 0
             \end{bmatrix}.
     \end{align*}
-    Then the solution is 
+    Hence
     \begin{align*}
         \begin{bmatrix}
             x_1\\x_2
         \end{bmatrix}=x_1
          \begin{bmatrix}
             1\\0
-        \end{bmatrix}
+        \end{bmatrix},
     \end{align*}
-    and then the eigenspace corresponding to eigenvalue 1 is
+    and the basis of the eigenspace corresponding to eigenvalue 1 is
     \begin{align*}
     \begin{Bmatrix}
         \begin{bmatrix}
@@ -689,60 +664,73 @@ Calculating matrix $A-\lambda I_2$ yields
     \end{Bmatrix}.
     \end{align*}
     The eigenspace corresponding to $-4$ can be found with same process.
-    The reduced row echelon form of $A+4I_n$ is
+    The reduced row echelon form of $A+4I_2$ is
         \begin{align*}
             \begin{bmatrix}
-                1 & \frac{5}{3}\\
+                1 & \frac{3}{5}\\
                 0 & 0
             \end{bmatrix}.
     \end{align*}
-    Then the solution is 
+    Hence
     \begin{align*}
         \begin{bmatrix}
             x_1\\x_2
         \end{bmatrix}=x_1
          \begin{bmatrix}
-            -\frac{5}{3}\\1
+            -\frac{3}{5}\\1
         \end{bmatrix}
     \end{align*}
-    and then the eigenspace corresponding to -4 is
+    and the eigenspace corresponding to -4 is
     \begin{align*}
     \begin{Bmatrix}
         \begin{bmatrix}
-            -\frac{5}{3}\\1
+            -\frac{3}{5}\\1
+        \end{bmatrix}
+    \end{Bmatrix}.
+    \end{align*}
+    It is now calculated that the eigenvalues for $A$ is 1 and -4, and the basis for the eigenspace corresponding to the eigenvalues respectively is  
+    \begin{align*}
+    \begin{Bmatrix}
+        \begin{bmatrix}
+            1\\0
+        \end{bmatrix}
+    \end{Bmatrix}
+      \quad \text{and} \quad
+    \begin{Bmatrix}
+        \begin{bmatrix}
+            -\frac{3}{5}\\1
         \end{bmatrix}
     \end{Bmatrix}.
     \end{align*}
 \end{example}
 
-
-
-%der mangler vel en konklusion på eksemplet?
-Se side 313, der står der noget om diagonalization of matrices... VI kan finde ud af senere hvor meget vi skal bruge af det. 
+%Se side 313, der står der noget om diagonalization of matrices... VI kan finde ud af senere hvor meget VI skal bruge af det. 
 
 \section{Orthogonal Matrices}
-Orthogonal transforms are transforms that preserve the lengths of vectors and angle between vectors. In $\mathbb{R}^2$ and $\mathbb{R}^3$ Euclidean space orthogonal transforms are always a rotation or a reflection. \\
-To vectors $\textbf{u}$ and $\textbf{v}$ in $\mathbb{R}^n$ is orthogonal if $\textbf{u}\cdot \textbf{v}=0$. A set of vectors is orthogonal if all the vectors is orthogonal to on another. 
-\begin{theorem}{Linearly Independent Orthogonal Set of Vectors}
+Orthogonal transforms are transforms that preserve the length of vectors and the angle between vectors. In $\mathbb{R}^2$ and $\mathbb{R}^3$ Euclidean space orthogonal transforms are always a rotation or a reflection. \\
+Two vectors $\textbf{u}$ and $\textbf{v}$ in $\mathbb{R}^n$ is orthogonal if $\textbf{u}\vprik \textbf{v}=0$. A set of vectors is orthogonal if all the vectors is orthogonal to each of the vectors in the set. 
+\begin{theorem}{Linearly Independent of Orthogonal Set of Vectors}
 If a set of vectors consists of nonzero vectors and are orthogonal it is linearly independent.\cite[375]{LiAl}
 \end{theorem}
 
-\begin{proof}{Linearly Independent Orthogonal Set of Vectors}
-If $\{\mathbf{v}_1, \mathbf{v}_2, \hdots, \mathbf{v}_k\}$ is an orthogonal subset of $\mathbb{R}^n$ and consist of $k$ nonzero vectors and if $c_1, c_2, \hdots, c_k$ are the scalars, such that
+\begin{proof}{Linearly Independent of Orthogonal Set of Vectors}
+If $S=\{\mathbf{v}_1, \mathbf{v}_2, \hdots, \mathbf{v}_k\}$ is an orthogonal subset of $\mathbb{R}^n$ and consist of $k$ nonzero vectors and if $c_1, c_2, \hdots, c_k$ are the scalars, such that
 $$c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \hdots + c_k\mathbf{v}_k = \textbf{0}$$
-for any $\mathbf{v}_i$:
+for any $\mathbf{v}_i\in S$:
 \begin{align*}
   0 &= \mathbf{0 \vprik v}_i  \\
   &= (c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \hdots + c_i \mathbf{v}_i + \hdots + c_k \mathbf{v}_k ) \mathbf{\vprik v}_i \\
   &= c_1\mathbf{v}_1 \mathbf{\vprik v}_i + c_2\mathbf{v}_2 \mathbf{\vprik v}_i + \hdots + c_i \mathbf{v}_i \mathbf{\vprik v}_i + \hdots + c_k\mathbf{v}_k \mathbf{\vprik v}_i \\
   &=c_i(\mathbf{v}_i \mathbf{\vprik v}_i)\\
-  &=c_i||\mathbf{v}_i||^2
+  &=c_i||\mathbf{v}_i||^2.
 \end{align*}
-Where $||\mathbf{v}_i||^2 \neq 0$ since $\mathbf{v}_i \neq \mathbf{0}$, from this it follows that $c_i=0$. This shows that $\mathbf{v}_1, \mathbf{v}_2, \hdots, \mathbf{v}_k$ are linearly independent. \qedsymbol   
+Where $||\mathbf{v}_i||^2 \neq 0$ since $\mathbf{v}_i \neq \mathbf{0}$, from this it follows that $c_i=0$. From this it follows that $c_1=c_2=\cdots=c_k=0$. And by definition \ref{def:LinearDependent} this shows that $\mathbf{v}_1, \mathbf{v}_2, \hdots, \mathbf{v}_k$ are linearly independent. \qedsymbol   
 \end{proof}
-If the basis for a subspace of $\mathbb{R}^n$ is also a orthogonal set, it is then called a orthogonal basis. In practice orthogonal basis is often normalised to obtain normalised basis of the same subspace. This is called a orthonormal basis.  A matrix which rows forms a orthonormal set is called a orthogonal matrix.
+If a set of vectors in a basis for a subspace of $\mathbb{R}^n$ is orthogonal, then the basis is called an orthogonal basis. 
 
-\begin{example}{Orthonormal set of vectors}
+In practice orthogonal bases are often normalised to obtain an orthonormal basis of the same subspace. A matrix which rows forms a orthonormal set is called an orthogonal matrix.
+
+\begin{example}{Orthogonal and Orthonormal Set of Vectors}
     Consider the set of vectors:
     \begin{align*}
     \begin{Bmatrix}
@@ -754,9 +742,7 @@ If the basis for a subspace of $\mathbb{R}^n$ is also a orthogonal set, it is th
     \end{bmatrix}
     \end{Bmatrix}.
     \end{align*}
-    Show that it is an orthogonal set and find the corresponding orthonormal set.
-    \subsubsection{Solution}
-    To determine whether the two vectors are orthogonal the dot products between them is computers 
+    To determine whether the set of vectors is an orthogonal set, the dot product between the vectors are computed, which yields
     \begin{align*}
     \begin{bmatrix}
         -1\\1
@@ -765,7 +751,8 @@ If the basis for a subspace of $\mathbb{R}^n$ is also a orthogonal set, it is th
         2\\2
     \end{bmatrix}=(-1)\cdot2+1\cdot2=0.
     \end{align*}
-    Since the dot product between the vectors is zero, the vectors forms a orthogonal set. The orthonormal set can be found by dividing the vectors by the norm of the vector. 
+    Since the dot product between the two vectors is zero, the vectors forms an orthogonal set.
+    From this the corresponding orthonormal set can be determined by dividing the vectors by the norm of the vector. 
     \begin{align*}
     \begin{Bmatrix}
     \frac{1}{\sqrt{2}}
@@ -779,9 +766,7 @@ If the basis for a subspace of $\mathbb{R}^n$ is also a orthogonal set, it is th
     \end{Bmatrix}.
     \end{align*}
 \end{example}
-
-\subsubsection{Inverse of an Orthogonal Matrix}
-A useful property of an orthogonal matrix is that its transpose equals its inverse.
+An useful property of an orthogonal matrix is that its transposed equals its inverse.
 \begin{theorem}{Inverse of an Orthogonal Matrix}
     If $Q$ is an $n\times n$ orthogonal matrix then
     \begin{align*}
@@ -793,28 +778,25 @@ A useful property of an orthogonal matrix is that its transpose equals its inver
     \end{align*}
     \cite[413]{LiAl}
 \end{theorem}
-\begin{proof}{Inverse of an orthogonal matrix} 
-    Observe that the $i$'th row of $Q^T$ equals $\textbf{q}_i$. Then the ($i$,$j$)-entry of $Q^TQ$ is equal to $\textbf{q}_i\cdot\textbf{q}_j$. Since the columns of $Q$ forms an orthonormal set, this equals to
+\begin{proof}{Inverse of an Orthogonal Matrix}
+    Suppose that matrix $Q$ is an orthogonal matrix.
+    By observing that the $i$th row of $Q^T$ equals $\textbf{q}_i$, the ($i$,$j$)-entry of $Q^TQ$ must be equal to $\textbf{q}_i\cdot\textbf{q}_j$. Since the columns of $Q$ forms an orthonormal set, this equals 
     \begin{align*}
-        \textbf{q}_i\cdot\textbf{q}_j= \left\{
-    \begin{array}{ll}
+        \textbf{q}_i\vprik\textbf{q}_j=
+    \begin{cases}
           0 & \text{for } j\neq i\\
           1 & \text{for } j= i
-    \end{array}
-    \right. .
+    \end{cases}.
     \end{align*}
-    From this it can be seen that $Q^TQ=I_n$. Using the def... it can be seen that $Q$ is invertible and $Q^T=Q^{-1}$.
+    From this it can be seen that $Q^TQ=I_n$. Using definition \ref{def:Invertible} it can be seen that $Q$ is invertible and $Q^T=Q^{-1}$.
     \qedsymbol 
 \end{proof}
-
-
-\begin{enumerate}
-    \item theorem 6.5
-    \item eksempel hvordan man finder ud af om de er ortogonale og videre til orthonormale
-    \item theorem 6.9 - invertibel done
-    \item theorem 6.14 - forbindelse til eigenværdier
-    \item i LIAL done wrong - corollary 3.2 muligvis theorem 3.1
-    \item def i starten 3.3
-\end{enumerate}
-
-\section{Singular Value Decomposition}
+%\section{Singular Value Decomposition}
+%\begin{enumerate}
+%    \item theorem 6.5
+%    \item eksempel hvordan man finder ud af om de er ortogonale og videre til orthonormale
+%    \item theorem 6.9 - invertibel done
+%    \item theorem 6.14 - forbindelse til eigenværdier
+%    \item i LIAL done wrong - corollary 3.2 muligvis theorem 3.1
+%    \item def i starten 3.3
+%\end{enumerate}

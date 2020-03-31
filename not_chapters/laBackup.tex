@@ -36,3 +36,39 @@ Written on parameterised vector form
 \end{align*}
 Hence the span $\mathcal{S}$ is a subspace of $\mathbb{R}^4$
 \end{example}
+
+
+\begin{theorem}{Invertible Matrix P} \label{the:PMatrix}
+    If an $m \times n$ matrix $A$ has a reduced row echelon form $R$, there will exist an invertible $m \times m$ elementary matrix $P$ which when multiplied with $A$ will equal $R$, such as
+    \begin{align*}
+        PA=R.
+    \end{align*}
+    \cite[127]{LiAl}
+    \label{theo:invertible}
+\end{theorem}
+A proof of Theorem \ref{theo:invertible} leads to a justification of why it is possible to reduce a matrix $A$ to a matrix $R$.
+\begin{proof}{Invertible Matrix P}
+    $P$ is an invertible matrix so $P[A\mathbf{b}]=[R\mathbf{c}]$, where $[R\mathbf{c}]$ is the reduced row echelon form of $[A\mathbf{b}]$. 
+    Hence the following can be stated
+    \begin{align*}
+        [PA\;P\mathbf{b}]=P[A\;\mathbf{b}]=[R\;\mathbf{c}].
+    \end{align*}
+    As seen, the connection between $PA$, $P\mathbf{b}$ and $R\mathbf{c}$ is
+    \begin{align*}
+        PA=R \quad\text{and}\quad P\mathbf{b}=\mathbf{c},
+    \end{align*}
+    hence
+    \begin{align*}
+        A = P^{-1}R \quad \text{and} \quad \mathbf{b} = P^{-1}\mathbf{c}.
+    \end{align*}
+    If $\mathbf{v}$ is a solution for $A\mathbf{x}=\mathbf{b}$, then $A\mathbf{v}=\mathbf{b}$. Thereby it can be expressed that 
+    \begin{align*}
+        R\mathbf{v}=(PA)\mathbf{v}=P(A\mathbf{v})=P\mathbf{b}=\mathbf{c}.
+    \end{align*}
+    This shows that $\mathbf{v}$ is a solution of $R\mathbf{x}=\mathbf{c}$
+    and as said, $P$ is invertible, and therefore the following must be true
+    \begin{align*}
+        A\mathbf{v}=(P^{-1}R)\mathbf{v}=P^{-1}(R\mathbf{v})=P^{-1}\mathbf{c}=\mathbf{b}
+    \end{align*}
+    and as seen above, $\mathbf{v}$ is a solution of $A\mathbf{x}=\mathbf{b}$. As proved, $A\mathbf{x}=\mathbf{b}$ and $R\mathbf{x}=\mathbf{c}$ have the same solutions for \textbf{x}. \qedsymbol
+\end{proof}

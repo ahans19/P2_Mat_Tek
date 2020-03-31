@@ -241,34 +241,35 @@ To split the input vector into the even and odd parts of the transformation, a $
 \end{example}
 From Example \ref{exa:bitreverse}, it can be generalised that $P$ is represented as a $N \times N$ matrix, where the columns contain the unit vector $\mathbf{e}_{i+1}$ from the bit reversed vector respectively. \\
 
-When making the Fourier transform of a signal the signal is transformed from the time domain to the frequency domain. Then making this transformation the frequencies are known from the entire signal, but its not known when thees frequencies occurs. To analyse to witch time the frequencies occurs the discrete short-time Fourier transform can be used. 
+When making the Fourier transform of a signal the signal is transformed from the time domain to the frequency domain. Making this transformation the frequencies are known from the entire signal, but its not known when these frequencies occur. To analyse at which time frequencies occur, the discrete short-time Fourier transform can be relevant to use. 
 
 \section{The Discrete Short-Time Fourier Transform}
 Dealing with audio signals it can be desirable to use short-time Fourier transform (STFT), because it can be used to quantify the change of a nonstationary signal's frequency and phase content over time. The formal definition for the discrete short-time Fourier transform(DSTFT), is 
 \begin{align*}
     F_w[n,\omega]=\sum^{\infty}_{m=-\infty}f[m]w[n-m]e^{-j\omega m},
 \end{align*}
-where $\omega=\frac{2\pi}{N} k$, $f[n]$ is the input signal at time $n$, $w[n]$ is a window function(e.g. Hanning) with length $M$, $F_w[n,\omega]$ is the Fourier transform of the output response for the convolution $(f*w)(n)$, within the length $M$ of the time window. The length/the number of frames of the window $M$ should be less than or equal to the length of the signal $N$ $w[n]$\cite[56]{layer2015signal}. 
+where $\omega=\frac{2\pi}{N} k$, $f[n]$ is the input signal at time $n$, $w[n]$ is a window function(e.g. Hanning) with length $M$, $F_w[n,\omega]$ is the Fourier transform of the output response for the convolution $(f*w)(n)$, within the length $M$ of the time window. The length of each frame $M$ should be less than or equal to the length of the signal $N$ $w[n]$\cite[56]{layer2015signal}. 
 \\
-Time windows have different properties, in general it is a way to consider a smaller segment of the whole input signal. Each segment has the length $M$ and can be considered as a frame of the input signal, where $m$ is the number of a given frame.
+Time windows have different properties, in general it is a way to consider a smaller segment of the whole input signal. Each segment has the length $M$ and can be considered as a frame of the input signal, where $n$ is the number of a given frame.
 As mentioned, $F_w[n,\omega]$ is the Fourier transform of the output response for a discrete convolution $(f*w)(n)$, which is defined as
 \begin{align*}
-    y[n]=f[n]*w[n]=\sum_{-\infty}^{\infty}f[m]w[n-m]dm,
+    y[n]=f[n]*w[n]=\sum_{m=-\infty}^{\infty}f[m]w[n-m],
 \end{align*}
 where y(n) is the output response of the convolution.
 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/overlapfigure.pdf}
-    \caption{Illustrates "framing" of the original signal shown in the top, where frame $n$, $n+1$ and $n+2$ is shown. The original signal consist of two subsequent sinusiods of frequency 1 Hz and 5 Hz, and the applied time window is the rectangular window, with a window length of $M=4$ and 50\% overlap from a frame and the next. }
+    \caption{Illustrates "framing" of the original signal shown in the top, where frame $n$, $n+1$ and $n+2$ is shown. The original signal consist of two subsequent sinusiods of frequency 1 Hz and 5 Hz, and the applied time window is the rectangular window, with a window length of $M=4$ and 50\% overlap from a frame to another. }
     \label{fig:overlap}
 \end{figure}
-\includegraphics[scale=0.7]{figures/window.PNG}\\
+%\includegraphics[scale=0.7]{figures/window.PNG}\\
 %\includegraphics[width=\textwidth]{overlap.JPG}
 
-Applying time windows, a given frame $m$ of the signal is nonzero in a specified time interval, and null otherwise, as shown in \autoref{fig:overlap}. There exist different types of window functions, which makes it possible to choose the most beneficial, in different cases. Often a window function is symmetrical and has the highest value around the middle of the interval. \\
+Applying time windows, a given frame $n$ of the signal is nonzero in a specified time interval, and null otherwise, as shown in \autoref{fig:overlap}. There exist different types of window functions, which makes it possible to choose the most beneficial, in different cases. Often a window function is symmetrical and has the highest value around the middle of the interval. \\
 %In figure ?? a signal and the Fourier transform of the windowed version shown. In the figure a bell shaped time window is applied, and there is shown different segments of the signal. 
 One type of window function is the rectangular window which is defined as:
+\begin{definition}{Rectangular window}
 \begin{align*}
     w_R(n)=
     \begin{cases}
@@ -276,50 +277,38 @@ One type of window function is the rectangular window which is defined as:
     0, & \text{otherwise}
     \end{cases}
 \end{align*}
-where $M$ is the length of the window in samples.\\
-(Tekst)
+where $M$ is the length of the window in samples.
+\end{definition}
+The Fourier transform of $w_R(n)$ and $w_R(n)$ in time domain, are plotted in \autoref{fig: Rectangular}, where $M=21$, and centered at time $t=10$. 
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/RectangularTime.pdf}
-        \caption{Caption rectangular}
+         \caption{}
         \label{fig:RectangularTime}
     \end{subfigure}
     \begin{subfigure}[b]{.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/RectangularFourier.pdf}
-        \caption{en anden caption rectangular}
+        \caption{}
         \label{fig:RectangularFourier}
     \end{subfigure}
-\caption{en fælles caption?}
+\caption{Rectangular time window and its Fourier transform.}
 \label{fig: Rectangular}
 \end{figure}
-(tekst)
 
-\begin{figure}[H]
-    \centering
-    \begin{subfigure}[b]{.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/HanningTime.pdf}
-        \caption{Caption}
-        \label{fig:hanningtime}
-    \end{subfigure}
-    \begin{subfigure}[b]{.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/HanningFourier.pdf}
-        \caption{en anden caption}
-        \label{fig:hanningfourier}
-    \end{subfigure}
-\caption{en fælles caption?}
-\label{fig: Hanning}
-\end{figure}
+A commonly used type of time windows, is time windows in the Hamming family. A Hamming window consists of a rectangular window multiplied by one period of cosine. 
 
-A commonly used type of time windows, is time windows in the Hamming family. A Hamming window consists of a rectangular window multiplied by one period of cosine. A genrealised Hamming window is defined as
+\begin{definition}{Generalised Hamming window}
+A generalised Hamming window is defined as followed.
 \begin{align*}
     w_H(n)=w_R(n) \left(\alpha +2\beta \cos\left(\frac{2\pi n}{M}\right)\right),
 \end{align*}
-where $\alpha$ and $\beta$ is constants. The different windows in the Hamming family have different parameters for $\alpha$ and $\beta$. 
+where $\alpha$ and $\beta$ is constants. 
+\end{definition}
+
+The different windows in the Hamming family have different parameters for $\alpha$ and $\beta$. 
 One of this windows is called the Hanning window
 The Hanning window is defined by having the parameters $\alpha = \frac{1}{2} $ and $\beta = \frac{1}{4}$, hence
 \begin{align*}
@@ -328,27 +317,68 @@ The Hanning window is defined by having the parameters $\alpha = \frac{1}{2} $ a
     \intertext{the expression for $w_H(n)$ above can be written as}\\
     &=w_R(n)\cos^2\left(\frac{\pi n}{M}\right)
 \end{align*}
-(afsluttende tekst)
-\\
-The difference, when comparing a Hanning window and the rectangular window, is that the Hanning window has lower side lobes, meaning that the side lobes are more attenuated, and the main lobe is twice as wide. When choosing a window function with lower side lobes, it minimises the risk of "crosstalk". Crosstalk is when a signal leakage from one channel or circuit to another, which can cause an unwanted effect. \\
+Hence $w_H(n)$ can be defined as:
+\begin{definition}{The Hanning time window}
+   \begin{align*}
+        w_H(n)=
+    \begin{cases}
+    \cos^2\left(\frac{\pi n}{M}\right), & -\frac{M-1}{2}\leq n \leq \frac{M-1}{2} \\
+    0, & \text{otherwise}
+    \end{cases}   
+   \end{align*}
+\end{definition}
+The Fourier transform of $w_H(n)$ and $w_H(n)$ in time domain, are plotted in \autoref{fig: Hanning}, where $M=21$, and centered at time $t=10$.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/HanningTime.pdf}
+        \caption{}
+        \label{fig:hanningtime}
+    \end{subfigure}
+    \begin{subfigure}[b]{.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/HanningFourier.pdf}
+        \caption{}
+        \label{fig:hanningfourier}
+    \end{subfigure}
+\caption{Hanning time window and its Fourier transform}
+\label{fig: Hanning}
+\end{figure}
+The difference, when comparing a Hanning window and the rectangular window, is that the Hanning window has lower side lobes, meaning that the side lobes are more attenuated, and the main lobe is twice as wide. This can be seen by comparison of \autoref{fig:RectangularFourier} and \autoref{fig:hanningfourier}. When choosing a window function with lower side lobes, it minimises the risk of "crosstalk". Crosstalk is when a signal leakage from one channel or circuit to another, which can cause an unwanted effect. \\
 
-An ideal window requires a main lobe as narrow as possible and the side lobes should be as low as possible\cite[56]{layer2015signal}. In relation to Hanning and rectangular windows, Hanning has low side lobes, but a twice as wide main lobe, meaning that applying a Hanning window results in a (better/worse) frequency resolution.
+An ideal window requires a main lobe as narrow as possible and the side lobes should be as low as possible\cite[56]{layer2015signal}. In relation to Hanning and rectangular windows, Hanning has low side lobes, but a twice as wide main lobe, meaning that applying a Hanning window results in a worse frequency resolution.
 \\
 In relation to the length $M$ of the time window, a time window narrow, will result in a good time resolution, but a worse time resolution. Hence, a wide time window will result in a better frequency resolution, but a worse time resolution.
 Hence it is not possible to attain high time resolution and high frequency resolution at the same time. 
 \\
-With the knowledge of the relationship between length of time window, wide of lobes and resolution, a beneficial time window can be chosen to a given purpose. 
-(Hvorfor vi har valgt Hanning, kilden bruger det, most commonly used(Kilde herpå(Anna)), overlap. Behøves vi egentlig noget om overlap? Kontekst)
+With the knowledge of the relationship between length of time window, wide of lobes and resolution, a beneficial time window can be chosen to a given purpose.\\
 
-Spectral analysis(spectrogram, STFT square magnitude):
+Of the reason that this project, in general, is based on the processes described in (kilde fra PA, Hgihly robust.....), a Hanning window is used when audio signals are analysed. When using Hanning its worth to mention overlap from a frame to another. 
+
+\begin{definition}{The Constant Overlap-Add Property}
+A window function $w(n)$ has the COLA property if:
+\begin{align*}
+    \sum_{m=-\infty}^{\infty}w(n-m)=1,\quad \forall n \in \mathbb{Z}
+\end{align*} 
+\end{definition}
+
+%Here it will just be stated that the following theorem is met. COLA
 
 
-To visualise the STFT, a spectrogram is often used. A spectrogram
-is a two dimensional representation of time, frequency and magnitude, which is represented by the squared magnitude $ |F_w[n,\omega]|^2$.
-In the generated spectrogram (indsæt ref til billede), the horizontal axis represents time, the vertical axis represents the frequency and the intensity of color represents the value of the squared magnitude. 
+
+
+%(Hvorfor vi har valgt Hanning, kilden bruger det, most commonly used(Kilde herpå(Anna)), overlap. Behøves vi egentlig noget om overlap? Kontekst)
+%Spectral analysis(spectrogram, STFT square magnitude):
+
+
+To visualise the STFT, spectrograms are often used. A spectrogram is a two dimensional representation of time, frequency and magnitude, which is represented by the squared magnitude $ |F_w[n,\omega]|^2$.
+In the generated spectrogram (indsæt ref til billede), the horizontal axis represents time, the vertical axis represents the frequency, and the intensity of color represents the value of the squared magnitude. 
 \\
-Afslutning: Spectrogram af C4 tone
-\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/spectrogramC4['hanning'].jpg}
+    \caption{A spectrogram of a $C_4$ tone, with a Hanning window }
+    \label{fig: spectrogram_of_C4}
+\end{figure}
 Zero-padding?:
-
-
