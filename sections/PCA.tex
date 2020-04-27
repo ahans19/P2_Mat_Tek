@@ -7,7 +7,7 @@
 
 
 In order to be able to work with the principal component analysis, variance is required.
-A set of observations $x_1,x_2,\cdots, x_m$ can be represented as the vector:
+A set of observations $x_1,x_2,\cdots, x_m$ can be represented as the vector
 \begin{align*}
     \mathbf{x}=
     \begin{bmatrix}
@@ -17,7 +17,7 @@ A set of observations $x_1,x_2,\cdots, x_m$ can be represented as the vector:
     x_m
 \end{bmatrix} \quad \textbf{x}\in\mathbb{R}^m.
 \end{align*}
-From this the mean of the can calculated as
+From this the mean of $x$ can be calculated as:
 \begin{align*}
     \Bar{x}=\frac{1}{m}\sum_{i=1}^mx_i.
 \end{align*}
@@ -31,27 +31,28 @@ Since the data set is represented in vector form, the mean can also be represent
     \Bar{x}\\
     \end{bmatrix}\quad \mathbf{\Bar{x}}\in\mathbb{R}^m.
 \end{align*}
-Variance is a measure of how much a set of random numbers varies from the main value. Variance can be defined as 
+Variance is a measure of how much a set of observations varies from the mean. Variance is defined as: 
 \begin{definition}{Variance}
 Variance of a variable $\textbf{x}\in\mathbb{R}^m$ is denoted $s_\textbf{x}^2$ and is calculated as
 \begin{align*}
-    s_\textbf{x}^2=&\frac{1}{m-1}(\mathbf{x}-\mathbf{\Bar{x}})\cdot(\mathbf{x}-\mathbf{\Bar{x}})\\
-    =&\frac{1}{m-1}||\mathbf{x}-\mathbf{\Bar{x}}||^2
+    s_\textbf{x}^2=&\frac{1}{m-1}(\mathbf{x}-\mathbf{\Bar{x}})\vprik(\mathbf{x}-\mathbf{\Bar{x}})=\frac{1}{m-1}||\mathbf{x}-\mathbf{\Bar{x}}||^2.
 \end{align*}
+\cite[475]{LiAl}
 \end{definition}
-With this the concept of Covariance can be defined.
-Covariance of two variables describe the extend to which they vary together. If the two variables do not vary together, the covariance is close to zero. If the covariance is positive then a greater value of the first variable corresponds to a greater value of the second variable and vise versa. If the covariance is negative a greater value of the first variable corresponds to a smaller value the second variable and vise versa. Covariance is defined as 
+With this the concept of covariance can be defined.
+Covariance of two variables describes the extend to which the variables vary together. If the two variables do not vary together, the covariance is close to zero. If the covariance is positive then a greater value of the first variable corresponds to a greater value of the second variable and vise versa. If the covariance is negative a greater value of the first variable corresponds to a smaller value the second variable and vise versa. Covariance is defined as 
 \begin{definition}{Covariance}
-    The covariance of to variables $\textbf{x}, \textbf{y}\in \mathbb{R}^m$ is defined as
+    The covariance of two variables $\textbf{x}, \textbf{y}\in \mathbb{R}^m$ is defined as
     \begin{align*}
-        \text{cov}(\textbf{x},\textbf{y})=\frac{1}{m-1}(\mathbf{x}-\mathbf{\Bar{x}}) \bullet (\mathbf{y}-\mathbf{\Bar{y}}).
+        \text{cov}(\textbf{x},\textbf{y})=\frac{1}{m-1}(\mathbf{x}-\mathbf{\Bar{x}}) \vprik (\mathbf{y}-\mathbf{\Bar{y}}).
     \end{align*}
+    \cite[475]{LiAl}
 \end{definition}
-Since the dot product is commutative it follows that $\text{cov}(\textbf{x},\textbf{y})=\text{cov}(\textbf{y},\textbf{x})$. Furthermore it can be seen that
+Since the dot product is commutative, it follows that $\text{cov}(\textbf{x},\textbf{y})=\text{cov}(\textbf{y},\textbf{x})$. Furthermore it can be seen that
 \begin{align*}
-    \text{cov}(\textbf{x},\textbf{x})=\frac{1}{m-1}(\mathbf{x}-\mathbf{\Bar{x}}) \bullet (\mathbf{x}-\mathbf{\Bar{x}})=s^2_{\textbf{x}}.
+    \text{cov}(\textbf{x},\textbf{x})=\frac{1}{m-1}(\mathbf{x}-\mathbf{\Bar{x}}) \vprik (\mathbf{x}-\mathbf{\Bar{x}})=s^2_{\textbf{x}}.
 \end{align*}
-If a set of variables $\textbf{x}_1,\textbf{x}_2\cdots\textbf{x}_n$ is given, the $n\times n$ covariance matrix $C$ is defined as a matrix with entries $C_{i,j}=\text{cov}(\textbf{x}_i,\textbf{x}_j)$. This can be written as the following
+If a set of variables $\textbf{x}_1,\textbf{x}_2, \cdots, \textbf{x}_n$ is given, the $n\times n$ covariance matrix $C$ is defined as a matrix with entries $C_{i,j}=\text{cov}(\textbf{x}_i,\textbf{x}_j)$. This can be written as the following matrix
 \begin{align*}
     C=
     \begin{bmatrix}
@@ -62,11 +63,13 @@ If a set of variables $\textbf{x}_1,\textbf{x}_2\cdots\textbf{x}_n$ is given, th
           \text{cov}(\textbf{x}_n,\textbf{x}_1)  & \text{cov}(\textbf{x}_n,\textbf{x}_2) & \cdots & s_{\textbf{x}_n}^2\\
     \end{bmatrix}
 \end{align*}
+\cite[475]{LiAl}
 \section{Principal Component Analysis}
 Principal component analysis (PCA) is a method of reducing the dimensions of a dataset via orthogonal projection, such that the variance is maximized. This is done by finding eigenvectors of the covariance matrix.
-The eigenvectors of the covariance matrix corresponding to the larges eigenvalues can be interpreted as the direction of most variance. The eigenvectors corresponding to the second larges eigenvalues is the direction of the second most variance etc. These eigenvectors are a basis of the data matrix, these vectors can be interpreted as the "unique characteristics" of the dataset. In this project, the data which is analysed is the data from the STFT. \cite[561]{patternmachineleaning}
-From STFT, the audio sampled is split into $m$ number of frames stored in the vectors $\mathbf{\Gamma}_1, \mathbf{\Gamma}_2,\hdots\mathbf{\Gamma}_m$ which consist of $n$ samples.
-To do PCA analysis first the covariance matrix is calculated. To ease the calculation the data is mean centered. The mean of the data is defined as
+The eigenvectors of the covariance matrix corresponding to the largest eigenvalues can be interpreted as the direction of most variance. The eigenvectors corresponding to the second largest eigenvalues is the direction of the second most variance etc. These eigenvectors forms a basis of the data matrix and can be interpreted as the "unique characteristics" of the dataset \cite[561]{patternmachineleaning}.\\ 
+In this project the data analysis is based on the data from the DSTFT, where
+the sampled audio is split into $m$ number of frames stored in the vectors $\mathbf{\Gamma}_1, \mathbf{\Gamma}_2,\hdots\mathbf{\Gamma}_m$, which each consist of $n$ samples.
+To do PCA the covariance matrix is first calculated. To ease the calculation the data is mean centered. The mean of the data is defined as
 \begin{align*}
     \mathbf{\Psi}=\frac{1}{m-1}\sum_{i=1}^m \mathbf{\Gamma}_i.
 \end{align*}
@@ -76,19 +79,21 @@ Then the mean can be subtracted from each frame to obtain the mean centered fram
 \end{align*}
 This can then be assembled into a $n\times m$ matrix $A=[\mathbf{\Phi}_1,\mathbf{\Phi}_2\cdots\mathbf{\Phi}_n]$. Then the $n\times n$ covariance matrix $C$ of the mean centered data can be found as
 \begin{align*}
-    C=\frac{1}{m-1}\sum_{i=1}^m\mathbf{\Phi}_i\mathbf{\Phi}_i^T=\frac{1}{m-1}AA^T. 
+    C=\frac{1}{m-1}\sum_{i=1}^m\mathbf{\Phi}_i\mathbf{\Phi}_i^T=AA^T. 
 \end{align*}
-To compute the principal component analysis, the eigenvectors of $C$ have to be computed. Since it is only the eigenvectors in which is needed, the constant $\frac{1}{m-1}$ can be removed since the eigenvectors will remain the same. The matrix $AA^T$ is a semidefinite matrix hens it has $n$ eigenvectors. The eigenvectors are then sorted by egenvalues from largest to smallest and normalised. The eigenvectores can then put in to the orthogonal $n\times n$ matrix $E$.
-Since $E$ is an orthogonal matrix $E^{-1}=E^T$. The data matrix can then be projetet in to $E$ as
+To compute the PCA, the eigenvectors of $C$ have to be computed. Since the matrix $A^TA$ is a positive semidefinite matrix it has $n$ eigenvalues. The eigenvalues and corresponding eigenvectors are ordered from largest to smallest and the eigenvectors are normalised. Then a matrix $E$ is defined whose columns forms an orthonormal basis for $\mathbb{R}^n$ consisting of eigenvectors for $A^TA$. 
+%Since $E$ is an orthogonal matrix $E^{-1}=E^T$. 
+The data matrix can then be projected to a coordinate system using $E$ as a coordinate transformation matrix,
 \begin{align*}
-    Y=E^TA.
+    Y=E^TA,
 \end{align*}
-Where $Y$ is an $n\times m$ matrix.
-However to find a basis, it is only necessary to compute the eigenvectors corresponding to the largest eigenvalues. This can be done by computing the eigenvectors of the $m\times m$ matrix 
+where $Y$ is an $n\times m$ matrix. The rows of $Y$ are called principal components. When representing the data in a coordinate system, the $Y$ coordinate set has the property that the first axis has the largest amount of variance, and the second axis has the second largest variance etc.. Each column of $\textbf{y}_n$ represents a unique characteristic for each frame $\mathbf{\Gamma}_n$. The first principal components represent the data the most, therefor in order to represent the data optimally it isn't relevant to include all principle components. Therefor the dimension of the dataset can be reduced by removing the last principle components.\\
+Since it is only the largest principle components in which are relevant, it is only relevant to compute the eigenvectors corresponding to the largest eigenvalues.
+This can be done by computing the eigenvectors of the $m\times m$ matrix 
 \begin{align*}
     \Tilde{C}=A^TA.
 \end{align*}
-If $\mu$ is an eigenvalue of $\Tilde{C}$ and $\textbf{v}$ is an eigenvectors of $\Tilde{C}$ then
+It can be seen in the following that the eigenvectors and eigenvalues of $C$ can be computed by computing eigenvectors and eigenvalues of $\Tilde{C}$. If $\mu$ is an eigenvalue of $\Tilde{C}$ and $\textbf{v}$ is an eigenvector of $\Tilde{C}$ then
 \begin{align*}
     A^TA\textbf{v}=\mu \textbf{v}.
 \end{align*}
@@ -100,7 +105,18 @@ Multiplying by $A$ from the left we get
 \end{align*}
 From this it can be concluded that the $A\textbf{v}$ and $\mu$ are eigenvectors and eigenvalues of $C$. These eigenvectors correspond to the largest eigenvalues of $C$.
 
+\section{Recognition}
+Let $\mathbf{\Gamma}_{unknown}$ be a unknown frame that has to be identified. first the frame is mean centered and projected on to $E$  
+\begin{align*}
+    \mathbf{u}=E^T(\mathbf{\Gamma}_{unknown}-\mathbf{\Psi}).
+\end{align*}
+Then the frame can be identified by calculating the distance $\epsilon_i$ between the unknown and know frame. This is done by using the Euclidean distance
+\begin{align*}
+\epsilon_i=\text{d}(\textbf{u},\textbf{y}_i)=\sqrt{\sum_{j=1}^m(u_j-y_j)^2}=||\textbf{u}-\textbf{y}_i||
+\end{align*}
+The frame with the minimum distance is the frame in which is considered a match.
 
+When working with multiple unknown frames, the same algorithm is used, where the frames with the lowest distance between them is the match
 
  
 Har kan vi muske lave et plot!!!  som FIG2 i "Face Recognition Using Eigenface Approach"

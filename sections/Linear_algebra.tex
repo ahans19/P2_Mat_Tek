@@ -722,9 +722,9 @@ for any $\mathbf{v}_i\in S$:
   &= (c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \hdots + c_i \mathbf{v}_i + \hdots + c_k \mathbf{v}_k ) \mathbf{\vprik v}_i \\
   &= c_1\mathbf{v}_1 \mathbf{\vprik v}_i + c_2\mathbf{v}_2 \mathbf{\vprik v}_i + \hdots + c_i \mathbf{v}_i \mathbf{\vprik v}_i + \hdots + c_k\mathbf{v}_k \mathbf{\vprik v}_i \\
   &=c_i(\mathbf{v}_i \mathbf{\vprik v}_i)\\
-  &=c_i||\mathbf{v}_i||^2.
+  &=c_i||\mathbf{v}_i||^2
 \end{align*}
-Where $||\mathbf{v}_i||^2 \neq 0$ since $\mathbf{v}_i \neq \mathbf{0}$, from this it follows that $c_i=0$. From this it follows that $c_1=c_2=\cdots=c_k=0$. And by definition \ref{def:LinearDependent} this shows that $\mathbf{v}_1, \mathbf{v}_2, \hdots, \mathbf{v}_k$ are linearly independent. \qedsymbol   
+where $||\mathbf{v}_i||^2 \neq 0$ since $\mathbf{v}_i \neq \mathbf{0}$, from this it follows that $c_i=0$. From this it follows that $c_1=c_2=\cdots=c_k=0$. And by definition \ref{def:LinearDependent} this shows that $\mathbf{v}_1, \mathbf{v}_2, \hdots, \mathbf{v}_k$ are linearly independent. \qedsymbol   
 \end{proof}
 If a set of vectors in a basis for a subspace of $\mathbb{R}^n$ is orthogonal, then the basis is called an orthogonal basis. 
 
@@ -793,20 +793,18 @@ An useful property of an orthogonal matrix is that its transposed equals its inv
     \qedsymbol 
 \end{proof}
 \section{Singular Value Decomposition}
-There have been described how to determine eigenvalues and eigenvectors, but any matrix does not necessarily have eigenvectors and eigenvalues. As described the matrix has to be squared. A similar method for rectangular matrices is the Singular Value Decomposition (SVD), where singular vectors and their corresponding singular values are determined. The section will result in a practical example using SVD.
+Previously it was derived how to determine eigenvalues and eigenvectors, but this is only defined for squared matrices. A similar method for rectangular matrices is the Singular Value Decomposition (SVD), where singular vectors and their corresponding singular values are determined. 
 
-%theorem og proof 6,17 og eksempel
-%theorem og eksempel 6,18
 In the previous sections many of the properties of a matrix has been for a symmetrical matrix...
-In this section a generalisation of an orthonormal basis of eigenvectors for an arbitrary $m \times n$ matrix A of rank i $k$ is defined. 
+In this section a generalisation of an orthonormal basis of eigenvectors for an arbitrary $m \times n$ matrix A of rank $k$ is defined. 
 \begin{theorem}{Singular Values for a Matrix}
 Let a $m \times n$ matrix $A$ be of rank $k$. Then there exist orthonormal bases $\mathcal{B}_1$ and $\mathcal{B}_2$ where
 \begin{align*}
-    \mathcal{B}_1=\{\mathbf{v}_1,\mathbf{v}_2,...,\mathbf{v}_n\} \text{ for } \mathbb{R}^n \text{  and  } \mathcal{B}_2=\{\mathbf{u}_1,\mathbf{u}_2,...,\mathbf{u}_n\} \text{ for } \mathbb{R}^m
+    \mathcal{B}_1=\{\mathbf{v}_1,\mathbf{v}_2,...,\mathbf{v}_n\} \text{ for } \mathbb{R}^n \text{  and  } \mathcal{B}_2=\{\mathbf{u}_1,\mathbf{u}_2,...,\mathbf{u}_m\} \text{ for } \mathbb{R}^m
 \end{align*}
 and scalars
 \begin{align*}
-    \sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_k > 0 
+    \sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_k > 0, 
 \end{align*}
 such that
 \begin{align}
@@ -828,27 +826,28 @@ and
 \cite[439]{LiAl}
 \label{theo: singularValues}
 \end{theorem}
-To proof Theorem \ref{theo: singularValues} the concept positive semidefinite matrix must be defined.
+To prove Theorem \ref{theo: singularValues} the concept positive semidefinite matrix must be defined.
 \begin{definition}{Positive Semidefinite Matrix}
-    For a matrix to be semidefinite, five criteria must be fulfilled. 
+    For a matrix to be positive semidefinite, one of the five criteria must be fulfilled. 
     \begin{enumerate}
         \item $\lambda_i \geq 0$
         \item Energy $\mathbf{v}^T C \mathbf{v} \geq 0$
         \item $\mathcal{S}=A^TA$
         \item All leading determinants $\geq 0$ 
-        \item All pivots in elimination $\geq 0$
+        \item All pivots for a matrix on echelon form $\geq 0$ \\
+        \cite{ryan2019linear}
     \end{enumerate}
-    If one of the criteria is fulfilled, the rest, will be too.
+    If one of the criteria is fulfilled, the rest will be too.
     The most common used and often the 
-    easiest way to determine if the Matrix is semidefinite is criteria number three, that says\\
+    easiest way, to determine if the matrix is semidefinite, is criteria number three, that says:\\
     An $n\times n$ matrix $C$ is positive semidefinite if $C$ is symmetric and $\mathbf{v}^T C \mathbf{v} \geq 0$ for every vector \textbf{v} in $\mathbb{R}$. 
     \label{def: PSD}
 \cite[436]{LiAl}
 \end{definition}
 \begin{proof}{Singular Values for a Matrix}
-    In definition \ref{def: PSD}, it follows that $A^TA$ is a $n\times n$ positive semidefinite matrix. It therefore has an orthonormal basis $\mathcal{B}_1={\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_n}$ for $\mathbb{R}^n$, which consist of eigenvectors of $A^TA$, with corresponding eigenvalues $\lambda_i \geq 0$
-    These eigenvalues and the eigenvectors can be ordered so $\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_n$. $A^TA$ has rank $k$, which means that the first $k$ eigenvalues are positive and the last $n-k$ are zero. By letting $\sigma_i=\sqrt{\lambda_i}$ for each $i=1, 2, \cdots, k$, then $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_k > 0$. 
-    For every $i\geq k$, $\mathbf{u}_i$ will be the vector in $\mathbb{R}^m$, which is defined by $\mathbf{u}_i=\dfrac{1}{\sigma_i}A\mathbf{v}_i$. It can now be shown that ${\mathbf{u}_1, \mathbf{u_2}, \cdots, \mathbf{u}_k}$ is an orthonormal subset of $\mathbb{R}^m$. By considering any $\mathbf{u}_i$ and $\mathbf{u}_j$, then it follows that:
+    In definition \ref{def: PSD}, it follows that $A^TA$ is a $n\times n$ positive semidefinite matrix. It therefore has an orthonormal basis $\mathcal{B}_1=\{\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_n\}$ for $\mathbb{R}^n$, which consist of eigenvectors of $A^TA$, with corresponding eigenvalues $\lambda_i \geq 0$
+    These eigenvalues and the eigenvectors can be ordered so $\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_n$. $A^TA$ has rank $k$, which means that there is exactly $k$ positive eigenvalues and the last $n-k$ are zero. By letting $\sigma_i=\sqrt{\lambda_i}$ for each $i=1, 2, \cdots, k$, then $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_k > 0$. 
+    For every $i\geq k$, $\mathbf{u}_i$ will be the vector in $\mathbb{R}^m$, which is defined by $\mathbf{u}_i=\dfrac{1}{\sigma_i}A\mathbf{v}_i$. It can now be shown that $\{\mathbf{u}_1, \mathbf{u_2}, \cdots, \mathbf{u}_k\}$ is an orthonormal subset of $\mathbb{R}^m$. By considering any $\mathbf{u}_i$ and $\mathbf{u}_j$, then it follows that:
     \begin{align*}
         \mathbf{u}_i \vprik \mathbf{u}_j &= \dfrac{1}{\sigma_i}A\mathbf{v}_i \vprik \dfrac{1}{\sigma_i}A\mathbf{v}_j\\
         &=\dfrac{1}{\sigma_i\sigma_j}A\mathbf{v}_i \vprik A\mathbf{v}_j\\
@@ -856,15 +855,15 @@ To proof Theorem \ref{theo: singularValues} the concept positive semidefinite ma
         &=\dfrac{1}{\sigma_i\sigma_j}\mathbf{v}_i \vprik \lambda_j\mathbf{v}_j\\
         &=\dfrac{\sigma^2_j}{\sigma_i\sigma_j}\mathbf{v}_i \vprik \mathbf{v}_j.
     \end{align*}
-    By this it follow that
+    By this it follows that
     \begin{align*}
         \mathbf{u}_i \vprik \mathbf{u}_j = \dfrac{\sigma_j}{\sigma_i}\mathbf{v}_i \vprik \mathbf{v}_j=
         \begin{cases}
         0 & \text{if } i\neq j\\
-        1 & \text{if } i=j.
-        \end{cases}
+        1 & \text{if } i=j
+        \end{cases}.
     \end{align*}
-    It then follows that ${\mathbf{u}_1, \mathbf{u}_2, \cdots, \mathbf{u}_k}$ is an orthonormal set, which can be extended to an orthonormal basis $\mathcal{B}_2={\mathbf{u}_1, \mathbf{u}_2, \cdots, \mathbf{u}_m}$ for $\mathbb{R}^m$. \\
+    It then follows that $\{\mathbf{u}_1, \mathbf{u}_2, \cdots, \mathbf{u}_k\}$ is an orthonormal set, which can be extended to an orthonormal basis $\mathcal{B}_2=\{ \mathbf{u}_1, \mathbf{u}_2, \cdots, \mathbf{u}_m\}$ for $\mathbb{R}^m$. \\
     By considering any $\mathbf{u}_i$ in $\mathcal{B}_2$, suppose that $i\geq k$, then it follow that:
     \begin{align*}
         A^T\mathbf{u}_i &= A^T \left(\dfrac{1}{\sigma_i}A\mathbf{v}_i \right)\\
@@ -878,9 +877,9 @@ To proof Theorem \ref{theo: singularValues} the concept positive semidefinite ma
     \end{align*}
     which is because $i\neq j$. If $j>k$, then it follows that:
     \begin{align*}
-        A^T\mathbf{u}_i \vprik \mathbf{v}_j = \mathbf{u}_i \vprik A\mathbf{v}_j= \mathbf{u}_i \vprik \mathbf{0}=0
+        A^T\mathbf{u}_i \vprik \mathbf{v}_j = \mathbf{u}_i \vprik A\mathbf{v}_j= \mathbf{u}_i \vprik \mathbf{0}=0.
     \end{align*}
-    It can therefore be seen that $A^T\mathbf{u}_i$ is orthogonal to every vector in $\mathcal{B}_1$, and it can there be concluded that $A^T\mathbf{u}_i = \mathbf{0}$.
+    It can therefore be seen that $A^T\mathbf{u}_i$ is orthogonal to every vector in $\mathcal{B}_1$, and it can then be concluded that $A^T\mathbf{u}_i = \mathbf{0}$.
     \qedsymbol
 
 
@@ -894,30 +893,31 @@ To proof Theorem \ref{theo: singularValues} the concept positive semidefinite ma
 \begin{theorem}{Singular Value Decomposition}
     For any $n \times m$ matrix $A$ with rank $k$, with singular values $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_k > 0$, there exist an $m\times m$ orthogonal matrix $U$ and an $n\times n$ orthogonal matrix $V$ such that 
     \begin{align*}
-        A=U\Sigma V^T
+        A=U\Sigma V^T,
     \end{align*}
-    where $U$ and $V$ consist of singular vectors for $A$ and $\Sigma$ is a matrix of same size as $A$ consisting of the corresponding singular values. the matrix $\Sigma$ satisfies 
+    where $U$ and $V$ consist of singular vectors for $A$ and $\Sigma$ is a matrix whose diagonal entries consist of the corresponding singular values, and is of same size as $A$. The matrix $\Sigma$ satisfies 
     \begin{align*}
             \begin{cases}
-          s_ii = \sigma_i & \text{for } i =1, 2,...,k\\
-          0 & \text{otherwise}
-    \end{cases}
+          \Sigma_{ii} = \sigma_i & \text{for } i =1, 2,...,k\\
+          \Sigma_{ij}=0 & \text{otherwise}
+    \end{cases},
     \end{align*}
     hence $\Sigma$ is the matrix 
     \begin{align*}
+    \Sigma=
         \begin{bmatrix}
            \sigma_1 & 0 & \cdots & 0 & \cdots & 0\\
            0 & \sigma_2 & \cdots & 0 & \cdots & 0\\
            \vdots & \vdots & \ddots & 0 & \cdots & 0\\
            0 & 0 & \cdots & \sigma_k & \cdots & 0\\
-           \vdots & \vdots & & \vdots & \cdots & 0\\
+           \vdots & \vdots & & \vdots & \ddots & \vdots\\
            0 & 0 & \cdots & 0 & \cdots & 0
-        \end{bmatrix},
+        \end{bmatrix}.
     \end{align*}
     \label{theo: SVDecomposition}
+    \cite[444-445]{LiAl}
 \end{theorem}
-    \noindent In Theorem \ref{theo: SVDecomposition} it is mentioned that $V$ and $U$ consist of singular vectors.
-    are introduced. To show what matrix $V$ is for a $n \times m$ matrix $A$ is, $A^TA$ is considered. From Definition \ref{def: PSD} $A^TA$ is a positive semidefinite matrix, hence symmetrical and then there exist an orthogonal matrix $V$ and a diagonal matrix $D$ such that 
+    \noindent In Theorem \ref{theo: SVDecomposition} it is mentioned that $V$ and $U$ consist of singular vectors. To show what matrix $V$ is for a $n \times m$ matrix $A$ is, $A^TA$ is considered. From Definition \ref{def: PSD} $A^TA$ is a positive semidefinite matrix, hence symmetrical and then there exist an orthogonal matrix $V$ and a diagonal matrix $D$ such that 
     \begin{align*}
         V^TAV = D.    
     \end{align*}
@@ -925,9 +925,9 @@ To proof Theorem \ref{theo: singularValues} the concept positive semidefinite ma
     So $V$ is consisting of the eigenvectors for $A^TA$ and has size $n \times n$. In relation to $U$, it is the matrix consisting of eigenvalues of $AA^T$ and its columns form an orthonormal basis for $\mathbb{R}^m$.
 
 \begin{proof}{Singular Value Decomposition}
-    Having a $m \times n$ matrix $A$ of rank $k$ with singular values $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_k > 0$, and orthonormal bases $\mathcal{B}_1={\mathbf{v}_1, \mathbf{v}_2,..., \mathbf{v}_n}$ for $\mathbb{R}^n$, $\mathcal{B}_2={\mathbf{u}_1, \mathbf{u}_2,..., \mathbf{u}_m}$ for $\mathbb{R}^m$ such that Theorem \ref{theo: singularValues} is satisfied. Defining matrices $V$ and $U$ as 
+    Having a $m \times n$ matrix $A$ of rank $k$ with singular values $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_k > 0$, and orthonormal bases $\mathcal{B}_1=\{\mathbf{v}_1, \mathbf{v}_2,..., \mathbf{v}_n\}$ for $\mathbb{R}^n$, $\mathcal{B}_2=\{\mathbf{u}_1, \mathbf{u}_2,..., \mathbf{u}_m\}$ for $\mathbb{R}^m$ such that Theorem \ref{theo: singularValues} is satisfied. Defining matrices $V$ and $U$ as 
     \begin{align}
-        V = [\mathbf{v}_1, \mathbf{v}_2,..., \mathbf{v}_n] \text{ and } U = \mathbf{u}_1, \mathbf{u}_2,..., \mathbf{u}_m
+        V = [\mathbf{v}_1, \mathbf{v}_2,..., \mathbf{v}_n] \text{ and } U = [\mathbf{u}_1, \mathbf{u}_2,..., \mathbf{u}_m]
     \end{align}
     By \eqref{eq: eq3FromDefSingularValues} in Theorem \ref{theo: singularValues} it can be expressed that
     \begin{align*}
@@ -937,15 +937,16 @@ To proof Theorem \ref{theo: singularValues} the concept positive semidefinite ma
         =& \begin{bmatrix}
         \sigma_1\mathbf{u}_1 & \sigma_2\mathbf{u}_2 & \cdots & \sigma_k\mathbf{u}_k & \mathbf{0} & \cdots & \mathbf{0}
         \end{bmatrix}\\
-        =&U\Sigma 
+        =&U\Sigma. 
     \end{align*}
     The final step is to isolate $A$ by multiplying both sides with $V^T$  which may be done, because $V$ is an orthogonal matrix. Hence
     \begin{align*}
         A=U\Sigma V^T.
-    \end{align*}\qedsymbol
+    \end{align*} \cite[444-445]{LiAl} \qedsymbol
 \end{proof}
 
 \begin{example}{Determine the Singular Value Decomposition of a Matrix}
+In this example SVD of a matrix $A$ is competed.\\
 Let a matrix A be
 \begin{align*}
 A=
@@ -955,7 +956,7 @@ A=
 \end{bmatrix},
 \end{align*}
 with a orthogonal bases $\{\mathbf{v}_1,\mathbf{v}_2,\mathbf{v}_3\}$ for $\mathcal{R}^3$ and $\{\mathbf{u}_1,\mathbf{u}_2\}$ for $\mathcal{R}^2$.\\
-To find the singular values $A^TA$ is calculated..
+$A^TA$ is calculated as
 \begin{align*}
     A^TA=
     \begin{bmatrix}
@@ -974,50 +975,95 @@ To find the singular values $A^TA$ is calculated..
        0 & 2 & 2
     \end{bmatrix}
 \end{align*}
-tekst
+The determinant of $A^TA-\lambda I_3$ is
 \begin{align*}
-    DET(A^TA-\lambda I_3)=DET
+    \text{det}(A^TA-\lambda I_3)=\text{det}
     \begin{bmatrix}
        2-\lambda & 0 & 0\\
        0 & 2-\lambda & 2\\
        0 & 2 & 2-\lambda
     \end{bmatrix}=
-    (2-\lambda)(-1)^{1+1} DET
+    (2-\lambda)(-1)^{1+1} \text{det}
     \begin{bmatrix}
         2-\lambda & 2 \\
         2 &2-\lambda
     \end{bmatrix}=\\
     (2-\lambda)((2-\lambda)(2-\lambda)-4) =
-    (2-\lambda)(-4\lambda+\lambda^2) = -\lambda^3+6\lambda^2-8\lambda.
+    (2-\lambda)(-4\lambda+\lambda^2) = \lambda(2-\lambda)(\lambda-4).
 \end{align*}
-    When solving for $\lambda$ in $-\lambda^3+6\lambda^2-8\lambda$
+    When solving for $\lambda$ in $\lambda(2-\lambda)(\lambda-4)=0$
     it gives the eigenvalues
     \begin{align*}
       \lambda_1=4, \quad \lambda_2=2, \quad \lambda_3=0.   
     \end{align*}
-    For each eigenvalue the eigenvector is determined using $A-\lambda \mathbf{v}=\mathbf{0}$ and normalized to be an orthonormal basis of $\mathbb{R^n}$. Hence the corresponding eigenvectors is
+    For each eigenvalue the eigenvector is determined using $A-\lambda \mathbf{v}=\mathbf{0}$ and normalized to be an orthonormal basis of $\mathbb{R}^n$. Hence the corresponding eigenvectors is
     \begin{align*}
         \begin{bmatrix}
             0\\1\\1
-        \end{bmatrix} \quad \text{for}\; \lambda=4, \textbf{normalized to} \begin{bmatrix}
-            0\\\frac{1}{\sqrt{2}}\\\frac{1}{\sqrt{2}}
+        \end{bmatrix} \quad \text{for}\;& \lambda=4, \text{ normalized to  }\frac{1}{\sqrt{2}}
+        \begin{bmatrix}
+            0\\1\\1
         \end{bmatrix}\\
         \begin{bmatrix}
             1\\0\\0
-        \end{bmatrix} \quad \text{for}\; \lambda=2\\
+        \end{bmatrix} \quad \text{for}\; &\lambda=2\\
         \begin{bmatrix}
             0\\-1\\1
-        \end{bmatrix} \quad \text{for}\; \lambda=0, \\\
+        \end{bmatrix} \quad \text{for}\;&\lambda=0, \text{ normalized to } \frac{1}{\sqrt{2}}
+        \begin{bmatrix}
+            0\\-1\\1
+        \end{bmatrix}
     \end{align*}
-    
-    fortsettes..... (SVD, u matrice, $\Sigma$ matrice)
+    The eigenvalues are $4,\;2 \text{ and }0$, hence the singular values are $\sigma_1 = \sqrt{4}=2\text{ and }\sigma_2 = \sqrt{2}$. The orthonormal basis of $\mathbb{R}^m$ consisting of eigenvectors of $AA^T$ is calculated:
+\begin{align*}
+    \mathbf{u}_1 = \frac{1}{\sigma_1}A \mathbf{v}_1 = \frac{1}{2}
+    \begin{bmatrix}
+       1 & 1 & 1\\
+       1 & -1 & -1
+    \end{bmatrix}
+    \frac{1}{\sqrt{2}}
+        \begin{bmatrix}
+            0\\1\\1
+        \end{bmatrix}\\
+    = \frac{1}{2\sqrt{2}}
+    \begin{bmatrix}
+       2\\
+       -2
+    \end{bmatrix}
+\end{align*} 
+\begin{align*}
+    \mathbf{u}_2 = \frac{1}{\sigma_2}A \mathbf{v}_2 = \dfrac{1}{\sqrt{2}}
+    \begin{bmatrix}
+       1 & 1 & 1\\
+       1 & -1 & -1
+    \end{bmatrix}
+    \begin{bmatrix}
+       1\\0\\0
+    \end{bmatrix}
+    = 
+    \begin{bmatrix}
+       \dfrac{1}{\sqrt{2}} \\
+       \dfrac{1}{\sqrt{2}}
+    \end{bmatrix}
+\end{align*}  
+Thus the singular value decomposition of matrix $A$ is 
+\begin{align*}
+    A = U\Sigma V^T = 
+    \begin{bmatrix}
+        \frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}\\
+        -\frac{1}{\sqrt{2}}& \frac{1}{\sqrt{2}}
+    \end{bmatrix}
+    \begin{bmatrix}
+       2 & 0 & 0\\
+       0 & \sqrt{2} & 0
+    \end{bmatrix}
+    \begin{bmatrix}
+       0 & 1 & 0\\
+       \frac{1}{\sqrt{2}} & 0 & -\frac{1}{\sqrt{2}}\\
+       \frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}}\\
+    \end{bmatrix}^T
+\end{align*}
 \end{example}
 
-%\begin{enumerate}
-%    \item theorem 6.5
-%    \item eksempel hvordan man finder ud af om de er ortogonale og videre til orthonormale
-%    \item theorem 6.9 - invertibel done
-%    \item theorem 6.14 - forbindelse til eigenværdier
-%    \item i LIAL done wrong - corollary 3.2 muligvis theorem 3.1
-%    \item def i starten 3.3
-%\end{enumerate}
+In practice SVD is often used, because it consist of two orthogonal matrices and a diagonal matrix with few nonzero values. 
+%evt afslut med det der står på side 446 i midten, kommer an på PCA.
