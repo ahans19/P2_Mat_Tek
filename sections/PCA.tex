@@ -1,0 +1,108 @@
+\chapter{Principal Component Analysis}
+
+
+
+%The Gaussian distribution is a method of distributing continuous variables by probability. This distribution consists of two parameters the mean ($\Bar{x}$) and the variance ($s^2$). %The mean describes the average of all the variables whilst The variance describes how much the distribution varies from the mean.
+%When looking at the Gaussian distribution, the variance describes the how much the distribution deviates from the mean.
+
+
+In order to be able to work with the principal component analysis, variance is required.
+A set of observations $x_1,x_2,\cdots, x_m$ can be represented as the vector:
+\begin{align*}
+    \mathbf{x}=
+    \begin{bmatrix}
+    x_1\\
+    x_2\\
+    \vdots\\
+    x_m
+\end{bmatrix} \quad \textbf{x}\in\mathbb{R}^m.
+\end{align*}
+From this the mean of the can calculated as
+\begin{align*}
+    \Bar{x}=\frac{1}{m}\sum_{i=1}^mx_i.
+\end{align*}
+Since the data set is represented in vector form, the mean can also be represented as the vector
+\begin{align*}
+\mathbf{\Bar{x}}=
+    \begin{bmatrix}
+    \Bar{x}\\
+    \Bar{x}\\
+    \vdots\\
+    \Bar{x}\\
+    \end{bmatrix}\quad \mathbf{\Bar{x}}\in\mathbb{R}^m.
+\end{align*}
+Variance is a measure of how much a set of random numbers varies from the main value. Variance can be defined as 
+\begin{definition}{Variance}
+Variance of a variable $\textbf{x}\in\mathbb{R}^m$ is denoted $s_\textbf{x}^2$ and is calculated as
+\begin{align*}
+    s_\textbf{x}^2=&\frac{1}{m-1}(\mathbf{x}-\mathbf{\Bar{x}})\cdot(\mathbf{x}-\mathbf{\Bar{x}})\\
+    =&\frac{1}{m-1}||\mathbf{x}-\mathbf{\Bar{x}}||^2
+\end{align*}
+\end{definition}
+With this the concept of Covariance can be defined.
+Covariance of two variables describe the extend to which they vary together. If the two variables do not vary together, the covariance is close to zero. If the covariance is positive then a greater value of the first variable corresponds to a greater value of the second variable and vise versa. If the covariance is negative a greater value of the first variable corresponds to a smaller value the second variable and vise versa. Covariance is defined as 
+\begin{definition}{Covariance}
+    The covariance of to variables $\textbf{x}, \textbf{y}\in \mathbb{R}^m$ is defined as
+    \begin{align*}
+        \text{cov}(\textbf{x},\textbf{y})=\frac{1}{m-1}(\mathbf{x}-\mathbf{\Bar{x}}) \bullet (\mathbf{y}-\mathbf{\Bar{y}}).
+    \end{align*}
+\end{definition}
+Since the dot product is commutative it follows that $\text{cov}(\textbf{x},\textbf{y})=\text{cov}(\textbf{y},\textbf{x})$. Furthermore it can be seen that
+\begin{align*}
+    \text{cov}(\textbf{x},\textbf{x})=\frac{1}{m-1}(\mathbf{x}-\mathbf{\Bar{x}}) \bullet (\mathbf{x}-\mathbf{\Bar{x}})=s^2_{\textbf{x}}.
+\end{align*}
+If a set of variables $\textbf{x}_1,\textbf{x}_2\cdots\textbf{x}_n$ is given, the $n\times n$ covariance matrix $C$ is defined as a matrix with entries $C_{i,j}=\text{cov}(\textbf{x}_i,\textbf{x}_j)$. This can be written as the following
+\begin{align*}
+    C=
+    \begin{bmatrix}
+        s_{\textbf{x}_1}^2 & \text{cov}(\textbf{x}_1,\textbf{x}_2) & \cdots & \text{cov}(\textbf{x}_1,\textbf{x}_n)\\
+         \text{cov}(\textbf{x}_2,\textbf{x}_1)
+         & s_{\textbf{x}_2}^2 &  \cdots &\text{cov}(\textbf{x}_2,\textbf{x}_n)\\
+         \vdots & \vdots & \ddots & \vdots \\
+          \text{cov}(\textbf{x}_n,\textbf{x}_1)  & \text{cov}(\textbf{x}_n,\textbf{x}_2) & \cdots & s_{\textbf{x}_n}^2\\
+    \end{bmatrix}
+\end{align*}
+\section{Principal Component Analysis}
+Principal component analysis (PCA) is a method of reducing the dimensions of a dataset via orthogonal projection, such that the variance is maximized. This is done by finding eigenvectors of the covariance matrix.
+The eigenvectors of the covariance matrix corresponding to the larges eigenvalues can be interpreted as the direction of most variance. The eigenvectors corresponding to the second larges eigenvalues is the direction of the second most variance etc. These eigenvectors are a basis of the data matrix, these vectors can be interpreted as the "unique characteristics" of the dataset. In this project, the data which is analysed is the data from the STFT. \cite[561]{patternmachineleaning}
+From STFT, the audio sampled is split into $m$ number of frames stored in the vectors $\mathbf{\Gamma}_1, \mathbf{\Gamma}_2,\hdots\mathbf{\Gamma}_m$ which consist of $n$ samples.
+To do PCA analysis first the covariance matrix is calculated. To ease the calculation the data is mean centered. The mean of the data is defined as
+\begin{align*}
+    \mathbf{\Psi}=\frac{1}{m-1}\sum_{i=1}^m \mathbf{\Gamma}_i.
+\end{align*}
+Then the mean can be subtracted from each frame to obtain the mean centered frame $\mathbf{\Phi}_i$
+\begin{align*}
+    \mathbf{\Phi}_i=\mathbf{\Gamma}_i-\mathbf{\Psi}.
+\end{align*}
+This can then be assembled into a $n\times m$ matrix $A=[\mathbf{\Phi}_1,\mathbf{\Phi}_2\cdots\mathbf{\Phi}_n]$. Then the $n\times n$ covariance matrix $C$ of the mean centered data can be found as
+\begin{align*}
+    C=\frac{1}{m-1}\sum_{i=1}^m\mathbf{\Phi}_i\mathbf{\Phi}_i^T=\frac{1}{m-1}AA^T. 
+\end{align*}
+To compute the principal component analysis, the eigenvectors of $C$ have to be computed. Since it is only the eigenvectors in which is needed, the constant $\frac{1}{m-1}$ can be removed since the eigenvectors will remain the same. The matrix $AA^T$ is a semidefinite matrix hens it has $n$ eigenvectors. The eigenvectors are then sorted by egenvalues from largest to smallest and normalised. The eigenvectores can then put in to the orthogonal $n\times n$ matrix $E$.
+Since $E$ is an orthogonal matrix $E^{-1}=E^T$. The data matrix can then be projetet in to $E$ as
+\begin{align*}
+    Y=E^TA.
+\end{align*}
+Where $Y$ is an $n\times m$ matrix.
+However to find a basis, it is only necessary to compute the eigenvectors corresponding to the largest eigenvalues. This can be done by computing the eigenvectors of the $m\times m$ matrix 
+\begin{align*}
+    \Tilde{C}=A^TA.
+\end{align*}
+If $\mu$ is an eigenvalue of $\Tilde{C}$ and $\textbf{v}$ is an eigenvectors of $\Tilde{C}$ then
+\begin{align*}
+    A^TA\textbf{v}=\mu \textbf{v}.
+\end{align*}
+Multiplying by $A$ from the left we get
+\begin{align*}
+    AA^TA\textbf{v}&=A\mu \textbf{v}\\
+    AA^T(A\textbf{v})&=\mu (A \textbf{v})\\
+    C(A\textbf{v})&=\mu (A \textbf{v})
+\end{align*}
+From this it can be concluded that the $A\textbf{v}$ and $\mu$ are eigenvectors and eigenvalues of $C$. These eigenvectors correspond to the largest eigenvalues of $C$.
+
+
+
+ 
+Har kan vi muske lave et plot!!!  som FIG2 i "Face Recognition Using Eigenface Approach"
+
+

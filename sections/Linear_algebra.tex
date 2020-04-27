@@ -29,7 +29,7 @@ A matrix vector product with a $m \times n$ matrix can be considered as a functi
     All matrix transformations are linear transformations.\cite[170]{LiAl}
 \end{theorem}
 \begin{proof}{Linearity of the Matrix Transformation}
-     Let $T_A(\textbf{v})=A\textbf{v}$ for an $m\times n$ matrix $A$ and $\textbf{v} \in \mathbb{R}^n$. Then
+     Let $T_A(\textbf{v})=A\textbf{v}$ for an $m\times n$ matrix $A$ and $\textbf{v}, \textbf{u} \in \mathbb{R}^n$. Then
      \begin{align*}
          T_A(\textbf{v}+\textbf{u})&=A(\textbf{v}+\textbf{u})=A\textbf{v}+A\textbf{u}=T_A(\textbf{u})+T_A(\textbf{v})\\
          T_A(c\textbf{v})&=A(c\textbf{v})=cA\textbf{v}=cT_A(\textbf{v}).
@@ -437,7 +437,7 @@ This section introduces the concept of invertible matrices. Working with transfo
 \begin{figure}[H]
     \centering
     \input{figures/Tikz/inverseFunction.tex}
-    \caption{Illustration of the function $f$: $\mathcal{S}_1 \rightarrow \mathcal{S}_2$ and $f^{-1}$: $\mathcal{S}_2 \rightarrow \mathcal{S}_1$}
+    \caption{Illustration of the function $f$: $\mathcal{S}_1 \rightarrow \mathcal{S}_2$ and $f^{-1}$: $\mathcal{S}_2 \rightarrow \mathcal{S}_1$.}
     \label{fig:inverseFunction}
 \end{figure}
 To explain how to invert a matrix, it is defined in the following.
@@ -448,7 +448,7 @@ To explain how to invert a matrix, it is defined in the following.
     \end{align*}
     In this case, $B$ can be defined as an inverse of $A$. The inverse matrix of $A$ is denoted $A^{-1}$. \cite[122]{LiAl}
 \end{definition}
-Not all matrices is invertible. To describe the conditions for which a matrix is invertible the concepts of an elementary matrix are introduced. This is done in \autoref{bil:ElementaryMatrix} where $P$ was defined as $P=E_K\cdots E_2E_1$, where $E$ is an elementary matrix such that:
+\noindent Not all matrices is invertible. To describe the conditions for which a matrix is invertible the concepts of an elementary matrix are introduced. This is done in \autoref{bil:ElementaryMatrix} where $P$ was defined as $P=E_K\cdots E_2E_1$, where $E$ is an elementary matrix such that:
 \begin{align*}
     PA=R.
 \end{align*}
@@ -728,7 +728,7 @@ Where $||\mathbf{v}_i||^2 \neq 0$ since $\mathbf{v}_i \neq \mathbf{0}$, from thi
 \end{proof}
 If a set of vectors in a basis for a subspace of $\mathbb{R}^n$ is orthogonal, then the basis is called an orthogonal basis. 
 
-In practice orthogonal bases are often normalised to obtain an orthonormal basis of the same subspace. A matrix which rows forms a orthonormal set is called an orthogonal matrix.
+In practice orthogonal bases are often normalised to obtain an orthonormal basis of the same subspace, which is done by dividing the vectors in an orthogonal set with the norm of the vector itself. Thereby the set consist entirely of unit vectors, and said to be an orthonormal set. A matrix which columns forms an orthonormal set is called an orthogonal matrix.
 
 \begin{example}{Orthogonal and Orthonormal Set of Vectors}
     Consider the set of vectors:
@@ -766,7 +766,8 @@ In practice orthogonal bases are often normalised to obtain an orthonormal basis
     \end{Bmatrix}.
     \end{align*}
 \end{example}
-An useful property of an orthogonal matrix is that its transposed equals its inverse.
+An useful property of an orthogonal matrix is that its transposed equals its inverse. 
+
 \begin{theorem}{Inverse of an Orthogonal Matrix}
     If $Q$ is an $n\times n$ orthogonal matrix then
     \begin{align*}
@@ -791,7 +792,227 @@ An useful property of an orthogonal matrix is that its transposed equals its inv
     From this it can be seen that $Q^TQ=I_n$. Using definition \ref{def:Invertible} it can be seen that $Q$ is invertible and $Q^T=Q^{-1}$.
     \qedsymbol 
 \end{proof}
-%\section{Singular Value Decomposition}
+\section{Singular Value Decomposition}
+There have been described how to determine eigenvalues and eigenvectors, but any matrix does not necessarily have eigenvectors and eigenvalues. As described the matrix has to be squared. A similar method for rectangular matrices is the Singular Value Decomposition (SVD), where singular vectors and their corresponding singular values are determined. The section will result in a practical example using SVD.
+
+%theorem og proof 6,17 og eksempel
+%theorem og eksempel 6,18
+In the previous sections many of the properties of a matrix has been for a symmetrical matrix...
+In this section a generalisation of an orthonormal basis of eigenvectors for an arbitrary $m \times n$ matrix A of rank i $k$ is defined. 
+\begin{theorem}{Singular Values for a Matrix}
+Let a $m \times n$ matrix $A$ be of rank $k$. Then there exist orthonormal bases $\mathcal{B}_1$ and $\mathcal{B}_2$ where
+\begin{align*}
+    \mathcal{B}_1=\{\mathbf{v}_1,\mathbf{v}_2,...,\mathbf{v}_n\} \text{ for } \mathbb{R}^n \text{  and  } \mathcal{B}_2=\{\mathbf{u}_1,\mathbf{u}_2,...,\mathbf{u}_n\} \text{ for } \mathbb{R}^m
+\end{align*}
+and scalars
+\begin{align*}
+    \sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_k > 0 
+\end{align*}
+such that
+\begin{align}
+    A\mathbf{v}_i=
+    \begin{cases}
+          \sigma_i\mathbf{u}_i & \text{if } 1\leq i\leq k\\
+          \mathbf{0} & \text{if } i>k
+    \end{cases}
+\label{eq: eq3FromDefSingularValues}
+\end{align}
+and
+\begin{align*}
+    A^T\mathbf{u}_i=
+    \begin{cases}
+          \sigma_i\mathbf{v}_i & \text{if } 1\leq i\leq k\\
+          \mathbf{0} & \text{if } i>k
+    \end{cases}.
+\end{align*}
+\cite[439]{LiAl}
+\label{theo: singularValues}
+\end{theorem}
+To proof Theorem \ref{theo: singularValues} the concept positive semidefinite matrix must be defined.
+\begin{definition}{Positive Semidefinite Matrix}
+    For a matrix to be semidefinite, five criteria must be fulfilled. 
+    \begin{enumerate}
+        \item $\lambda_i \geq 0$
+        \item Energy $\mathbf{v}^T C \mathbf{v} \geq 0$
+        \item $\mathcal{S}=A^TA$
+        \item All leading determinants $\geq 0$ 
+        \item All pivots in elimination $\geq 0$
+    \end{enumerate}
+    If one of the criteria is fulfilled, the rest, will be too.
+    The most common used and often the 
+    easiest way to determine if the Matrix is semidefinite is criteria number three, that says\\
+    An $n\times n$ matrix $C$ is positive semidefinite if $C$ is symmetric and $\mathbf{v}^T C \mathbf{v} \geq 0$ for every vector \textbf{v} in $\mathbb{R}$. 
+    \label{def: PSD}
+\cite[436]{LiAl}
+\end{definition}
+\begin{proof}{Singular Values for a Matrix}
+    In definition \ref{def: PSD}, it follows that $A^TA$ is a $n\times n$ positive semidefinite matrix. It therefore has an orthonormal basis $\mathcal{B}_1={\mathbf{v}_1, \mathbf{v}_2, \cdots, \mathbf{v}_n}$ for $\mathbb{R}^n$, which consist of eigenvectors of $A^TA$, with corresponding eigenvalues $\lambda_i \geq 0$
+    These eigenvalues and the eigenvectors can be ordered so $\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_n$. $A^TA$ has rank $k$, which means that the first $k$ eigenvalues are positive and the last $n-k$ are zero. By letting $\sigma_i=\sqrt{\lambda_i}$ for each $i=1, 2, \cdots, k$, then $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_k > 0$. 
+    For every $i\geq k$, $\mathbf{u}_i$ will be the vector in $\mathbb{R}^m$, which is defined by $\mathbf{u}_i=\dfrac{1}{\sigma_i}A\mathbf{v}_i$. It can now be shown that ${\mathbf{u}_1, \mathbf{u_2}, \cdots, \mathbf{u}_k}$ is an orthonormal subset of $\mathbb{R}^m$. By considering any $\mathbf{u}_i$ and $\mathbf{u}_j$, then it follows that:
+    \begin{align*}
+        \mathbf{u}_i \vprik \mathbf{u}_j &= \dfrac{1}{\sigma_i}A\mathbf{v}_i \vprik \dfrac{1}{\sigma_i}A\mathbf{v}_j\\
+        &=\dfrac{1}{\sigma_i\sigma_j}A\mathbf{v}_i \vprik A\mathbf{v}_j\\
+        &=\dfrac{1}{\sigma_i\sigma_j}\mathbf{v}_i \vprik A^T A\mathbf{v}_j\\
+        &=\dfrac{1}{\sigma_i\sigma_j}\mathbf{v}_i \vprik \lambda_j\mathbf{v}_j\\
+        &=\dfrac{\sigma^2_j}{\sigma_i\sigma_j}\mathbf{v}_i \vprik \mathbf{v}_j.
+    \end{align*}
+    By this it follow that
+    \begin{align*}
+        \mathbf{u}_i \vprik \mathbf{u}_j = \dfrac{\sigma_j}{\sigma_i}\mathbf{v}_i \vprik \mathbf{v}_j=
+        \begin{cases}
+        0 & \text{if } i\neq j\\
+        1 & \text{if } i=j.
+        \end{cases}
+    \end{align*}
+    It then follows that ${\mathbf{u}_1, \mathbf{u}_2, \cdots, \mathbf{u}_k}$ is an orthonormal set, which can be extended to an orthonormal basis $\mathcal{B}_2={\mathbf{u}_1, \mathbf{u}_2, \cdots, \mathbf{u}_m}$ for $\mathbb{R}^m$. \\
+    By considering any $\mathbf{u}_i$ in $\mathcal{B}_2$, suppose that $i\geq k$, then it follow that:
+    \begin{align*}
+        A^T\mathbf{u}_i &= A^T \left(\dfrac{1}{\sigma_i}A\mathbf{v}_i \right)\\
+        &= \dfrac{1}{\sigma_i}A^TA\mathbf{v}_i\\
+        &= \dfrac{1}{\sigma_i}\sigma_i^2\mathbf{v}_i\\
+        &=\sigma_i\mathbf{v}_i.
+    \end{align*}
+    If $i>k$, then it follows that $A^T\mathbf{u}_i$ is orthogonal to every vector in $\mathcal{B}_1$ and since $\mathcal{B}_1$ is a basis for $\mathbb{R}^n$, then $A^T\mathbf{u}_i=\mathbf{0}$. \\ By considering any $\mathbf{v}_j$ in $\mathcal{B}_1$, suppose that $j\geq k$, then it follow that: 
+    \begin{align*}
+        A^T\mathbf{u}_i \vprik \mathbf{v}_j = \mathbf{u}_i \vprik A\mathbf{v}_j = \mathbf{u}_i \vprik \sigma_j\mathbf{u}_j = \sigma_j\mathbf{u}_i \vprik \mathbf{u}_j =0,
+    \end{align*}
+    which is because $i\neq j$. If $j>k$, then it follows that:
+    \begin{align*}
+        A^T\mathbf{u}_i \vprik \mathbf{v}_j = \mathbf{u}_i \vprik A\mathbf{v}_j= \mathbf{u}_i \vprik \mathbf{0}=0
+    \end{align*}
+    It can therefore be seen that $A^T\mathbf{u}_i$ is orthogonal to every vector in $\mathcal{B}_1$, and it can there be concluded that $A^T\mathbf{u}_i = \mathbf{0}$.
+    \qedsymbol
+
+
+\noindent\cite[439-440]{LiAl}
+\end{proof}
+
+
+%$(AC)^T=C^T A^T= C^TA$
+
+%...this means that there exists two orthonomal basis one for $\mathbb{R}^m$ and one for $\mathbb{R}^n$ and for each product between A and 
+\begin{theorem}{Singular Value Decomposition}
+    For any $n \times m$ matrix $A$ with rank $k$, with singular values $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_k > 0$, there exist an $m\times m$ orthogonal matrix $U$ and an $n\times n$ orthogonal matrix $V$ such that 
+    \begin{align*}
+        A=U\Sigma V^T
+    \end{align*}
+    where $U$ and $V$ consist of singular vectors for $A$ and $\Sigma$ is a matrix of same size as $A$ consisting of the corresponding singular values. the matrix $\Sigma$ satisfies 
+    \begin{align*}
+            \begin{cases}
+          s_ii = \sigma_i & \text{for } i =1, 2,...,k\\
+          0 & \text{otherwise}
+    \end{cases}
+    \end{align*}
+    hence $\Sigma$ is the matrix 
+    \begin{align*}
+        \begin{bmatrix}
+           \sigma_1 & 0 & \cdots & 0 & \cdots & 0\\
+           0 & \sigma_2 & \cdots & 0 & \cdots & 0\\
+           \vdots & \vdots & \ddots & 0 & \cdots & 0\\
+           0 & 0 & \cdots & \sigma_k & \cdots & 0\\
+           \vdots & \vdots & & \vdots & \cdots & 0\\
+           0 & 0 & \cdots & 0 & \cdots & 0
+        \end{bmatrix},
+    \end{align*}
+    \label{theo: SVDecomposition}
+\end{theorem}
+    \noindent In Theorem \ref{theo: SVDecomposition} it is mentioned that $V$ and $U$ consist of singular vectors.
+    are introduced. To show what matrix $V$ is for a $n \times m$ matrix $A$ is, $A^TA$ is considered. From Definition \ref{def: PSD} $A^TA$ is a positive semidefinite matrix, hence symmetrical and then there exist an orthogonal matrix $V$ and a diagonal matrix $D$ such that 
+    \begin{align*}
+        V^TAV = D.    
+    \end{align*}
+    where $V$ is an orthogonal matrix, which columns form an orthonormal basis for $\mathbb{R}^n$ consisting of eigenvectors for $A^TA$ and the diagonal entries of $D$ are the eigenvalues corresponding to the respective columns of $V$\cite[426]{LiAl}.\\ 
+    So $V$ is consisting of the eigenvectors for $A^TA$ and has size $n \times n$. In relation to $U$, it is the matrix consisting of eigenvalues of $AA^T$ and its columns form an orthonormal basis for $\mathbb{R}^m$.
+
+\begin{proof}{Singular Value Decomposition}
+    Having a $m \times n$ matrix $A$ of rank $k$ with singular values $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_k > 0$, and orthonormal bases $\mathcal{B}_1={\mathbf{v}_1, \mathbf{v}_2,..., \mathbf{v}_n}$ for $\mathbb{R}^n$, $\mathcal{B}_2={\mathbf{u}_1, \mathbf{u}_2,..., \mathbf{u}_m}$ for $\mathbb{R}^m$ such that Theorem \ref{theo: singularValues} is satisfied. Defining matrices $V$ and $U$ as 
+    \begin{align}
+        V = [\mathbf{v}_1, \mathbf{v}_2,..., \mathbf{v}_n] \text{ and } U = \mathbf{u}_1, \mathbf{u}_2,..., \mathbf{u}_m
+    \end{align}
+    By \eqref{eq: eq3FromDefSingularValues} in Theorem \ref{theo: singularValues} it can be expressed that
+    \begin{align*}
+        AV=& \begin{bmatrix}
+        A\mathbf{v}_1 & A\mathbf{v}_2 & \cdots & A\mathbf{v}_n
+        \end{bmatrix}\\
+        =& \begin{bmatrix}
+        \sigma_1\mathbf{u}_1 & \sigma_2\mathbf{u}_2 & \cdots & \sigma_k\mathbf{u}_k & \mathbf{0} & \cdots & \mathbf{0}
+        \end{bmatrix}\\
+        =&U\Sigma 
+    \end{align*}
+    The final step is to isolate $A$ by multiplying both sides with $V^T$  which may be done, because $V$ is an orthogonal matrix. Hence
+    \begin{align*}
+        A=U\Sigma V^T.
+    \end{align*}\qedsymbol
+\end{proof}
+
+\begin{example}{Determine the Singular Value Decomposition of a Matrix}
+Let a matrix A be
+\begin{align*}
+A=
+\begin{bmatrix}
+   1 & 1 & 1\\
+   1 & -1 & -1
+\end{bmatrix},
+\end{align*}
+with a orthogonal bases $\{\mathbf{v}_1,\mathbf{v}_2,\mathbf{v}_3\}$ for $\mathcal{R}^3$ and $\{\mathbf{u}_1,\mathbf{u}_2\}$ for $\mathcal{R}^2$.\\
+To find the singular values $A^TA$ is calculated..
+\begin{align*}
+    A^TA=
+    \begin{bmatrix}
+       1 & 1\\
+       1 & -1\\
+       1 & -1
+    \end{bmatrix}
+    \begin{bmatrix}
+       1 & 1 & 1\\
+       1 & -1 & -1
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+       2 & 0 & 0\\
+       0 & 2 & 2\\
+       0 & 2 & 2
+    \end{bmatrix}
+\end{align*}
+tekst
+\begin{align*}
+    DET(A^TA-\lambda I_3)=DET
+    \begin{bmatrix}
+       2-\lambda & 0 & 0\\
+       0 & 2-\lambda & 2\\
+       0 & 2 & 2-\lambda
+    \end{bmatrix}=
+    (2-\lambda)(-1)^{1+1} DET
+    \begin{bmatrix}
+        2-\lambda & 2 \\
+        2 &2-\lambda
+    \end{bmatrix}=\\
+    (2-\lambda)((2-\lambda)(2-\lambda)-4) =
+    (2-\lambda)(-4\lambda+\lambda^2) = -\lambda^3+6\lambda^2-8\lambda.
+\end{align*}
+    When solving for $\lambda$ in $-\lambda^3+6\lambda^2-8\lambda$
+    it gives the eigenvalues
+    \begin{align*}
+      \lambda_1=4, \quad \lambda_2=2, \quad \lambda_3=0.   
+    \end{align*}
+    For each eigenvalue the eigenvector is determined using $A-\lambda \mathbf{v}=\mathbf{0}$ and normalized to be an orthonormal basis of $\mathbb{R^n}$. Hence the corresponding eigenvectors is
+    \begin{align*}
+        \begin{bmatrix}
+            0\\1\\1
+        \end{bmatrix} \quad \text{for}\; \lambda=4, \textbf{normalized to} \begin{bmatrix}
+            0\\\frac{1}{\sqrt{2}}\\\frac{1}{\sqrt{2}}
+        \end{bmatrix}\\
+        \begin{bmatrix}
+            1\\0\\0
+        \end{bmatrix} \quad \text{for}\; \lambda=2\\
+        \begin{bmatrix}
+            0\\-1\\1
+        \end{bmatrix} \quad \text{for}\; \lambda=0, \\\
+    \end{align*}
+    
+    fortsettes..... (SVD, u matrice, $\Sigma$ matrice)
+\end{example}
+
 %\begin{enumerate}
 %    \item theorem 6.5
 %    \item eksempel hvordan man finder ud af om de er ortogonale og videre til orthonormale

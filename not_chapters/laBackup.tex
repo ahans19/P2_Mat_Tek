@@ -72,3 +72,21 @@ A proof of Theorem \ref{theo:invertible} leads to a justification of why it is p
     \end{align*}
     and as seen above, $\mathbf{v}$ is a solution of $A\mathbf{x}=\mathbf{b}$. As proved, $A\mathbf{x}=\mathbf{b}$ and $R\mathbf{x}=\mathbf{c}$ have the same solutions for \textbf{x}. \qedsymbol
 \end{proof}
+
+
+gauss distribution
+\section{Gaussian Distribution}
+\begin{definition}{Gaussian Distribution}
+    The Gaussian distribution of a variable $x$ dimension is given by
+    \begin{align*}
+        \mathcal{N}(x|\Bar{x}, \sigma^2)=\frac{1}{(2\pi\sigma^2)^{1/2}}\exp\left\{-\frac{1}{2\sigma^2}(x-\Bar{x} )^2\right\}
+    \end{align*}
+    Where $\Bar{x}$ is the mean of the data, $\sigma$ is the standard deviation of the data and $\sigma^2$ is the variance. \cite[24]{patternmachineleaning}
+\end{definition}
+\autoref{fig:normalDistribution} show a Gaussian distribution with a mean of 2 and a standard deviation of 1. It can be seen that the Gaussian distribution have a maximum at the mean and is symmetric around the mean. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/normalDistribution.pdf}
+    \caption{A plot of a Gaussian distribution with a mean value of 2 and a standard deviation of 1.}
+    \label{fig:normalDistribution}
+\end{figure}
